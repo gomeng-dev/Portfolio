@@ -12,9 +12,10 @@ import {
   AiOutlineHome,
   AiOutlineFundProjectionScreen,
   AiOutlineUser,
+  AiOutlineFileDone,
 } from "react-icons/ai";
-
 import { CgFileDocument } from "react-icons/cg";
+import { MdOutlineWorkHistory } from "react-icons/md";
 
 function NavBar() {
   const [expand, updateExpanded] = useState(false);
@@ -93,13 +94,22 @@ function NavBar() {
             <Nav.Item>
               <Nav.Link
                 as={Link}
+                to="/career"
+                onClick={() => updateExpanded(false)}
+              >
+                <MdOutlineWorkHistory style={{ marginBottom: "2px" }} /> 경력
+              </Nav.Link>
+            </Nav.Item>
+
+            <Nav.Item>
+              <Nav.Link
+                as={Link}
                 to="/resume"
                 onClick={() => updateExpanded(false)}
               >
                 <CgFileDocument style={{ marginBottom: "2px" }} /> 이력서
               </Nav.Link>
             </Nav.Item>
-
 
             <Nav.Item className="fork-btn">
               <Button

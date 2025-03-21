@@ -666,7 +666,7 @@ button:focus {
 
 .resume-section {
   position: relative !important;
-  padding-top: 110px !important;
+  padding-top: 120px !important;
   padding-bottom: 30px !important;
   background-image: var(--section-background-color) !important;
   color: white !important;
@@ -880,7 +880,113 @@ button:focus {
 
 @media (max-width: 767px) {
   .resume-section {
-    padding-top: 80px !important;
+    padding-top: 150px !important;
+  }
+}
+
+.resume-section .react-pdf__Document {
+  margin-top: 20px;
+}
+
+/* 경력 페이지 스타일 */
+.career-section {
+  position: relative !important;
+  padding-top: 150px !important;
+  padding-bottom: 30px !important;
+  background: transparent !important;
+  color: white !important;
+}
+
+.career-timeline {
+  padding-top: 30px;
+}
+
+.career-item {
+  position: relative;
+  padding: 25px;
+  margin-bottom: 40px;
+  border-left: 3px solid #4fa3f7;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+.career-item h3 {
+  font-size: 1.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.career-item h4 {
+  font-size: 1.2rem;
+  color: #4fa3f7;
+  margin-bottom: 15px;
+}
+
+.period {
+  font-size: 1rem;
+  color: #bbbbbb;
+}
+
+.career-description {
+  list-style-type: none;
+  padding-left: 10px;
+  margin-top: 20px;
+}
+
+.career-description li {
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 10px;
+}
+
+.career-description li:before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #4fa3f7;
+}
+
+.career-projects {
+  margin-top: 20px;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+.project-item {
+  margin-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.project-item:last-child {
+  border-bottom: none;
+}
+
+.project-item h6 {
+  font-size: 1.05rem;
+  color: white;
+  margin-bottom: 5px;
+}
+
+.project-item p {
+  font-size: 0.9rem;
+  color: #bbbbbb;
+}
+
+@media (max-width: 767px) {
+  .career-item h3 {
+    font-size: 1.4rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .period {
+    margin-top: 5px;
+    font-size: 0.9rem;
   }
 }
 

@@ -20,10 +20,12 @@ function ResumeNew() {
   const [width, setWidth] = useState(1200);
 
   useEffect(() => {
-    setWidth(window.innerWidth);
-    
-    // 윈도우 리사이즈 시 너비 업데이트
+    // 윈도우 너비 업데이트
     const handleResize = () => setWidth(window.innerWidth);
+    
+    // 초기 설정
+    handleResize();
+    
     window.addEventListener("resize", handleResize);
     
     return () => window.removeEventListener("resize", handleResize);
@@ -40,13 +42,12 @@ function ResumeNew() {
         flexDirection: "column",
         flex: "1",
         paddingBottom: "50px",
-        paddingTop: "120px"
+        paddingTop: "120px" // 네비게이션 바 아래로 충분한 여백
       }}>
         <Particle />
         <Row style={{ 
           justifyContent: "center", 
           position: "relative",
-          zIndex: 5,
           marginTop: "20px"
         }}>
           <Button
@@ -62,10 +63,9 @@ function ResumeNew() {
 
         <Row className="resume" style={{ 
           position: "relative", 
-          zIndex: 5,
+          zIndex: 2,
           overflow: "auto", 
-          marginTop: "20px",
-          marginBottom: "20px"
+          marginTop: "20px"
         }}>
           <Document file={pdf} className="d-flex justify-content-center">
             <Page pageNumber={1} scale={width > 786 ? 1.7 : 0.6} />
@@ -75,8 +75,7 @@ function ResumeNew() {
         <Row style={{ 
           justifyContent: "center", 
           position: "relative", 
-          marginTop: "30px",
-          zIndex: 5
+          marginTop: "30px"
         }}>
           <Button
             variant="primary"
