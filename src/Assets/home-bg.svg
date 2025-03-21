@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100%" height="100%" viewBox="0 0 800 1200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 그라데이션 정의 -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a2e" />
+      <stop offset="100%" stop-color="#16213e" />
+    </linearGradient>
+    
+    <!-- 원형 그라데이션 - 중앙에 집중 -->
+    <radialGradient id="glowGradient1" cx="50%" cy="30%" r="60%" fx="50%" fy="30%">
+      <stop offset="0%" stop-color="#7B42F6" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#4A00E0" stop-opacity="0" />
+    </radialGradient>
+    
+    <radialGradient id="glowGradient2" cx="50%" cy="60%" r="70%" fx="50%" fy="60%">
+      <stop offset="0%" stop-color="#7B42F6" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#4A00E0" stop-opacity="0" />
+    </radialGradient>
+    
+    <!-- 별 반짝임 효과 필터 -->
+    <filter id="blurEffect" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="30" />
+    </filter>
+    
+    <!-- 별 패턴 - 더 작고 고르게 분포 -->
+    <pattern id="starPattern" x="0" y="0" width="100%" height="100%" patternUnits="userSpaceOnUse">
+      <g opacity="0.8">
+        <!-- 첫 번째 행 -->
+        <circle cx="5%" cy="5%" r="1.5" fill="#ffffff" />
+        <circle cx="15%" cy="10%" r="1" fill="#ffffff" />
+        <circle cx="25%" cy="5%" r="1.2" fill="#ffffff" />
+        <circle cx="35%" cy="12%" r="0.8" fill="#ffffff" />
+        <circle cx="45%" cy="7%" r="1" fill="#ffffff" />
+        <circle cx="55%" cy="15%" r="1.3" fill="#ffffff" />
+        <circle cx="65%" cy="8%" r="0.9" fill="#ffffff" />
+        <circle cx="75%" cy="4%" r="1.1" fill="#ffffff" />
+        <circle cx="85%" cy="10%" r="1" fill="#ffffff" />
+        <circle cx="95%" cy="7%" r="0.7" fill="#ffffff" />
+        
+        <!-- 두 번째 행 -->
+        <circle cx="10%" cy="20%" r="1" fill="#ffffff" />
+        <circle cx="20%" cy="25%" r="1.2" fill="#ffffff" />
+        <circle cx="30%" cy="22%" r="0.8" fill="#ffffff" />
+        <circle cx="40%" cy="28%" r="1.5" fill="#ffffff" />
+        <circle cx="50%" cy="23%" r="1" fill="#ffffff" />
+        <circle cx="60%" cy="27%" r="0.7" fill="#ffffff" />
+        <circle cx="70%" cy="22%" r="1.2" fill="#ffffff" />
+        <circle cx="80%" cy="25%" r="0.9" fill="#ffffff" />
+        <circle cx="90%" cy="20%" r="1" fill="#ffffff" />
+        
+        <!-- 세 번째 행 -->
+        <circle cx="5%" cy="35%" r="0.8" fill="#ffffff" />
+        <circle cx="15%" cy="40%" r="1.2" fill="#ffffff" />
+        <circle cx="25%" cy="38%" r="1" fill="#ffffff" />
+        <circle cx="35%" cy="43%" r="0.7" fill="#ffffff" />
+        <circle cx="45%" cy="37%" r="1.3" fill="#ffffff" />
+        <circle cx="55%" cy="42%" r="0.9" fill="#ffffff" />
+        <circle cx="65%" cy="39%" r="1.1" fill="#ffffff" />
+        <circle cx="75%" cy="36%" r="0.8" fill="#ffffff" />
+        <circle cx="85%" cy="41%" r="1" fill="#ffffff" />
+        <circle cx="95%" cy="38%" r="1.2" fill="#ffffff" />
+        
+        <!-- 네 번째 행 -->
+        <circle cx="10%" cy="55%" r="1.5" fill="#ffffff" />
+        <circle cx="20%" cy="50%" r="0.7" fill="#ffffff" />
+        <circle cx="30%" cy="58%" r="1.2" fill="#ffffff" />
+        <circle cx="40%" cy="52%" r="0.9" fill="#ffffff" />
+        <circle cx="50%" cy="56%" r="1" fill="#ffffff" />
+        <circle cx="60%" cy="53%" r="1.3" fill="#ffffff" />
+        <circle cx="70%" cy="59%" r="0.8" fill="#ffffff" />
+        <circle cx="80%" cy="54%" r="1.1" fill="#ffffff" />
+        <circle cx="90%" cy="57%" r="0.7" fill="#ffffff" />
+        
+        <!-- 다섯 번째 행 -->
+        <circle cx="5%" cy="70%" r="1" fill="#ffffff" />
+        <circle cx="15%" cy="73%" r="1.3" fill="#ffffff" />
+        <circle cx="25%" cy="68%" r="0.8" fill="#ffffff" />
+        <circle cx="35%" cy="75%" r="1.2" fill="#ffffff" />
+        <circle cx="45%" cy="71%" r="0.9" fill="#ffffff" />
+        <circle cx="55%" cy="76%" r="1" fill="#ffffff" />
+        <circle cx="65%" cy="72%" r="1.1" fill="#ffffff" />
+        <circle cx="75%" cy="69%" r="0.7" fill="#ffffff" />
+        <circle cx="85%" cy="74%" r="1.2" fill="#ffffff" />
+        <circle cx="95%" cy="70%" r="0.8" fill="#ffffff" />
+        
+        <!-- 여섯 번째 행 -->
+        <circle cx="10%" cy="85%" r="1.2" fill="#ffffff" />
+        <circle cx="20%" cy="89%" r="0.8" fill="#ffffff" />
+        <circle cx="30%" cy="86%" r="1" fill="#ffffff" />
+        <circle cx="40%" cy="90%" r="1.3" fill="#ffffff" />
+        <circle cx="50%" cy="87%" r="0.7" fill="#ffffff" />
+        <circle cx="60%" cy="84%" r="1.1" fill="#ffffff" />
+        <circle cx="70%" cy="88%" r="0.9" fill="#ffffff" />
+        <circle cx="80%" cy="85%" r="1" fill="#ffffff" />
+        <circle cx="90%" cy="90%" r="1.2" fill="#ffffff" />
+        
+        <!-- 일곱 번째 행 -->
+        <circle cx="5%" cy="95%" r="0.8" fill="#ffffff" />
+        <circle cx="15%" cy="97%" r="1" fill="#ffffff" />
+        <circle cx="25%" cy="94%" r="1.2" fill="#ffffff" />
+        <circle cx="35%" cy="98%" r="0.7" fill="#ffffff" />
+        <circle cx="45%" cy="95%" r="1.1" fill="#ffffff" />
+        <circle cx="55%" cy="93%" r="0.9" fill="#ffffff" />
+        <circle cx="65%" cy="96%" r="1" fill="#ffffff" />
+        <circle cx="75%" cy="94%" r="1.3" fill="#ffffff" />
+        <circle cx="85%" cy="97%" r="0.8" fill="#ffffff" />
+        <circle cx="95%" cy="95%" r="1.2" fill="#ffffff" />
+      </g>
+    </pattern>
+  </defs>
+  
+  <!-- 배경 -->
+  <rect width="100%" height="100%" fill="url(#bgGradient)" />
+  
+  <!-- 추상적인 모양들 - 모바일에서도 보이는 중앙 배치 -->
+  <circle cx="50%" cy="35%" r="300" fill="url(#glowGradient1)" filter="url(#blurEffect)" />
+  <circle cx="50%" cy="65%" r="350" fill="url(#glowGradient2)" filter="url(#blurEffect)" />
+  
+  <!-- 별 패턴 적용 -->
+  <rect width="100%" height="100%" fill="url(#starPattern)" />
+</svg> 

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="340" height="90" viewBox="0 0 340 90" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4fa3f7" />
+      <stop offset="100%" stop-color="#1976d3" />
+    </linearGradient>
+    
+    <filter id="shadow" x="-0.5" y="-0.5" width="2" height="2">
+      <feDropShadow dx="2" dy="2" stdDeviation="1.5" flood-opacity="0.4" />
+    </filter>
+    
+    <!-- 타이핑 커서용 애니메이션 -->
+    <linearGradient id="cursor-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#63b1ff" />
+      <stop offset="100%" stop-color="#0d63c0" />
+    </linearGradient>
+  </defs>
+  
+  <!-- 백그라운드 요소 -->
+  <rect x="0" y="0" width="340" height="90" fill="transparent" />
+  
+  <!-- 로고 텍스트 컨테이너 -->
+  <g filter="url(#shadow)">
+    <!-- 글자별 타이핑 효과 - 페이드 없이 즉시 나타남 -->
+    <text id="text-container" font-family="Helvetica, Arial, sans-serif" font-weight="bold" font-size="60" fill="url(#logo-gradient)">
+      <!-- 'G' 자 -->
+      <tspan id="g-letter" x="10" y="60" opacity="0">
+        G
+        <animate 
+          id="animG"
+          attributeName="opacity" 
+          values="0;1" 
+          dur="0.01s" 
+          begin="0s; resetAnimation.end" 
+          fill="freeze" />
+      </tspan>
+      
+      <!-- 'o' 자 -->
+      <tspan id="o-letter" x="55" y="60" opacity="0">
+        o
+        <animate 
+          id="animO"
+          attributeName="opacity" 
+          values="0;1" 
+          dur="0.01s" 
+          begin="animG.end+0.3s" 
+          fill="freeze" />
+      </tspan>
+      
+      <!-- 'm' 자 -->
+      <tspan id="m-letter" x="90" y="60" opacity="0">
+        m
+        <animate 
+          id="animM"
+          attributeName="opacity" 
+          values="0;1" 
+          dur="0.01s" 
+          begin="animO.end+0.3s" 
+          fill="freeze" />
+      </tspan>
+      
+      <!-- 'e' 자 -->
+      <tspan id="e-letter" x="145" y="60" opacity="0">
+        e
+        <animate 
+          id="animE"
+          attributeName="opacity" 
+          values="0;1" 
+          dur="0.01s" 
+          begin="animM.end+0.3s" 
+          fill="freeze" />
+      </tspan>
+      
+      <!-- 'n' 자 -->
+      <tspan id="n-letter" x="180" y="60" opacity="0">
+        n
+        <animate 
+          id="animN"
+          attributeName="opacity" 
+          values="0;1" 
+          dur="0.01s" 
+          begin="animE.end+0.3s" 
+          fill="freeze" />
+      </tspan>
+      
+      <!-- 'g' 자 -->
+      <tspan id="g2-letter" x="215" y="60" opacity="0">
+        g
+        <animate 
+          id="animG2"
+          attributeName="opacity" 
+          values="0;1" 
+          dur="0.01s" 
+          begin="animN.end+0.3s" 
+          fill="freeze" />
+      </tspan>
+    </text>
+    
+    <!-- 타이핑 커서 - 위치와 타이밍 수정 -->
+    <rect id="cursor" x="10" y="20" width="3" height="50" fill="url(#cursor-gradient)">
+      <!-- 커서 이동 애니메이션 - 위치 조정 및 타이밍 이벤트 (간격 추가) -->
+      <animate 
+        id="cursorMoveG"
+        attributeName="x" 
+        from="10" 
+        to="55" 
+        dur="0.01s" 
+        begin="animG.end" 
+        fill="freeze" />
+        
+      <animate 
+        id="cursorMoveO"
+        attributeName="x" 
+        from="55" 
+        to="100" 
+        dur="0.01s" 
+        begin="animO.end" 
+        fill="freeze" />
+        
+      <animate 
+        id="cursorMoveM"
+        attributeName="x" 
+        from="100" 
+        to="155" 
+        dur="0.01s" 
+        begin="animM.end" 
+        fill="freeze" />
+        
+      <animate 
+        id="cursorMoveE"
+        attributeName="x" 
+        from="155" 
+        to="190" 
+        dur="0.01s" 
+        begin="animE.end" 
+        fill="freeze" />
+        
+      <animate 
+        id="cursorMoveN"
+        attributeName="x" 
+        from="190" 
+        to="230" 
+        dur="0.01s" 
+        begin="animN.end" 
+        fill="freeze" />
+        
+      <animate 
+        id="cursorMoveG2"
+        attributeName="x" 
+        from="230" 
+        to="260" 
+        dur="0.01s" 
+        begin="animG2.end" 
+        fill="freeze" />
+        
+      <!-- 커서 깜빡임 애니메이션 -->
+      <animate 
+        id="blinkAnimation"
+        attributeName="opacity" 
+        values="1;1;0;0;1;1" 
+        dur="1s" 
+        begin="cursorMoveG2.end" 
+        repeatCount="3" />
+      
+      <!-- 커서 리셋 위치 -->
+      <animate 
+        id="cursorReset"
+        attributeName="x" 
+        to="10" 
+        from="260"
+        dur="0.01s" 
+        begin="resetAnimation.begin" 
+        fill="freeze" />
+    </rect>
+  </g>
+  
+  <!-- 애니메이션 리셋 및 반복 -->
+  <animate
+    id="resetAnimation"
+    attributeName="visibility"
+    from="visible"
+    to="visible"
+    dur="0.01s"
+    begin="blinkAnimation.end+0.1s"
+    fill="freeze" />
+    
+  <!-- 모든 글자 리셋 -->
+  <animate attributeName="opacity" to="0" dur="0.01s" begin="resetAnimation.begin" fill="freeze" xlink:href="#g-letter" />
+  <animate attributeName="opacity" to="0" dur="0.01s" begin="resetAnimation.begin" fill="freeze" xlink:href="#o-letter" />
+  <animate attributeName="opacity" to="0" dur="0.01s" begin="resetAnimation.begin" fill="freeze" xlink:href="#m-letter" />
+  <animate attributeName="opacity" to="0" dur="0.01s" begin="resetAnimation.begin" fill="freeze" xlink:href="#e-letter" />
+  <animate attributeName="opacity" to="0" dur="0.01s" begin="resetAnimation.begin" fill="freeze" xlink:href="#n-letter" />
+  <animate attributeName="opacity" to="0" dur="0.01s" begin="resetAnimation.begin" fill="freeze" xlink:href="#g2-letter" />
+</svg> 
