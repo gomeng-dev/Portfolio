@@ -243,14 +243,14 @@ function Career() {
             </div>
           </div>
 
-          {/* 디브레버 코퍼레이션 */}
+          {/* 디브데버 코퍼레이션 */}
           <div className="notion-entry mb-5 enhanced-notion-entry">
             <div className="notion-entry-header">
               <div className="notion-entry-title" style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap' }}>
                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
                   <FaBuilding className="company-icon" style={{ fontSize: '1.5rem', marginRight: '10px' }} />
                   <h2 className="mb-0">
-                    <span className="company-name">(주) 디브레버 코퍼레이션</span>
+                    <span className="company-name">(주) 디브데버 코퍼레이션</span>
                   </h2>
                 </div>
                 <span className="notion-period">
