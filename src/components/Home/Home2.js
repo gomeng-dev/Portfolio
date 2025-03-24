@@ -49,7 +49,7 @@ function Home2() {
               <br />
               <br />예를 들면
               <i>
-                <b className="skyblue"> 테이블 자동 생성 프로그램</b>이나 <b className="skyblue">이슈 알리미 챗봇</b>
+                <b className="skyblue"> 데이터 자동 생성 프로그램</b>이나 <b className="skyblue">이슈 알리미 챗봇</b>
               </i>
               같은걸 만들고는 합니다.
               <br />
@@ -66,9 +66,6 @@ function Home2() {
         <Row>
           <Col md={12} className="home-about-social">
             <h1>소셜 미디어</h1>
-            <p>
-              <span className="skyblue">연락주세요 </span>
-            </p>
             <ul className="home-about-social-links">
               <li className="social-icons">
                 <a

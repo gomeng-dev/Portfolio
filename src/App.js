@@ -62,48 +62,50 @@ export const PortfolioContext = createContext({
 function UrlParamManager() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { showPortfolio } = React.useContext(PortfolioContext);
+  const { showPortfolio, setShowPortfolio } = React.useContext(PortfolioContext);
   
   useEffect(() => {
-    // 현재 URL의 경로부분과 쿼리 파라미터 부분 분리
+    // HashRouter에서는 location.search로 파라미터 확인 (React Router v6에서는 search로 제공됨)
     const currentPath = location.pathname || "/";
-    const hasPortfolioParam = location.hash.includes("portfolio=true");
+    
+    // 해시 URL에서 파라미터 추출
+    // location.search는 HashRouter에서도 search 파라미터를 감지
+    const hasPortfolioParam = location.search.includes("portfolio=true");
     
     // 디버깅 로그
     console.log("== URL PARAM MANAGER ==");
     console.log("Current path:", currentPath);
+    console.log("Current search:", location.search);
     console.log("Has portfolio param:", hasPortfolioParam);
     console.log("Context showPortfolio:", showPortfolio);
     
-    // portfolio=true 파라미터가 있고 경로가 /portfolio가 아니면 페이지 이동
-    if (hasPortfolioParam && currentPath !== "/portfolio" && location.pathname !== "/portfolio") {
-      navigate("/portfolio", { replace: false });
+    // portfolio=true 파라미터가 있으면 showPortfolio를 true로 설정만 하고 리다이렉트하지 않음
+    if (hasPortfolioParam && !showPortfolio) {
+      setShowPortfolio(true);
     }
     
     // 현재 페이지가 변경될 때 portfolio 파라미터 유지
-    if (showPortfolio && !hasPortfolioParam && location.hash && !location.hash.includes("portfolio=true")) {
-      // 현재 해시에 portfolio 파라미터 추가
-      let newHash = location.hash;
-      if (newHash.includes("?")) {
-        // 이미 다른 쿼리 파라미터가 있는 경우 
-        if (newHash.endsWith("?")) {
-          newHash += "portfolio=true";
+    if (showPortfolio && !hasPortfolioParam) {
+      // 현재 URL에 portfolio 파라미터 추가
+      const search = location.search || "";
+      let newSearch = "";
+      
+      if (search.includes("?")) {
+        // 이미 다른 쿼리 파라미터가 있는 경우
+        if (search.endsWith("?")) {
+          newSearch = search + "portfolio=true";
         } else {
-          newHash += "&portfolio=true";
+          newSearch = search + "&portfolio=true";
         }
       } else {
         // 쿼리 파라미터가 없는 경우
-        if (newHash.includes("#")) {
-          newHash += "?portfolio=true";
-        } else {
-          newHash = "#/?portfolio=true";
-        }
+        newSearch = "?portfolio=true";
       }
       
       // 새 URL로 교체 (페이지 이동 없이 URL만 변경)
-      window.history.replaceState(null, "", newHash);
+      navigate(location.pathname + newSearch, { replace: true });
     }
-  }, [location, navigate, showPortfolio]);
+  }, [location, navigate, showPortfolio, setShowPortfolio]);
   
   return null;
 }
@@ -127,11 +129,15 @@ function App() {
   useEffect(() => {
     // URL에서 portfolio 파라미터 확인
     const checkPortfolioParam = () => {
-      const fullUrl = window.location.href;
-      const hasPortfolioParam = fullUrl.includes("portfolio=true");
+      // HashRouter에서는 React Router v6부터 파라미터가 location.search로 제공됨
+      const searchStr = window.location.hash.split('?')[1] || '';
+      const searchParams = new URLSearchParams(searchStr);
+      const hasPortfolioParam = searchParams.has("portfolio") && searchParams.get("portfolio") === "true";
       
       console.log("== APP COMPONENT ==");
-      console.log("Full URL:", fullUrl);
+      console.log("Current URL:", window.location.href);
+      console.log("Current hash:", window.location.hash);
+      console.log("Search string:", searchStr);
       console.log("Has portfolio param:", hasPortfolioParam);
       
       setShowPortfolio(hasPortfolioParam);
@@ -147,15 +153,15 @@ function App() {
     // 초기 로드 및 URL 변경 시 체크
     checkPortfolioParam();
     
-    // URL 변경 이벤트 리스너
-    const handleHashChange = () => {
+    // URL 변경 이벤트 리스너 
+    const handleUrlChange = () => {
       checkPortfolioParam();
     };
     
-    window.addEventListener("hashchange", handleHashChange);
+    window.addEventListener("hashchange", handleUrlChange);
     
     return () => {
-      window.removeEventListener("hashchange", handleHashChange);
+      window.removeEventListener("hashchange", handleUrlChange);
     };
   }, []);
 

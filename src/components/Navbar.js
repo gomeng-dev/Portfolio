@@ -43,6 +43,9 @@ function NavBar() {
 
   // 포트폴리오 파라미터를 URL에 유지하는 커스텀 링크 생성 함수
   const getNavLink = (path) => {
+    // HashRouter는 자동으로 #을 추가하므로 경로만 반환합니다
+    // 이미 React Router의 Link 컴포넌트가 적절히 처리함
+    
     if (showPortfolio && portfolioParam) {
       // 파라미터 이미 존재하면 추가
       if (path.includes("?")) {
