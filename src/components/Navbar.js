@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
 import logo from "../Assets/gomeng-logo.svg";
 import Button from "react-bootstrap/Button";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { CgGitFork } from "react-icons/cg";
 import { ImBlog } from "react-icons/im";
 import {
@@ -16,10 +16,22 @@ import {
 } from "react-icons/ai";
 import { CgFileDocument } from "react-icons/cg";
 import { MdOutlineWorkHistory } from "react-icons/md";
+import { BsFileEarmarkText } from "react-icons/bs";
+import { PortfolioContext } from "../App";
 
 function NavBar() {
   const [expand, updateExpanded] = useState(false);
   const [navColour, updateNavbar] = useState(false);
+  const location = useLocation();
+  const { showPortfolio, portfolioParam } = useContext(PortfolioContext);
+
+  // 디버깅 로그
+  useEffect(() => {
+    console.log('== NAVBAR CONTEXT DEBUGGING ==');
+    console.log('Context showPortfolio:', showPortfolio);
+    console.log('Portfolio Param:', portfolioParam);
+    console.log('===================');
+  }, [showPortfolio, portfolioParam]);
 
   function scrollHandler() {
     if (window.scrollY >= 20) {
@@ -28,6 +40,19 @@ function NavBar() {
       updateNavbar(false);
     }
   }
+
+  // 포트폴리오 파라미터를 URL에 유지하는 커스텀 링크 생성 함수
+  const getNavLink = (path) => {
+    if (showPortfolio && portfolioParam) {
+      // 파라미터 이미 존재하면 추가
+      if (path.includes("?")) {
+        return `${path}&${portfolioParam}`;
+      } else {
+        return `${path}?${portfolioParam}`;
+      }
+    }
+    return path;
+  };
 
   window.addEventListener("scroll", scrollHandler);
 
@@ -39,7 +64,7 @@ function NavBar() {
       className={navColour ? "sticky" : "navbar"}
     >
       <Container>
-        <Navbar.Brand as={Link} to="/" className="d-flex align-items-center" style={{ padding: "0 5px" }}>
+        <Navbar.Brand as={Link} to={getNavLink("/")} className="d-flex align-items-center" style={{ padding: "0 5px" }}>
           <img 
             src={logo} 
             className="img-fluid logo" 
@@ -63,7 +88,7 @@ function NavBar() {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ms-auto" defaultActiveKey="#home">
             <Nav.Item>
-              <Nav.Link as={Link} to="/" onClick={() => updateExpanded(false)}>
+              <Nav.Link as={Link} to={getNavLink("/")} onClick={() => updateExpanded(false)}>
                 <AiOutlineHome style={{ marginBottom: "2px" }} /> 홈
               </Nav.Link>
             </Nav.Item>
@@ -71,7 +96,7 @@ function NavBar() {
             <Nav.Item>
               <Nav.Link
                 as={Link}
-                to="/about"
+                to={getNavLink("/about")}
                 onClick={() => updateExpanded(false)}
               >
                 <AiOutlineUser style={{ marginBottom: "2px" }} /> 소개
@@ -81,7 +106,7 @@ function NavBar() {
             <Nav.Item>
               <Nav.Link
                 as={Link}
-                to="/project"
+                to={getNavLink("/project")}
                 onClick={() => updateExpanded(false)}
               >
                 <AiOutlineFundProjectionScreen
@@ -91,10 +116,22 @@ function NavBar() {
               </Nav.Link>
             </Nav.Item>
 
+            {showPortfolio && (
+              <Nav.Item>
+                <Nav.Link
+                  as={Link}
+                  to={getNavLink("/portfolio")}
+                  onClick={() => updateExpanded(false)}
+                >
+                  <BsFileEarmarkText style={{ marginBottom: "2px" }} /> 포트폴리오
+                </Nav.Link>
+              </Nav.Item>
+            )}
+
             <Nav.Item>
               <Nav.Link
                 as={Link}
-                to="/career"
+                to={getNavLink("/career")}
                 onClick={() => updateExpanded(false)}
               >
                 <MdOutlineWorkHistory style={{ marginBottom: "2px" }} /> 경력
@@ -104,7 +141,7 @@ function NavBar() {
             <Nav.Item>
               <Nav.Link
                 as={Link}
-                to="/resume"
+                to={getNavLink("/resume")}
                 onClick={() => updateExpanded(false)}
               >
                 <CgFileDocument style={{ marginBottom: "2px" }} /> 이력서
