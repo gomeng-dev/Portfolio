@@ -1,0 +1,689 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>뽑기 UI</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="9b873e72-1663-4035-82d9-a4d7bfde4ad0" class="page sans"><header><h1 class="page-title">뽑기 UI</h1><p class="page-description"></p></header><div class="page-body"><figure id="58a11306-b523-468f-8796-9537fdc2ec32" class="link-to-page"><a href="https://www.notion.so/UI-58a11306b523468f87969537fdc2ec32?pvs=21">뽑기 UI 리서치</a></figure><figure id="168193d6-45a3-432f-8688-36687a9498ef" class="link-to-page"><a href="https://www.notion.so/168193d645a3432f868836687a9498ef?pvs=21">뽑기 확률표 및 뽑기 내역</a></figure><h1 id="8f54baee-bfd7-4ba1-9dc8-53f1c3280afb" class="">개요</h1><figure id="b7c15bec-c95d-410e-a0b4-7f5505e04e8b" class="image"><a href="Untitled.png"><img style="width:2113.322998046875px" src="Untitled.png"/></a></figure><ol type="1" id="234adc05-f8b9-4a79-ab0a-e1433d02242d" class="numbered-list" start="1"><li><a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">하단 메뉴 뽑기 버튼</a> = 뽑기 페이지 진입점</li></ol><ol type="1" id="8b04ba1a-fe25-495b-a666-69426f3b868b" class="numbered-list" start="2"><li><a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">뽑기 페이지</a><ol type="a" id="b305ef67-dcd1-47d8-95b9-bd47633fe2d8" class="numbered-list" start="1"><li><a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">상단 바</a> = 뽑기에서 사용하는 자원 정보 출력</li></ol><ol type="a" id="4653b292-dcb5-446f-92b1-f50ded323a98" class="numbered-list" start="2"><li><a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">뽑기 리스트</a> = 현재 활성화된 뽑기 상품 목록</li></ol><ol type="a" id="a8073975-fd59-4674-8e33-5565f068bade" class="numbered-list" start="3"><li><a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">뽑기 상세 정보</a><ol type="i" id="c3dfaac7-00b8-48b0-8e23-9af858cfa1ef" class="numbered-list" start="1"><li><a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">기본 정보</a><ol type="1" id="a7df1c3b-5cc1-4ac2-b870-31c149738fba" class="numbered-list" start="1"><li><a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">뽑기 타입</a></li></ol><ol type="1" id="bb99e452-ff42-481d-8d39-1c6e2a184eb2" class="numbered-list" start="2"><li><a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">확률표 버튼</a></li></ol><ol type="1" id="2ec67074-2e25-4082-b3e0-a6ab28ab7996" class="numbered-list" start="3"><li><a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">뽑기 제목</a></li></ol><ol type="1" id="fc025d20-9817-401e-a570-beb9718c84fe" class="numbered-list" start="4"><li><a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">천장 정보</a></li></ol><ol type="1" id="52b1dbff-14aa-4745-83a4-deeda3b866ee" class="numbered-list" start="5"><li><a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">뽑기 버튼</a> = 뽑기 버튼 기능 &amp; 관련 팝업 정보</li></ol></li></ol><ol type="i" id="43db619a-d1c6-4f6b-86b1-ed9348926615" class="numbered-list" start="2"><li><a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">한정 뽑기 정보</a> = 한정 뽑기에서만 출력되는 정보</li></ol></li></ol></li></ol><ol type="1" id="f6e3c114-0437-49a5-8f61-3173225f142c" class="numbered-list" start="3"><li><a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">뽑기 결과 창</a></li></ol><ol type="1" id="4c4a0e82-7f94-49bc-b039-25925304d858" class="numbered-list" start="4"><li><a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">상점</a><ol type="a" id="331a2455-b92e-4ab0-9aea-b17bc616d0f1" class="numbered-list" start="1"><li><a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">길드 코인 교환 팝업</a></li></ol><ol type="a" id="c5596e11-1c40-492f-bb67-573ce196df0e" class="numbered-list" start="2"><li><a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">뽑기권 구매 팝업</a></li></ol><p id="3460c8ea-3a0e-46c3-a782-6bdf50bac0c7" class="">
+</p></li></ol><h1 id="c60df900-09e0-44db-b906-079c535c7fc4" class="">1. 하단 메뉴 뽑기 버튼</h1><div id="3d4f2411-2eca-450f-b6f4-3968f7f7db46" class="column-list"><div id="f0fc254b-3032-4342-82b7-3e65c235c9a1" style="width:20.833333333333336%" class="column"><figure id="1b4f5366-5d74-4d6f-9d73-3a3e5f3013b1" class="image"><a href="Untitled%201.png"><img style="width:350px" src="Untitled%201.png"/></a></figure><p id="f2da57df-3094-42cb-846f-f932d187394c" class="">
+</p></div><div id="4e2f4a42-0e24-4862-b368-dbe30338d544" style="width:25%" class="column"><figure id="e8ff6fa5-39bf-4dc7-8ba9-f127b4e820fc" class="image"><a href="Untitled%202.png"><img style="width:288px" src="Untitled%202.png"/></a></figure></div><div id="6a8f0ee9-9e45-4915-ab79-8efc73069409" style="width:54.16666666666667%" class="column"><ul id="bc911f16-cba9-44bc-adc8-0811db1a3f98" class="bulleted-list"><li style="list-style-type:disc">뽑기 버튼 선택 시 뽑기 메뉴 진입<p id="a425ea2b-1e19-4288-97af-ec17c5b3ce08" class="">※ 선택 시 상시 페이지 진입</p></li></ul></div></div><p id="3f77eeac-0317-4eec-9341-3c54862e230c" class="">
+</p><h1 id="76335830-021c-497f-b469-3239589d5c8a" class="">2. 뽑기 페이지</h1><div id="df8968eb-cf5b-48c5-9c1d-bba779fcefe4" class="column-list"><div id="e7757bd7-7560-47b5-816d-1b22ed697a00" style="width:31.25%" class="column"><figure id="ade6358e-7a51-4144-b399-2a30b49689f6" class="image"><a href="Untitled%203.png"><img style="width:387px" src="Untitled%203.png"/></a></figure></div><div id="9e165bec-ea51-4a99-99ac-8bc399176349" style="width:68.75%" class="column"><ol type="1" id="f80db131-1d98-4838-8fa4-77653d3d40a1" class="numbered-list" start="1"><li>상단 바</li></ol><ol type="1" id="09684948-a808-4db2-9796-24a3568b225d" class="numbered-list" start="2"><li>뽑기 리스트</li></ol><ol type="1" id="7e524c02-1c1d-4177-ae0e-cba516b8aeb7" class="numbered-list" start="3"><li>뽑기 세부 정보</li></ol></div></div><h2 id="921d348c-92d9-4df6-8494-03e1581140fa" class="block-color-red_background">2-1. 상단 바</h2><p id="31cf916f-b4a7-445b-8265-80db8c79f18b" class="block-color-red_background"><span style="border-bottom:0.05em solid"><strong>※ 1.12.0 버전 스팩에서 제외 됨</strong></span></p><figure id="006325b4-ee1f-4379-a465-59ca8fc3ed2c" class="image"><a href="Untitled%204.png"><img style="width:609px" src="Untitled%204.png"/></a></figure><ul id="e50d843a-1ff0-4ca2-b4ca-0edaedd7a6fb" class="bulleted-list"><li style="list-style-type:disc">보유 중인 뽑기와 관련된 재화를 상단에 출력</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="2d03c983-e266-46ca-9c7f-a16b5f563924"><div style="font-size:1.5em"><span class="icon">‼️</span></div><div style="width:100%"> - 출력 재화 목록<ol type="1" id="55174ce8-a7cd-46f9-b41e-ec16b36bff57" class="numbered-list" start="1"><li>한정 뽑기권</li></ol><ol type="1" id="ac15fbc7-770e-4dad-88fc-16171d6de354" class="numbered-list" start="2"><li>상시 뽑기권</li></ol><ol type="1" id="d6f34fe2-5070-4e5d-a668-cb76e902cd0b" class="numbered-list" start="3"><li>길드 코인</li></ol><ol type="1" id="f26e0748-c91c-4146-a14e-0ee3f5dda508" class="numbered-list" start="4"><li>보석</li></ol></div></figure><div id="d029d165-a403-4897-89c1-801c89f143f0" class="column-list"><div id="aa4a67d8-765a-4e29-aac1-97e4f4f80bb5" style="width:62.5%" class="column"><figure id="d4087ddd-5dbe-4691-9c07-fca42fa76aa5" class="image"><a href="Untitled%205.png"><img style="width:440px" src="Untitled%205.png"/></a></figure></div><div id="d5e4c4f0-071f-474d-b301-9167376d33a5" style="width:137.5%" class="column"><ol type="1" id="2363021d-a537-4fb1-8de8-ec5afe9c3274" class="numbered-list" start="1"><li>재화 아이콘<ul id="238159f3-6485-4327-918e-04de6eec8517" class="bulleted-list"><li style="list-style-type:disc">각 재화의 아이콘 출력</li></ul></li></ol><ol type="1" id="87f38646-1224-46ec-918c-9a735e22858e" class="numbered-list" start="2"><li>재화 보유량<ul id="a897d1cf-134b-41f6-8a85-fdf7eda67866" class="bulleted-list"><li style="list-style-type:disc">각 재화 보유량 출력</li></ul></li></ol><ol type="1" id="9c883062-96b1-4679-a939-404d78f770f8" class="numbered-list" start="3"><li>구매,교환 버튼<ul id="44b5af08-f4f3-484a-b4b1-0d2de81eb639" class="bulleted-list"><li style="list-style-type:disc">선택 시 각 재화 주요 획득처 이동<ul id="00353d2c-26a8-41b6-a3b4-4d019a016f20" class="bulleted-list"><li style="list-style-type:circle">보석 = 상점 페이지 보석탭 이동</li></ul><ul id="d6550a3e-5074-4941-9e3d-9b212baa86ff" class="bulleted-list"><li style="list-style-type:circle">길드코인 = <a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">길드코인 교환 팝업</a> 출력</li></ul><ul id="e14a0528-9a31-4cef-b114-cdaf75ea9e05" class="bulleted-list"><li style="list-style-type:circle">상시 뽑기권 = <a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">상시뽑기 구매 팝업</a> 출력</li></ul><ul id="fac64622-27bf-4a26-b466-9428596e25a6" class="bulleted-list"><li style="list-style-type:circle">한정 뽑기권 = <a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">한정뽑기 구매 팝업</a> 출력</li></ul></li></ul></li></ol></div></div><h2 id="4f42edab-a9c2-4b1b-a82b-3791258b0b67" class="">2-2. 뽑기 리스트</h2><div id="6cfff782-b178-4ff3-8d41-c697f79aacc2" class="column-list"><div id="965943e0-0669-40e9-bc60-26e231c48bb2" style="width:37.5%" class="column"><figure id="8736b64e-2f8b-466e-84de-015cbf385e80" class="image"><a href="Untitled%206.png"><img style="width:367px" src="Untitled%206.png"/></a></figure></div><div id="41d45993-9117-4458-8f59-1ea81bdeb665" style="width:162.5%" class="column"><ul id="222e35eb-014d-42c8-b3ff-abd96aca174c" class="bulleted-list"><li style="list-style-type:disc">현재 활성화 된 뽑기 목록 출력</li></ul><ul id="1d4d0271-daf9-4b41-be4e-67c7fa5ad9e4" class="bulleted-list"><li style="list-style-type:disc">활성화 조건<ul id="2e32e840-bdbf-4588-98a7-fc3066a3c8e5" class="bulleted-list"><li style="list-style-type:circle"><code>ProductInfo</code> 테이블 참조<ol type="1" id="19af0b7b-3247-40b6-8131-42444a298581" class="numbered-list" start="1"><li><mark class="highlight-blue"><code>Id</code></mark> == Id 앞 2자리 20</li></ol><ol type="1" id="d41242f3-89c2-445e-bb86-a269cdd95f3d" class="numbered-list" start="2"><li><mark class="highlight-blue"><code>CanBuy</code></mark> == True</li></ol><ol type="1" id="98ca2c3c-5435-4458-8dd5-ad29f33c08c3" class="numbered-list" start="3"><li><mark class="highlight-blue"><code>Duration${}</code></mark> = <mark class="highlight-blue"><code>Start</code></mark> &lt; 현재 시각 &gt; <mark class="highlight-blue"><code>End</code></mark> </li></ol></li></ul></li></ul><ul id="21457fd9-d990-49ef-9b3c-a457b679383e" class="bulleted-list"><li style="list-style-type:disc">정렬 순서<ul id="987fbd51-0584-4a5a-bf49-9ba4972f1c15" class="bulleted-list"><li style="list-style-type:circle"><code>ProductInfo</code> → <mark class="highlight-blue"><code>Duration</code></mark>의 <mark class="highlight-blue"><code>End</code></mark> 날짜 최근 순서대로 내림차순으로 정렬</li></ul><ul id="ebc710e8-63a8-401f-9e47-742863431775" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-blue"><code>Duration</code></mark>이 공백인 경우 최하단에 배치 </li></ul></li></ul><ul id="4625f80f-4e63-4108-97ab-ca1e38852140" class="bulleted-list"><li style="list-style-type:disc">잔여시간 출력<div><ol type="1" id="7fc01322-6eb8-40e8-83df-264c22296dee" class="numbered-list" start="1"><li><strong>잔여 기간 타이머</strong><figure id="9ff682f1-af14-40a2-84d3-8068fcb82926" class="image"><a href="Untitled%207.png"><img style="width:106px" src="Untitled%207.png"/></a></figure><ul id="cd654ed2-b907-4472-b107-0767e108e329" class="bulleted-list"><li style="list-style-type:disc">뽑기 잔여 기간 출력<ul id="9d5a3a69-8f8c-4e6c-96e2-d73ac09e08da" class="bulleted-list"><li style="list-style-type:circle">잔여기간 = 뽑기 이벤트 종료 시각 - 현재 시각(UTC)</li></ul><ul id="66e6695d-a6b4-4944-a098-071341e58b82" class="bulleted-list"><li style="list-style-type:circle">뽑기 이벤트 종료 시각 = 뽑기 상품 Id 참조 <code>ProductInfo</code> → <mark class="highlight-blue"><code>Duration${End}</code></mark></li></ul><ul id="96e42f58-bbf2-4f03-a1bc-4e56e7cad680" class="bulleted-list"><li style="list-style-type:circle">잔여 기간 24시간 초과 = n 일 남음</li></ul><ul id="4f99dfeb-1502-4fa9-83cc-fc7a56c1b79f" class="bulleted-list"><li style="list-style-type:circle">잔여 기간 24시간 이하 = n 시간 남음</li></ul><ul id="397e82d6-216a-43ed-9a01-4b8d577f858a" class="bulleted-list"><li style="list-style-type:circle">잔여 기간 1시간 이하 = n분 m초 남음</li></ul></li></ul></li></ol></div></li></ul></div></div><div id="fd5d401a-1e07-437e-be0c-fc2d7c0dd02c" class="column-list"><div id="4adf5859-b6da-4bb9-9805-6e4f2da1db49" style="width:18.75%" class="column"><figure id="f20e8cea-5985-4beb-8c74-4a8bb44a4088" class="image"><a href="Untitled%208.png"><img style="width:387.22918701171875px" src="Untitled%208.png"/></a></figure></div><div id="da04c5d9-98f6-4472-99b5-5e166a74ad15" style="width:81.25%" class="column"><ol type="1" id="4e03e804-2864-470c-af1a-10951924ce49" class="numbered-list" start="1"><li>뽑기 아이콘 배너<ul id="9bfb3442-97d6-4862-9c38-ec6167d5dc02" class="bulleted-list"><li style="list-style-type:disc">각 뽑기의 배너 이미지 출력</li></ul><p id="4db36cb6-8a98-4a9f-800c-97efcf266fab" class="">※ 뽑기 배너 이미지는 지정 경로에  <code>GachaRewardInfo</code> → <code>Id</code> 로 구분하여 추가한다.<div class="indented"><ul id="d92aeef0-9f0e-421f-a5eb-c335ca70e157" class="bulleted-list"><li style="list-style-type:disc">e.g) GachaRewardInfo_Banner_300001.png</li></ul></div></p></li></ol><ol type="1" id="fec7513a-7ce9-456e-93b5-243afbfc1c1c" class="numbered-list" start="2"><li>현재 탭 표시<ul id="a1e8d9be-a4cf-43d4-9717-605a28bf5fad" class="bulleted-list"><li style="list-style-type:disc">현재 선택된 뽑기를 아이콘 뒤에 하이라이터로 표시해준다.</li></ul></li></ol></div></div><h2 id="f96c30e6-97bd-4798-a928-a2c74b08b3a1" class="">2-3. 뽑기 상세정보</h2><figure id="4c33fce3-6637-4b2f-b573-c7b7d1e5b1d4" class="image"><a href="Untitled%209.png"><img style="width:720px" src="Untitled%209.png"/></a><figcaption>(좌) 상시 캐릭터 뽑기, (우) 한정 캐릭터 뽑기</figcaption></figure><h3 id="b24a150c-7716-46af-bae9-4c5cdba814b2" class="">뽑기 기본 정보</h3><div id="cb1d045e-52ed-4b92-8740-96e256ba5fc5" class="column-list"><div id="e68c48b2-df07-4f3a-ac10-fd0a23321226" style="width:31.25%" class="column"><figure id="263f9416-500e-46af-8f61-cccea3c01cce" class="image"><a href="Untitled%2010.png"><img style="width:489px" src="Untitled%2010.png"/></a></figure></div><div id="e2d91942-7719-4b39-af5a-3f8f94480324" style="width:68.75%" class="column"><ol type="1" id="45d17449-2e0f-48b8-9cb8-204f20139733" class="numbered-list" start="1"><li><strong>뽑기 타입 정보</strong><ol type="a" id="ad25c150-6c04-4753-bc77-0e4691ef5fd7" class="numbered-list" start="1"><li>뽑기 타입에 따른 정보를 출력한다.</li></ol><ol type="a" id="36ede1dd-b6b6-4684-ad20-37d7524ea166" class="numbered-list" start="2"><li><code>ProductInfo</code> → <mark class="highlight-blue"><code>Id</code></mark>를 참조하여 출력</li></ol></li></ol><ol type="1" id="2c87cfb8-e482-4975-8b4e-4378fc8fd591" class="numbered-list" start="2"><li><strong>뽑기 확률 버튼</strong><ol type="a" id="0ac6bd4d-0524-4d2d-adfa-2364fc811a0e" class="numbered-list" start="1"><li>선택 시 ShopRandomItemDetailPopup 프리팹 출력<p id="b050ac47-e762-460b-9f01-d99733d7441a" class="">※ Hive 모듈 사용으로 별도 웹페이지 출력 시 변경 될 수 있음</p></li></ol></li></ol><ol type="1" id="c59df68d-8663-4c92-8b0b-0e73a65f9f76" class="numbered-list" start="3"><li><strong>뽑기 제목</strong><ol type="a" id="2131577e-dc45-4e8d-9818-591e50c0e481" class="numbered-list" start="1"><li>뽑기 제목<ul id="33361754-f530-4901-88fd-628de6bd659f" class="bulleted-list"><li style="list-style-type:disc">Data.ProductInfo.<mark class="highlight-red">뽑기 Id</mark>.Name,&quot;<mark class="highlight-red">뽑기 이름</mark>&quot;</li></ul></li></ol><ol type="a" id="5e8b779c-4d8d-4819-baa0-29ba2ec369b0" class="numbered-list" start="2"><li>안내 문구<ul id="f60cfc4f-fada-4442-b30c-c9a7516e488f" class="bulleted-list"><li style="list-style-type:disc">고정 문구 출력</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9bfd12bc-808f-456c-bd00-5f494b4e2932"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">문구 내용<p id="fd61ae15-1751-467d-9218-8f0d6cb8625b" class="">이미 보유한 캐릭터는 영혼석으로 변환됩니다.</p></div></figure><p id="c83dfa7d-fdd5-40c4-9cb0-113900d853bc" class="">
+</p></li></ol></li></ol><ol type="1" id="4a0cc574-753c-43f7-89a3-c1b5149bc406" class="numbered-list" start="4"><li><strong>천장 정보</strong><figure id="09567e9e-f156-4d4a-b2dc-35ac4872c493" class="image"><a href="Untitled%2011.png"><img style="width:1391.885498046875px" src="Untitled%2011.png"/></a></figure><ul id="08acf6a5-0184-477b-9772-b4b6f1692a45" class="bulleted-list"><li style="list-style-type:disc">출력 방식 : <strong><mark class="highlight-gray">뽑기 횟수</mark></strong><strong>/</strong><strong><mark class="highlight-yellow">천장 한도</mark></strong><strong> </strong><strong><mark class="highlight-brown">[천장 아이템 아이콘]</mark></strong></li></ul><ul id="55291cf8-64f4-41eb-886a-f16d792b78b7" class="bulleted-list"><li style="list-style-type:disc">천장 직전 연출 : 뽑기 횟수 -1 = 천장 한도<ol type="1" id="3686f0dd-f424-4545-9bf6-d041e0be1905" class="numbered-list" start="1"><li>뽑기 횟수 : 색상 변경</li></ol><ol type="1" id="0906e6ad-ea48-4ec5-a23f-2fb2ca2d6194" class="numbered-list" start="2"><li>추가 툴팁 출력</li></ol></li></ul><ol type="1" id="fe1a6b4f-77d2-4421-a623-9106dad61ffe" class="numbered-list" start="1"><li>뽑기 횟수 = 해당 뽑기 시도 횟수<ul id="efb2cc1d-1c06-480e-b5da-ff26cdf335fc" class="bulleted-list"><li style="list-style-type:disc">각 뽑기마다 횟수 저장 됨</li></ul><ul id="37a37dc3-109e-4cf6-820b-899e404f48c7" class="bulleted-list"><li style="list-style-type:disc">천장 시스템 정책에 따라 뽑기에서 천장 아이템 획득 시 <strong>0</strong>으로 초기화</li></ul></li></ol><ol type="1" id="75196233-a01e-4c73-a533-97a697473f69" class="numbered-list" start="2"><li>천장 한도 =  <code>GachaRewardInfo</code> → <mark class="highlight-blue"><code>PittyCounts</code></mark><mark class="highlight-blue"> </mark>출력 <ul id="cfae0f08-7c0c-4ef8-bce4-7f1d5bea1801" class="bulleted-list"><li style="list-style-type:disc"><code>GachaRewardInfo</code> 의 Id = 해당 뽑기 <code>ProductInfo</code> → <mark class="highlight-blue"><code>GachaRewardId</code></mark> 참조</li></ul></li></ol><ol type="1" id="2ba53a58-5992-4301-a94d-4af644091d37" class="numbered-list" start="3"><li>천장 아이템 아이콘 = 하단 경로 참조<ol type="a" id="5d53c204-a1f6-43ab-a0a0-99f0b3e2bfd1" class="numbered-list" start="1"><li> <code>GachaRewardInfo</code> → <mark class="highlight-blue"><code>PittyItem</code></mark> 의 Id를 <code>RandomItemSetInfo</code> 참조하여 아이콘 출력 형태 결정<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="efa3ddf3-ce74-4adb-b25d-076947968187"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">출력 형태<p id="dc171aed-5144-4c9b-b65f-87c37d147ebc" class="">Case 1 : 천장 아이템 개수 == 1</p><figure id="320a0659-ff0b-412c-81c2-32c0ab3f269c" class="image"><a href="Untitled%2012.png"><img style="width:98px" src="Untitled%2012.png"/></a></figure><ul id="39c97db7-e6e3-4c0e-a46a-de40fe2e0c78" class="bulleted-list"><li style="list-style-type:disc">해당 아이템 아이콘 출력</li></ul><p id="63dcf284-0b06-4fa7-9685-175dd110ea90" class="">Case 2 : 천장 아이템 개수 ≥ 2</p><figure id="f17718ad-a501-4d79-9ae4-3caa4025a4ae" class="image"><a href="Untitled%2013.png"><img style="width:96px" src="Untitled%2013.png"/></a></figure><ul id="7cf7b4f3-7274-450a-99f4-0947d31c09ad" class="bulleted-list"><li style="list-style-type:disc">물음표 아이콘 출력</li></ul></div></figure></li></ol></li></ol><ol type="1" id="7d31072f-bde7-47fb-bb3b-e97e8e94e0b0" class="numbered-list" start="4"><li>툴팁<ul id="d6628251-3429-449b-9edf-05374ddd4d08" class="bulleted-list"><li style="list-style-type:disc">천장 직전에서만 출력되는 툴팁</li></ul><ul id="e2398eea-bf19-477b-90f3-a34c8ab5a19d" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">뽑기 타입</a>에 따라 출력 내용 변경<ol type="1" id="5dbad87b-9d7c-4a88-83b1-5566b621790f" class="numbered-list" start="1"><li>상시 뽑기 = &quot;다음 뽑기에서 전설급 아이템 확정 획득&quot;</li></ol><ol type="1" id="a342265f-6310-445f-ad7b-f588ba9aeeb2" class="numbered-list" start="2"><li>한정 뽑기 = &quot;다음 뽑기에서 획득&quot;</li></ol></li></ul></li></ol></li></ol><ol type="1" id="38b268aa-333b-49b2-8d4f-fbe1b067ef69" class="numbered-list" start="5"><li><strong>뽑기 버튼</strong><ul id="95a9a9e0-2b35-4a86-a3db-10644a7f1cb3" class="bulleted-list"><li style="list-style-type:disc">버튼 선택 시 2. 확인 팝업 출력</li></ul><ul id="8c789957-534c-4be1-9f11-43e6d6393666" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid"><strong>아래 모든 팝업 출력 시 </strong></span><a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21"><span style="border-bottom:0.05em solid"><strong>상단 바</strong></span></a><span style="border-bottom:0.05em solid"><strong>가 출력되어야 함</strong></span></li></ul><ol type="1" id="583d849b-be5c-4572-a64c-a521b6a1bf58" class="numbered-list" start="1"><li>뽑기 버튼<figure id="1c8df9e8-4871-45a9-a01f-4fec88fb3a10" class="image"><a href="Untitled%2014.png"><img style="width:536px" src="Untitled%2014.png"/></a></figure><ul id="92dc15da-d7f4-4e32-aff5-4d2fe943dbca" class="bulleted-list"><li style="list-style-type:disc">1회 뽑기 버튼 = 해당 뽑기 1회 진행</li></ul><ul id="16b336e2-9828-41be-906a-ee35b3eec76c" class="bulleted-list"><li style="list-style-type:disc">10회 뽑기 버튼 = 해당 뽑기 10회 진행</li></ul><ul id="74997c71-d0c1-428e-868a-63d7c31f6060" class="bulleted-list"><li style="list-style-type:disc">뽑기 버튼 선택 시 <strong>2. 확인 팝업</strong> 출력<p id="2fbfe751-1e3b-4b9e-ba2d-bf2ca3590047" class="">※ 뽑기권이 부족할 경우 3. 뽑기권 교환 팝업 출력</p></li></ul><ul id="fedd0c04-833e-4ee6-bf90-48c1682c3740" class="bulleted-list"><li style="list-style-type:disc">텍스트 = n회 뽑기</li></ul><ul id="169c744d-9af9-44f2-b119-907fa6517543" class="bulleted-list"><li style="list-style-type:disc">필요 자원 아이콘 = 해당 뽑기 ID <code>ProductInfo</code> → <mark class="highlight-blue"><code>Payment</code></mark> 타입 참조<ul id="34117804-6f62-4f49-8672-7ded315104b8" class="bulleted-list"><li style="list-style-type:circle">GachaTicket = 일반 뽑기권 아이콘</li></ul><ul id="ba5b2caa-7e2c-4348-9bc4-a5dc25f78ec8" class="bulleted-list"><li style="list-style-type:circle">LimitedGachaTicket = 한정 뽑기권 아이콘</li></ul></li></ul><ul id="c4b02e28-0558-4be9-9f32-ff59ee36f27a" class="bulleted-list"><li style="list-style-type:disc">자원 요구량 = n개<ul id="c7b00669-d9a0-4272-aed3-76f4795f2caa" class="bulleted-list"><li style="list-style-type:circle">n = <code>자원</code> * <code>버튼 당 뽑기 횟수</code> </li></ul><ul id="80d14aa9-128b-447c-bb73-cb88f61ec159" class="bulleted-list"><li style="list-style-type:circle"><span style="border-bottom:0.05em solid"><strong>부족 시 텍스트 색상 </strong></span><mark class="highlight-red"><span style="border-bottom:0.05em solid"><strong>빨간색</strong></span></mark><span style="border-bottom:0.05em solid"><strong>으로 출력</strong></span></li></ul></li></ul></li></ol><ol type="1" id="e0515281-d493-4a8b-b81d-b3e8234a6237" class="numbered-list" start="2"><li>확인 팝업<figure id="a47ce806-83b8-46fd-94f5-d11b40ffbbe3" class="image"><a href="Untitled%2015.png"><img style="width:510px" src="Untitled%2015.png"/></a></figure><ul id="d173be00-81dd-425f-b4f0-6df6e7557b0f" class="bulleted-list"><li style="list-style-type:disc">n = 뽑기 횟수</li></ul><ul id="64a89130-6522-468f-966f-b763e78025fc" class="bulleted-list"><li style="list-style-type:disc">m = 소비 자원 량</li></ul><ul id="45a6f3ae-9e04-4b9c-b242-e2aeac3ac5c7" class="bulleted-list"><li style="list-style-type:disc">타이틀 = <code>[뽑기명]</code> n회</li></ul><ul id="e50f20fb-9e59-4a22-82ab-e73519b25209" class="bulleted-list"><li style="list-style-type:disc">설명 = m 개의 <code>[소비 자원 명]</code> 을 사용하여 뽑기를 진행합니다. 계속하시겠습니까?</li></ul><ul id="74125a77-cddb-4ae8-bb96-51f0b7997a83" class="bulleted-list"><li style="list-style-type:disc">버튼<ol type="1" id="d2883a69-20e0-4973-b218-366d286cf3ed" class="numbered-list" start="1"><li>취소 버튼 : 선택 시 팝업 닫기</li></ol><ol type="1" id="eeab5e23-8511-4f2f-8664-f8489b6a70e0" class="numbered-list" start="2"><li>확인 버튼 : 선택 시 팝업 닫기 후 뽑기 결과 이동</li></ol></li></ul></li></ol><ol type="1" id="c58d00cc-8927-4667-a682-8bfe67f0e713" class="numbered-list" start="3"><li>뽑기권 교환 팝업<figure id="04f50e95-ae8d-47e8-922a-66e0b3b4a8fa" class="image"><a href="Untitled%2016.png"><img style="width:510px" src="Untitled%2016.png"/></a></figure><ul id="a2e66bfa-00dd-41e8-8508-a3e314e64cb0" class="bulleted-list"><li style="list-style-type:disc">n = 보유한 뽑기권 개수 - 필요한 뽑기권 개수 </li></ul><ul id="32a2b507-b079-483f-bc49-eb6add5604eb" class="bulleted-list"><li style="list-style-type:disc">m = <code>[뽑기권 가격]</code> * n<ul id="0b89b3e6-1fa2-49ca-96c2-5c3b53776e75" class="bulleted-list"><li style="list-style-type:circle">뽑기권 가격 = 뽑기권 상품 Id 참조 <code>ProductInfo</code> → <mark class="highlight-blue"><code>Price</code></mark></li></ul></li></ul><ul id="33bf4697-eaaf-4dd7-9147-c5d28ab4c90c" class="bulleted-list"><li style="list-style-type:disc">타이틀 = <code>[뽑기 자원]</code> 교환</li></ul><ul id="dfd5d382-95b5-4cfd-8166-f67b5bf4864a" class="bulleted-list"><li style="list-style-type:disc">설명 = <code>[뽑기 자원]</code>이 n 개 부족합니다. m개의 <code>[길드 코인 명]</code>을 사용하여 구매 하시겠습니까?</li></ul><ul id="3a16c260-b1b7-4928-b84d-c2b1abbb8841" class="bulleted-list"><li style="list-style-type:disc">버튼<ol type="1" id="8af9ccf4-5461-44c6-b024-681f46d330c7" class="numbered-list" start="1"><li>취소 버튼 : 선택 시 팝업 닫기</li></ol><ol type="1" id="835ae9b5-f849-45c6-99b9-4180c2e103a0" class="numbered-list" start="2"><li>확인 버튼 : 선택 시 팝업 닫기 후 뽑기권 n개 구매<p id="81dfecd5-f53e-4905-b800-3a03158633e6" class="">※ 코인이 부족할 시 4. 코인 교환 팝업 출력</p></li></ol></li></ul></li></ol><ol type="1" id="3284a2cb-81fb-4d3e-a607-a9306ed6034e" class="numbered-list" start="4"><li>코인 교환 팝업<figure id="19f9c267-2829-44da-af3c-7d334524aa96" class="image"><a href="Untitled%2017.png"><img style="width:510px" src="Untitled%2017.png"/></a></figure><ul id="75b57bf2-9a19-4e05-84b2-8855b6bbded8" class="bulleted-list"><li style="list-style-type:disc">n = <code>[길드코인 보유량]</code> - <code>[뽑기권 가격]</code> * <code>[3. 뽑기권 교환 팝업에서 구매할 뽑기권 개수]</code></li></ul><ul id="6bb68689-dcb0-4c98-8d3c-47329fbba6fc" class="bulleted-list"><li style="list-style-type:disc">타이틀 = 길드코인 구매</li></ul><ul id="dde94a09-217a-4c1b-adf7-b64454783328" class="bulleted-list"><li style="list-style-type:disc">설명 = 길드코인이 n 개 부족합니다. 보석n개를 사용해 동일한 양의 길드코인으로 교환하시겠습니까?</li></ul><ul id="58505b96-6ec4-4003-b899-242705d44531" class="bulleted-list"><li style="list-style-type:disc">버튼<ol type="1" id="56c85158-0152-461e-b14c-7de09f73e8b5" class="numbered-list" start="1"><li>취소 버튼 : 선택 시 팝업 닫기</li></ol><ol type="1" id="ed242920-b47d-4b99-a461-15cc3315f0ad" class="numbered-list" start="2"><li>확인 버튼 : 팝업 닫기 후 선택 시 길드코인 n개 교환<p id="136ed1df-7f9e-4103-904d-14ad3a59f993" class="">※ 보석이 부족할 시 5. 보석 구매 팝업 출력</p></li></ol></li></ul><ol type="1" id="cc156619-599d-4602-949f-d9243fe67943" class="numbered-list" start="5"><li>보석 교환 팝업<figure id="5abf28f2-ffde-4e6f-ab71-519c616468a8" class="image"><a href="Untitled%2018.png"><img style="width:510px" src="Untitled%2018.png"/></a></figure></li></ol><ul id="df760b1b-bcfb-4bcf-8751-9825c3ef68b5" class="bulleted-list"><li style="list-style-type:disc">타이틀 = 보석 구매</li></ul><ul id="9f88cbbe-2184-4c02-9958-604a79215092" class="bulleted-list"><li style="list-style-type:disc">설명 = 보석이 부족합니다. 보석 구매 화면으로 이동하시겠습니까?</li></ul><ul id="54f10a9d-e6b8-4efb-ba9a-d71d66b926fa" class="bulleted-list"><li style="list-style-type:disc">버튼<ol type="1" id="d2c43315-bacf-4f2e-8343-82e1fcce76c8" class="numbered-list" start="1"><li>취소 버튼 : 선택 시 팝업 닫기</li></ol><ol type="1" id="3d0edb06-f55c-467f-8141-66eef4241603" class="numbered-list" start="2"><li>확인 버튼 : 선택 시  팝업 닫기 후 상점의 보석 구매 화면으로 이동</li></ol></li></ul></li></ol></li></ol></div></div><h3 id="6a644ed8-74fe-4422-a8b2-d151c56dd661" class="">한정 뽑기 추가 정보</h3><ul id="6e1c8856-b8ea-4cc1-a072-ffa4f800f3eb" class="bulleted-list"><li style="list-style-type:disc">한정 뽑기 타입에서 추가되는 정보</li></ul><div id="23334f8c-786c-4fe7-94c8-bff5c0d07a5b" class="column-list"><div id="5d8edf53-738b-4dbf-9540-520c32254995" style="width:31.25%" class="column"><figure id="bf3e027b-6649-4876-8364-26e5e52ee6c0" class="image"><a href="Untitled%2019.png"><img style="width:381px" src="Untitled%2019.png"/></a></figure></div><div id="829df369-fcd4-4d39-8692-68ff38b211d9" style="width:68.75%" class="column"><ol type="1" id="aec49056-ded9-405b-958b-92db004fc5d2" class="numbered-list" start="1"><li>한정<strong> 캐릭터 정보</strong><ul id="1ce50708-c8f4-4e2e-a29d-99d124dfefa1" class="bulleted-list"><li style="list-style-type:disc">GachaRewardInfo → PittyItem 참조</li></ul><ul id="22f2dcbd-2360-4e7b-8249-58a7c60919c7" class="bulleted-list"><li style="list-style-type:disc">RandomItemSetInfo → StrItemIds 참조하여 해당 캐릭터의 정보 출력</li></ul><ul id="471042e5-b435-4a92-b325-45b119be1159" class="bulleted-list"><li style="list-style-type:disc">천장 캐릭터 명 출력</li></ul><ul id="271b137e-bb2f-4051-99e5-d1b13a40ad29" class="bulleted-list"><li style="list-style-type:disc">천장 캐릭터 ActionGroupList 출력<ul id="c935c93a-43b6-44ca-836b-f3e585c85617" class="bulleted-list"><li style="list-style-type:circle">선택 시 해당 캐릭터의 액션 정보가 담긴 ActionGroupInfoPopup 출력</li></ul></li></ul></li></ol><ol type="1" id="3e08f7ae-b879-4255-9333-a77368796093" class="numbered-list" start="2"><li><strong>한정 뽑기 정보 텍스트</strong><ul id="c297f7eb-5b6c-4be9-9792-4f8aad9d06d7" class="bulleted-list"><li style="list-style-type:disc">해당 뽑기에서 천장 대상인 캐릭터 정보 출력</li></ul><ul id="aecbc8e4-282e-4739-b305-48c31fcb0885" class="bulleted-list"><li style="list-style-type:disc">출력 내용 : 기간 중 &#x27;<code>[천장 캐릭터 명]</code>&#x27; 출현 확률 UP</li></ul></li></ol></div></div><h1 id="efda8220-2890-4aa9-9dae-90112c3e2e23" class="">3. 뽑기 결과 창</h1><div id="358a34b8-c13e-42bc-b9f3-0aa5608f574e" class="column-list"><div id="03617918-33b5-44fc-9dab-3dc9ac78e431" style="width:25%" class="column"><figure id="913dd864-5b43-4037-b810-972c1fe5ad4d" class="image"><a href="Untitled%2020.png"><img style="width:509px" src="Untitled%2020.png"/></a></figure></div><div id="3e0e421c-fc07-49ef-9f27-5d86a12c7a3b" style="width:75%" class="column"><ul id="80adc713-aaff-4288-84ce-7036d98d9753" class="bulleted-list"><li style="list-style-type:disc">뽑기 버튼 선택 → 뽑기 결과 출력</li></ul><ul id="33c55e9f-2f59-4745-9480-16be93ce12e6" class="bulleted-list"><li style="list-style-type:disc">기존 RewardPopUp 프리팹에 버튼 추가</li></ul><ul id="8268edac-63c0-4ebb-86b9-6bf7747ed3f4" class="bulleted-list"><li style="list-style-type:disc">뽑기 결과 출력 시 <a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21"><span style="border-bottom:0.05em solid"><strong>상단 바</strong></span></a><span style="border-bottom:0.05em solid"><strong>가 출력되어야 함</strong></span></li></ul><ol type="1" id="206f04fc-9eef-4dd4-bc22-bd88717bf6f7" class="numbered-list" start="1"><li>뽑기 결과 아이템 리스트<ul id="2aa30c1c-0cf6-4653-90c5-84679e24a8c4" class="bulleted-list"><li style="list-style-type:disc">뽑기 계산 결과 출력된 아이템 리스트</li></ul><ul id="51b399c6-bcdc-4875-9dbb-125ec2ce249e" class="bulleted-list"><li style="list-style-type:disc">RewardPopUp 형태 계속 사용</li></ul><ul id="15f74741-ce9a-49d5-a9f0-904e8ac7f793" class="bulleted-list"><li style="list-style-type:disc">신규 기능 추가 필요<ol type="1" id="95a04fd6-4694-4c8d-81a7-864697d1a0a0" class="numbered-list" start="1"><li>새로운 캐릭터, 아이템, 재료를 획득 시 New 표시 출력<figure id="c371776b-2229-430d-bd93-201f1d892e39" class="image"><a href="Untitled%2021.png"><img style="width:509px" src="Untitled%2021.png"/></a></figure></li></ol><ol type="1" id="98ddb6ef-8367-48f2-b73c-3d5554121bd0" class="numbered-list" start="2"><li>획득한 아이템이 마일리지를 추가로 부여할 시 마일리지 획득량 표시<figure id="a0fbc9d4-a9e4-45df-9dfd-79b53888eb3a" class="image"><a href="Untitled%2022.png"><img style="width:151px" src="Untitled%2022.png"/></a></figure></li></ol></li></ul></li></ol><ol type="1" id="1c4362c5-2b8e-4019-a3f4-bb9fa0079e88" class="numbered-list" start="2"><li>다시 뽑기 버튼<ul id="f7cdc11e-7e9d-4aa6-99cd-d2b90776ae03" class="bulleted-list"><li style="list-style-type:disc">버튼 선택 시 직전 실행한 뽑기 구매 버튼과 동일한 동작 실행<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c6849ca1-bd10-42f4-9f55-0098b8df9103"><div style="font-size:1.5em"><span class="icon">‼️</span></div><div style="width:100%">다시 뽑기 예시<ol type="1" id="2d3caa9c-1b3b-40a9-81c8-ef6bde271d39" class="numbered-list" start="1"><li>직전 뽑기 = 1회 뽑기<ul id="9582f1d5-9fd0-4ead-ae93-f822804384ef" class="bulleted-list"><li style="list-style-type:disc">다시 뽑기 버튼 = 1회 뽑기 버튼</li></ul></li></ol><ol type="1" id="ce135600-a860-4f24-a76c-2b07be2fc336" class="numbered-list" start="2"><li>직전 뽑기 = 10회 뽑기<ul id="9bf92933-187b-480d-9d91-a1bee3767066" class="bulleted-list"><li style="list-style-type:disc">다시 뽑기 버튼 = 10회 뽑기 버튼</li></ul></li></ol><p id="7912ead5-ecd4-43ee-8f9a-f20cc14bb3d6" class="">※ <a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">버튼 선택 후 실행 프로세스</a>는 동일</p></div></figure></li></ul></li></ol></div></div><h1 id="9b717368-dee1-471c-84d8-6b2470b708ae" class="">4. 상점</h1><figure id="a64b1c38-ebd6-401b-82c3-9407f250ca43" class="image"><a href="Untitled%2023.png"><img style="width:672px" src="Untitled%2023.png"/></a><figcaption>길드코인, 뽑기권 상점 출력 예시</figcaption></figure><ul id="74ab4736-6326-47c3-9436-eefbb223bacf" class="bulleted-list"><li style="list-style-type:disc">상점 리스트 출력 순서<ol type="1" id="2de144a6-8943-4e30-950e-144be87e7c0d" class="numbered-list" start="1"><li>보석 구매</li></ol><ol type="1" id="6b0bb5c7-cabe-4332-9f89-5e79eb6a06cd" class="numbered-list" start="2"><li>길드코인 교환</li></ol><ol type="1" id="ab636a7a-3ce6-4d7c-9b2f-ee61ae24088b" class="numbered-list" start="3"><li>뽑기권 교환</li></ol><ol type="1" id="7f6f0596-8cb1-4caf-9776-7f474225d6c9" class="numbered-list" start="4"><li>골드 구매</li></ol></li></ul><ol type="1" id="8957476e-f9ef-4fba-a674-bc30d78ed25e" class="numbered-list" start="1"><li>길드코인 교환 버튼<ul id="f13e8d35-15b3-439b-8b41-8db1923f4061" class="bulleted-list"><li style="list-style-type:disc">선택 시 길드코인 교환 팝업 출력</li></ul><ol type="1" id="f3c876ac-a0dc-44d8-8732-686830d44285" class="numbered-list" start="1"><li>길드코인 아이콘</li></ol><ol type="1" id="0a2509f7-7748-4e2f-a86d-e8cc94de65c7" class="numbered-list" start="2"><li>길드코인 비용 = 보석 아이콘</li></ol></li></ol><ol type="1" id="18fab9ba-01ed-4ec2-bca5-67e797fc434d" class="numbered-list" start="2"><li>뽑기권 교환 버튼<ul id="0668f942-a9f4-43af-8fa2-79bc5cf82aad" class="bulleted-list"><li style="list-style-type:disc">선택 시 각 <a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">뽑기권 구매 팝업</a> 출력</li></ul><ol type="1" id="d3f7bc3b-2487-45ef-9972-d1e9cf977a0f" class="numbered-list" start="1"><li>뽑기권 아이콘<ol type="a" id="f8854d2d-a993-4f0c-9dcd-15f4c6adefbd" class="numbered-list" start="1"><li>뽑기권 Id 참조 <code>ProductInfo</code> → <mark class="highlight-blue"><code>FixedRewardId</code></mark> 참조 </li></ol><ol type="a" id="444b4872-05f9-4ee0-8e82-2ddce9d42406" class="numbered-list" start="2"><li>FixedRewardInfo → Item Id로 해당 아이템 아이콘 호출</li></ol></li></ol><ol type="1" id="b8f0650b-542b-40f9-8da0-2188c276ae02" class="numbered-list" start="2"><li>뽑기권 비용<ol type="a" id="d7443e49-9f7d-4801-86d1-7f80aeb5ffb0" class="numbered-list" start="1"><li>아이콘 = 뽑기권 Id 참조 <code>ProductInfo</code> → <mark class="highlight-blue"><code>Payment</code></mark> 참조</li></ol><ol type="a" id="9c6e382c-8ef6-4dbe-84fe-f341bb78039e" class="numbered-list" start="2"><li>값 = 뽑기권 Id 참조 <code>ProductInfo</code> → <mark class="highlight-blue"><code>Price</code></mark><mark class="highlight-blue"> </mark>참조</li></ol></li></ol></li></ol><h2 id="feabf2b7-cf1a-4beb-b60f-6cce761ac78c" class="block-color-red_background">4-1. 길드코인 교환 팝업</h2><p id="255496cf-ef88-4109-95fb-f079d86dced6" class="block-color-red_background"><span style="border-bottom:0.05em solid"><strong>※ 1.12.0 버전 스팩에서 제외 됨</strong></span></p><ul id="c726fc14-012d-429f-b727-cb8f1803efd3" class="bulleted-list"><li style="list-style-type:disc">길드코인 교환 버튼 선택 시 출력</li></ul><ul id="c9cb1d62-f37e-49ba-93f5-5c63d87488fc" class="bulleted-list"><li style="list-style-type:disc">길드코인은 보석과 1대1 교환</li></ul><ul id="fd91fa85-f806-4cf1-8205-4bba37cbb8d5" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid"><strong>해당 팝업 출력 시 </strong></span><a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21"><span style="border-bottom:0.05em solid"><strong>상단 바</strong></span></a><span style="border-bottom:0.05em solid"><strong>가 출력되어야 함</strong></span></li></ul><div id="6f15dd7e-9f43-451f-8953-91022f090fe6" class="column-list"><div id="06f483be-09a7-4441-bd5c-f7f203ee7362" style="width:37.5%" class="column"><figure id="f17b292e-f96e-454a-a0a3-3e8df69df648" class="image"><a href="Untitled%2024.png"><img style="width:510px" src="Untitled%2024.png"/></a></figure></div><div id="30be846e-661f-4ca5-ba35-8ddcbb82553b" style="width:62.5%" class="column"><ol type="1" id="1264f91d-c504-4f47-8489-9fb9ef5268c2" class="numbered-list" start="1"><li>타이틀 = 길드코인 교환</li></ol><ol type="1" id="ac322c17-6240-470e-905c-69fb8ba96056" class="numbered-list" start="2"><li>교환비 정보<ol type="a" id="18894b6e-3c60-46de-b907-702d43bb89e6" class="numbered-list" start="1"><li>보석<ol type="i" id="17a6fda2-40bc-46d2-ac30-0572b9f285b7" class="numbered-list" start="1"><li>아이콘 = 보석 아이콘 출력</li></ol><ol type="i" id="661bc894-16b1-479d-9698-70bc5546c813" class="numbered-list" start="2"><li>요구량 = 보석 x 1</li></ol></li></ol><ol type="a" id="2719d8be-f3b5-4104-a51c-06c484dc1115" class="numbered-list" start="2"><li>길드코인<ol type="i" id="9a0c19c8-f0ad-4e3c-8baf-01c5ea8ca048" class="numbered-list" start="1"><li>아이콘 = 길드코인 아이콘 출력</li></ol><ol type="i" id="4bca5617-957a-450c-be9d-d4aded4efc69" class="numbered-list" start="2"><li>교환량 = 길드코인 x 1</li></ol></li></ol></li></ol><ol type="1" id="669947f6-4957-40d7-b06a-6b6a136961e7" class="numbered-list" start="3"><li>교환량 정보<ol type="a" id="bfd8912e-bf70-460e-b744-782d97d9928d" class="numbered-list" start="1"><li>상단 텍스트 = 길드코인 교환 개수</li></ol><ol type="a" id="2230dc6f-052d-4863-959b-623470aace53" class="numbered-list" start="2"><li>교환 개수 인디케이터<ul id="39e7a785-d786-4af2-bfb2-fbbe06e4457f" class="bulleted-list"><li style="list-style-type:disc">+ , - 버튼 : 선택 시 각각 1개 씩 교환 개수 증감</li></ul><ul id="cf982a26-6b67-4711-acd9-1e8fc86e0a71" class="bulleted-list"><li style="list-style-type:disc">숫자 필드 : 교환할 길드코인 개수 출력<ul id="5ee9a96d-659b-49d2-8275-4120c4f0e336" class="bulleted-list"><li style="list-style-type:circle">선택 시 수동 입력 필드로 작동</li></ul><ul id="b1bb43f4-9f15-4a17-8939-e2c9707afac3" class="bulleted-list"><li style="list-style-type:circle">필드가 비어있을 때 기본값 출력</li></ul><p id="f7fbf36a-490a-461b-9a02-766cf88e81da" class="">※ 숫자만 입력 가능</p><p id="bf543611-a2a3-42d7-ab21-fc0338ce8367" class="">※ 최소 = 1 , 최대 = 1000000 , 기본값 = 1</p></li></ul><ul id="1255c996-bf40-4e2f-990b-8fd5bd472b9e" class="bulleted-list"><li style="list-style-type:disc">-100 버튼 : 현재 숫자 필드 - 100개</li></ul><ul id="91c75364-818a-4454-8264-6bca672f4823" class="bulleted-list"><li style="list-style-type:disc">+100 버튼 : 현재 숫자 필드 + 100개</li></ul><ul id="bb9a5cb8-7b88-4a77-b487-6f21623de673" class="bulleted-list"><li style="list-style-type:disc">최대 버튼 : 선택 시 숫자 필드가 현재 보유한 보석으로 교환할 수 있는 최대치로 변경</li></ul></li></ol></li></ol><ol type="1" id="61bc1b46-dadc-4337-8795-93963197f05c" class="numbered-list" start="4"><li>보석 소모량<p id="d529729b-fc51-4b19-85be-065411f8fa0b" class="">출력 형태 : 소모 <code>[보석 아이콘]</code> <code>[소모량 개수]</code></p><p id="dc613bf7-f71e-46aa-878b-a93173d45f54" class="">※ 보석 보유량 &lt; 소모량 일 경우 소모량 텍스트 붉은색 출력</p><figure id="95e38de3-b0b2-4be4-8b08-95a49393f167" class="image"><a href="Untitled%2025.png"><img style="width:219px" src="Untitled%2025.png"/></a></figure></li></ol><ol type="1" id="17729d32-1ea8-4bfc-b0ae-23702b2f4924" class="numbered-list" start="5"><li>버튼<ol type="a" id="b339e271-be19-41b3-b29d-eb8aab63b603" class="numbered-list" start="1"><li>취소 = 팝업 닫기</li></ol><ol type="a" id="dd2bb763-4edc-4c50-a145-bf82b14fd4be" class="numbered-list" start="2"><li>교환 = 소모량 만큼 보석 → 길드코인 교환<p id="2cdaa27d-4629-41c6-9461-b52d63149e9f" class="">※ 보석 보유량 &lt; 소모량 일 때 교환 버튼 선택 시 팝업 닫기 후 <a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">보석 교환 팝업 출력</a>.</p></li></ol></li></ol></div></div><h2 id="f0868fff-ed0a-4ac0-a7ef-bc4c8e49be51" class="">5-2. 뽑기권 구매 팝업</h2><ul id="35be6686-6719-47dc-bf0c-460b14de3539" class="bulleted-list"><li style="list-style-type:disc">출력할 뽑기권 정보<ol type="1" id="e8da1e18-4650-4cd6-98ec-2296aab0b18c" class="numbered-list" start="1"><li>뽑기권 Id 참조 <code>ProductInfo</code> → <mark class="highlight-blue"><code>FixedRewardId</code></mark> 참조 </li></ol><ol type="1" id="a1dad50e-a550-40c0-bc5c-8e03e23eb51b" class="numbered-list" start="2"><li>FixedRewardInfo → Item Id로 해당 아이템 정보 호출</li></ol></li></ul><ul id="a2d9c8d0-890a-4d11-a223-66e3d2559e2f" class="bulleted-list"><li style="list-style-type:disc">뽑기권을 구매할 수 있는 팝업</li></ul><ul id="d085d64f-3cd3-4c26-8445-6760df6d68a8" class="bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid"><strong>해당 팝업 출력 시 </strong></span><a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21"><span style="border-bottom:0.05em solid"><strong>상단 바</strong></span></a><span style="border-bottom:0.05em solid"><strong>가 출력되어야 함</strong></span></li></ul><div id="a33cb9f5-3c9b-46d6-9106-3175eb669e37" class="column-list"><div id="ccd9f151-2294-4d58-be33-80ac4485cafd" style="width:37.5%" class="column"><figure id="e66fe15f-dea1-41c9-ae0f-b1095da7657f" class="image"><a href="Untitled%2026.png"><img style="width:510px" src="Untitled%2026.png"/></a></figure></div><div id="7de3b141-4cef-4814-a1ee-2ac1ccac02b9" style="width:62.5%" class="column"><ol type="1" id="4980849e-4223-4277-b032-5383f697790a" class="numbered-list" start="1"><li>타이틀 = <code>[선택한 뽑기권]</code> 교환</li></ol><ol type="1" id="bfca0ffa-7fb8-4b0d-ac44-1b9dcdd7de3b" class="numbered-list" start="2"><li>가격 정보<ol type="a" id="27f2eed2-1ca2-4302-8e6e-7c11bc7d0995" class="numbered-list" start="1"><li>뽑기권 비용 아이콘<ol type="i" id="51bbd8ec-3b78-4cc8-a7ce-4c96871214d1" class="numbered-list" start="1"><li>아이콘 = 뽑기권 요구 재화 아이콘 출력<ul id="111da74c-1ef7-4f78-a3bc-1d49f0934e87" class="bulleted-list"><li style="list-style-type:disc">아이콘 = 뽑기권 Id 참조 <code>ProductInfo</code> → <mark class="highlight-blue"><code>Payment</code></mark> 참조</li></ul><ul id="a312918b-e3bb-4ca1-b9bf-7b6f337b9a82" class="bulleted-list"><li style="list-style-type:disc">해당 재화 아이콘 출력</li></ul></li></ol><ol type="i" id="b7877ac8-b7f7-46a3-9b3c-3e14be8f2ed7" class="numbered-list" start="2"><li>요구량 = 길드코인 x [가격]<ul id="368b1a0a-dd7d-4d08-830a-db8db5a011d9" class="bulleted-list"><li style="list-style-type:disc">가격 = 뽑기권 Id 참조 <code>ProductInfo</code> → <mark class="highlight-blue"><code>Price</code></mark><mark class="highlight-blue"> </mark>참조</li></ul></li></ol></li></ol><ol type="a" id="86134889-2e09-420a-957d-84cb03be5d60" class="numbered-list" start="2"><li><code>[선택한 뽑기권]</code> 아이콘<ol type="i" id="287a3a7f-addb-4750-823c-553dd4e5d0b0" class="numbered-list" start="1"><li>아이콘 = <code>[선택한 뽑기권]</code> 아이콘 출력</li></ol><ol type="i" id="bb08d199-f4e7-47b0-a061-b8784ef7c1ce" class="numbered-list" start="2"><li>교환량 = <code>[선택한 뽑기권]</code> </li></ol></li></ol></li></ol><ol type="1" id="017d1e88-a66c-4a4f-a1ad-bfe46e97f523" class="numbered-list" start="3"><li>구매량 정보<ol type="a" id="349f6ec7-3ad8-4faa-b992-5d24d90b4a3a" class="numbered-list" start="1"><li>상단 텍스트 = <code>[선택한 뽑기권 이름]</code> 구매 개수</li></ol><ol type="a" id="cee7463c-1f67-4d9e-a4cf-ed3d570964bd" class="numbered-list" start="2"><li>구매 개수 인디케이터<ul id="5c98c2d5-f9bf-4ae2-b599-a9553cc2ba5c" class="bulleted-list"><li style="list-style-type:disc">+ , - 버튼 : 선택 시 각각 1개 씩 구매 개수 증감</li></ul><ul id="9f50744e-0fc9-4ad1-94a8-0d26a2cf16da" class="bulleted-list"><li style="list-style-type:disc">숫자 필드 : 교환할 길드코인 개수 출력<ul id="ee77b37f-6d64-481b-87d4-50b892265820" class="bulleted-list"><li style="list-style-type:circle">선택 시 수동 입력 필드로 작동</li></ul><ul id="08f2da8a-2b81-4846-a0f4-c59b0863282f" class="bulleted-list"><li style="list-style-type:circle">필드가 비어있을 때 기본값 출력</li></ul><p id="ef87e00d-2791-487d-95b6-56b714a50af6" class="">※ 숫자만 입력 가능</p><p id="4f111b04-2f09-445c-884c-b4f22ce7c50a" class="">※ 최소 = 1 , 최대 = 1000000 , 기본값 = 1</p></li></ul><ul id="7f39acc6-dafa-4f9f-bb0f-05b0f2c97fec" class="bulleted-list"><li style="list-style-type:disc">-10 버튼 : 현재 숫자 필드 값 - 10개</li></ul><ul id="7b29f7e6-e14a-4fd3-a00d-70f2c17ac884" class="bulleted-list"><li style="list-style-type:disc">+10 버튼 : 현재 숫자 필드 값 + 10개</li></ul><ul id="3d0da2f0-8391-4aa4-bd49-82c26d111e83" class="bulleted-list"><li style="list-style-type:disc">최대 버튼 : 선택 시 숫자 필드가 현재 보유한 요구 재화로 뽑기권을 구매할 수 있는 최대치로 변경</li></ul></li></ol></li></ol><ol type="1" id="f55b4191-cb9c-4287-b13f-d781d03eef7b" class="numbered-list" start="4"><li>요구 재화 소모량<p id="5fe0eed0-9e68-4ec4-a859-906f7b4b648c" class="">출력 형태 : 소모 <code>[요구 재화 아이콘]</code> <code>[소모량 개수]</code></p><p id="74ac3551-fd24-40f2-a692-b1b00fda4f97" class="">※ 요구 재화 보유량 &lt; 소모량 일 경우 소모량 텍스트 붉은색 출력</p><figure id="bd0859c5-10f1-41ab-939b-b05f2132ae73" class="image"><a href="Untitled%2025.png"><img style="width:219px" src="Untitled%2025.png"/></a><figcaption>소모량 예시</figcaption></figure></li></ol><ol type="1" id="726dabe1-24f7-44be-9a95-6bc456630f16" class="numbered-list" start="5"><li>버튼<ol type="a" id="716f2881-9e1b-4771-82cb-53cf2a50e44c" class="numbered-list" start="1"><li>취소 = 팝업 닫기</li></ol><ol type="a" id="1fc222f0-d540-4f34-bfed-b3e0698bae7d" class="numbered-list" start="2"><li>구매 = 숫자 필드에 입력된 개수 만큼 <code>[선택한 뽑기권]</code> 구매<p id="f9f0bf8b-3282-4118-af9c-c21b5b887845" class="">※ 요구 재화 보유량 &lt; 소모량 일 때 구매 버튼 선택 시 팝업 닫기 후 해당 재화<a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21"> </a><a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">교환 팝업 출력.</a></p><p id="73ceac7c-4809-425e-88f8-46ab863f2785" class="">※ 재화 보유량이 부족하여 교환 팝업 출력 시 <span style="border-bottom:0.05em solid"><strong>부족한 재화량이 숫자 필드에 입력되어 있음</strong></span></p></li></ol></li></ol></div></div><p id="48563537-fa31-42b6-bf18-24b89443cb29" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

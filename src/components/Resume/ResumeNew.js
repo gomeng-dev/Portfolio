@@ -18,6 +18,7 @@ const resumeButtonStyle = {
 
 function ResumeNew() {
   const [width, setWidth] = useState(1200);
+  const [numPages, setNumPages] = useState(null);
 
   useEffect(() => {
     // 윈도우 너비 업데이트
@@ -31,8 +32,13 @@ function ResumeNew() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // PDF 문서가 로드될 때 전체 페이지 수를 가져오는 함수
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+  }
+
   return (
-    <section className="page-section">
+    <section className="page-section" style={{ overflow: "auto", minHeight: "100vh" }}>
       <Container fluid className="resume-section" style={{ 
         position: "relative",
         zIndex: 1,
@@ -67,8 +73,22 @@ function ResumeNew() {
           overflow: "auto", 
           marginTop: "20px"
         }}>
-          <Document file={pdf} className="d-flex justify-content-center">
-            <Page pageNumber={1} scale={width > 786 ? 1.7 : 0.6} />
+          <Document 
+            file={pdf} 
+            className="d-flex justify-content-center flex-column align-items-center"
+            onLoadSuccess={onDocumentLoadSuccess}
+          >
+            {Array.from(
+              new Array(numPages),
+              (el, index) => (
+                <Page
+                  key={`page_${index + 1}`}
+                  pageNumber={index + 1}
+                  scale={width > 786 ? 1.7 : 0.6}
+                  className="mb-5" // 페이지 간 여백 추가
+                />
+              )
+            )}
           </Document>
         </Row>
 

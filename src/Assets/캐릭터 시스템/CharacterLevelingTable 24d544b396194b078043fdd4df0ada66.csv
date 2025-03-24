@@ -1,0 +1,12 @@
+﻿항목,자료형,설명,데이터 공개 여부
+id,int,항목 ID,미출력
+chrID,int,"할당될 캐릭터 ID
+참조 → 테이블: CharacterInfo - 컬럼: id",출력
+level,int,캐릭터 레벨,출력
+expAmount,int,경험치 필요량,
+chrDMG,int,기본 공격력,출력
+chrHP,int,기본 체력,출력
+chrDT,int,데미지 감쇄값 (수치만큼 차감),출력
+chrDR,int,방어력 (비율로 차감),출력
+chrCritProb,float,기본 크리티컬 확률,출력
+chrCritDmg,float,기본 크리티컬 배율,미출력

@@ -1,0 +1,704 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>1.5.0 - 캐릭터 시스템</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="dc74a792-753a-442c-81f0-ce9c90eecf7f" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://play-lh.googleusercontent.com/0rm0obhw8SK5Gnv5OCaH1HpZbvLKJhY4h_C3EtWSSjUSrehcmYvhF6YbYN2V5EeuBHvG"/></div><h1 class="page-title">1.5.0 - 캐릭터 시스템</h1><p class="page-description"></p></header><div class="page-body"><hr id="600ac57f-5559-49bc-926b-db2333b94549"/><h1 id="b09a9fbe-bec5-4179-be77-46fd8b790a70" class="">개요</h1><blockquote id="9257100b-ad7a-46dc-9912-850d221abba9" class="">각 캐릭터에 따라 고유의 레벨별 기본 능력치를 가질 수 있다.<br/>각 캐릭터별 지정된 무기 타입만 착용 가능하다.<br/></blockquote><ol type="1" id="8cc9ddcf-c803-40f3-b405-4792c06c27d7" class="numbered-list" start="1"><li><strong>캐릭터 구성</strong><ol type="a" id="4db3dd22-7023-43a5-b83c-078c16e8afe2" class="numbered-list" start="1"><li>캐릭터 스탯</li></ol><ol type="a" id="e856e6aa-ba82-4682-9aba-3021df4fd781" class="numbered-list" start="2"><li>고유 캐릭터</li></ol><p id="9cd910ca-246f-488e-ba56-21340d4e440b" class="">
+</p></li></ol><ol type="1" id="4fb8efbd-7f01-41da-92eb-40e159dc392c" class="numbered-list" start="2"><li>캐릭터 메인 UI<ol type="a" id="045683f2-6923-47fc-8838-b64ed52dedff" class="numbered-list" start="1"><li>캐릭터 장비</li></ol><ol type="a" id="e108ca9b-3941-4379-916a-84370a1db3ce" class="numbered-list" start="2"><li>캐릭터 정보</li></ol><ol type="a" id="a3b2430b-1afe-4483-ba4a-3614d26a4036" class="numbered-list" start="3"><li>캐릭터 리스트</li></ol></li></ol><p id="fe315a11-17f8-4dbd-917a-0acf82273790" class="">
+</p><hr id="40bebccf-e7ec-4518-a226-96c20cc95a5b"/><h1 id="415f0546-5f79-4816-8ca1-13ab3c95650b" class="">1. 캐릭터 구성</h1><h2 id="5e5712a5-f10f-44c0-a35d-735cc5b10f34" class="">1-1. 캐릭터 스탯</h2><ul id="5c4f07dc-40e6-45c1-a4e5-6444ac593a30" class="bulleted-list"><li style="list-style-type:disc">캐릭터 스탯은 아래의 테이블 입력값에 따라 설정한다.</li></ul><div id="40304c78-435f-47b5-ace0-0261894b7a85" class="collection-content"><h4 class="collection-title">CharacterInfo</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg aria-hidden="true" role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesTitle"><path d="M0.637695 13.1914C1.0957 13.1914 1.32812 13 1.47852 12.5215L2.24414 10.3887H6.14746L6.90625 12.5215C7.05664 13 7.2959 13.1914 7.74707 13.1914C8.22559 13.1914 8.5332 12.9043 8.5332 12.4531C8.5332 12.2891 8.50586 12.1523 8.44434 11.9678L5.41602 3.79199C5.2041 3.21777 4.82129 2.9375 4.19922 2.9375C3.60449 2.9375 3.21484 3.21777 3.0166 3.78516L-0.0322266 12.002C-0.09375 12.1797 -0.121094 12.3232 -0.121094 12.4668C-0.121094 12.918 0.166016 13.1914 0.637695 13.1914ZM2.63379 9.12402L4.17871 4.68066H4.21973L5.76465 9.12402H2.63379ZM12.2793 13.2324C13.3115 13.2324 14.2891 12.6787 14.7129 11.8037H14.7402V12.5762C14.7471 12.9863 15.0273 13.2393 15.4238 13.2393C15.834 13.2393 16.1143 12.9795 16.1143 12.5215V8.00977C16.1143 6.49902 14.9658 5.52148 13.1543 5.52148C11.7666 5.52148 10.6592 6.08887 10.2695 6.99121C10.1943 7.15527 10.1533 7.3125 10.1533 7.46289C10.1533 7.81152 10.4062 8.04395 10.7686 8.04395C11.0215 8.04395 11.2129 7.94824 11.3496 7.73633C11.7529 6.99121 12.2861 6.65625 13.1064 6.65625C14.0977 6.65625 14.6992 7.20996 14.6992 8.1123V8.67285L12.5664 8.7959C10.7686 8.8916 9.77734 9.69824 9.77734 11.0107C9.77734 12.3369 10.8096 13.2324 12.2793 13.2324ZM12.6621 12.1387C11.8008 12.1387 11.2129 11.667 11.2129 10.9561C11.2129 10.2725 11.7598 9.82129 12.7578 9.75977L14.6992 9.62988V10.3203C14.6992 11.3457 13.7969 12.1387 12.6621 12.1387Z"></path></svg></span>항목</th><th><span class="icon property-icon"><svg aria-hidden="true" role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesSelect"><path d="M8 15.126C11.8623 15.126 15.0615 11.9336 15.0615 8.06445C15.0615 4.20215 11.8623 1.00293 7.99316 1.00293C4.13086 1.00293 0.938477 4.20215 0.938477 8.06445C0.938477 11.9336 4.1377 15.126 8 15.126ZM8 13.7383C4.85547 13.7383 2.33301 11.209 2.33301 8.06445C2.33301 4.91992 4.84863 2.39746 7.99316 2.39746C11.1377 2.39746 13.6738 4.91992 13.6738 8.06445C13.6738 11.209 11.1445 13.7383 8 13.7383ZM7.62402 10.6348C7.79492 10.915 8.20508 10.9287 8.37598 10.6348L10.666 6.73145C10.8574 6.41016 10.7002 6.04102 10.3652 6.04102H5.62793C5.29297 6.04102 5.14941 6.43066 5.32031 6.73145L7.62402 10.6348Z"></path></svg></span>자료형</th><th><span class="icon property-icon"><svg aria-hidden="true" role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesText"><path d="M1.56738 3.25879H14.4258C14.7676 3.25879 15.0479 2.97852 15.0479 2.63672C15.0479 2.29492 14.7744 2.02148 14.4258 2.02148H1.56738C1.21875 2.02148 0.952148 2.29492 0.952148 2.63672C0.952148 2.97852 1.22559 3.25879 1.56738 3.25879ZM1.56738 6.84082H14.4258C14.7676 6.84082 15.0479 6.56055 15.0479 6.21875C15.0479 5.87695 14.7744 5.60352 14.4258 5.60352H1.56738C1.21875 5.60352 0.952148 5.87695 0.952148 6.21875C0.952148 6.56055 1.22559 6.84082 1.56738 6.84082ZM1.56738 10.4229H14.4258C14.7676 10.4229 15.0479 10.1426 15.0479 9.80078C15.0479 9.45898 14.7744 9.18555 14.4258 9.18555H1.56738C1.21875 9.18555 0.952148 9.45898 0.952148 9.80078C0.952148 10.1426 1.22559 10.4229 1.56738 10.4229ZM1.56738 14.0049H8.75879C9.10059 14.0049 9.38086 13.7246 9.38086 13.3828C9.38086 13.041 9.10742 12.7676 8.75879 12.7676H1.56738C1.21875 12.7676 0.952148 13.041 0.952148 13.3828C0.952148 13.7246 1.22559 14.0049 1.56738 14.0049Z"></path></svg></span>설명</th></tr></thead><tbody><tr id="35b267a9-b2be-4c65-a7ae-335ddc7cea31"><td class="cell-title"><a href="https://www.notion.so/id-35b267a9b2be4c65a7ae335ddc7cea31?pvs=21">id</a></td><td class="cell-WlOw"><span class="selected-value select-value-color-blue">int</span></td><td class="cell-tzaS">항목 ID</td></tr><tr id="bf59b782-4605-4d6f-844b-48661fc1ce80"><td class="cell-title"><a href="https://www.notion.so/chrName-bf59b78246054d6f844b48661fc1ce80?pvs=21">chrName</a></td><td class="cell-WlOw"><span class="selected-value select-value-color-green">string</span></td><td class="cell-tzaS">캐릭터 이름, StringTable의 Key 참조</td></tr><tr id="641a8bd9-e9e9-4a4d-af88-ea417d2fc94f"><td class="cell-title"><a href="https://www.notion.so/chrPath-641a8bd9e9e94a4daf88ea417d2fc94f?pvs=21">chrPath</a></td><td class="cell-WlOw"><span class="selected-value select-value-color-green">string</span></td><td class="cell-tzaS">캐릭터 메쉬의 Path</td></tr><tr id="aae1bebb-166f-4ed3-b069-e7d16ec1377f"><td class="cell-title"><a href="https://www.notion.so/iconPath-aae1bebb166f4ed3b069e7d16ec1377f?pvs=21">iconPath</a></td><td class="cell-WlOw"><span class="selected-value select-value-color-green">string</span></td><td class="cell-tzaS">캐릭터 아이콘 Path</td></tr><tr id="08894314-bb40-4a12-8b88-df1514d04c47"><td class="cell-title"><a href="https://www.notion.so/illustPath-08894314bb404a128b88df1514d04c47?pvs=21">illustPath</a></td><td class="cell-WlOw"><span class="selected-value select-value-color-green">string</span></td><td class="cell-tzaS">캐릭터 일러스트의 Path</td></tr><tr id="619b6660-ea71-45ca-a1cd-d53cfe02bc3d"><td class="cell-title"><a href="https://www.notion.so/baseSpeed-619b6660ea7145caa1cdd53cfe02bc3d?pvs=21">baseSpeed</a></td><td class="cell-WlOw"><span class="selected-value select-value-color-blue">int</span></td><td class="cell-tzaS">기본 이동 속도</td></tr></tbody></table><br/><br/></div><div id="24d544b3-9619-4b07-8043-fdd4df0ada66" class="collection-content"><h4 class="collection-title">CharacterLevelingTable</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg aria-hidden="true" role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesTitle"><path d="M0.637695 13.1914C1.0957 13.1914 1.32812 13 1.47852 12.5215L2.24414 10.3887H6.14746L6.90625 12.5215C7.05664 13 7.2959 13.1914 7.74707 13.1914C8.22559 13.1914 8.5332 12.9043 8.5332 12.4531C8.5332 12.2891 8.50586 12.1523 8.44434 11.9678L5.41602 3.79199C5.2041 3.21777 4.82129 2.9375 4.19922 2.9375C3.60449 2.9375 3.21484 3.21777 3.0166 3.78516L-0.0322266 12.002C-0.09375 12.1797 -0.121094 12.3232 -0.121094 12.4668C-0.121094 12.918 0.166016 13.1914 0.637695 13.1914ZM2.63379 9.12402L4.17871 4.68066H4.21973L5.76465 9.12402H2.63379ZM12.2793 13.2324C13.3115 13.2324 14.2891 12.6787 14.7129 11.8037H14.7402V12.5762C14.7471 12.9863 15.0273 13.2393 15.4238 13.2393C15.834 13.2393 16.1143 12.9795 16.1143 12.5215V8.00977C16.1143 6.49902 14.9658 5.52148 13.1543 5.52148C11.7666 5.52148 10.6592 6.08887 10.2695 6.99121C10.1943 7.15527 10.1533 7.3125 10.1533 7.46289C10.1533 7.81152 10.4062 8.04395 10.7686 8.04395C11.0215 8.04395 11.2129 7.94824 11.3496 7.73633C11.7529 6.99121 12.2861 6.65625 13.1064 6.65625C14.0977 6.65625 14.6992 7.20996 14.6992 8.1123V8.67285L12.5664 8.7959C10.7686 8.8916 9.77734 9.69824 9.77734 11.0107C9.77734 12.3369 10.8096 13.2324 12.2793 13.2324ZM12.6621 12.1387C11.8008 12.1387 11.2129 11.667 11.2129 10.9561C11.2129 10.2725 11.7598 9.82129 12.7578 9.75977L14.6992 9.62988V10.3203C14.6992 11.3457 13.7969 12.1387 12.6621 12.1387Z"></path></svg></span>항목</th><th><span class="icon property-icon"><svg aria-hidden="true" role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesSelect"><path d="M8 15.126C11.8623 15.126 15.0615 11.9336 15.0615 8.06445C15.0615 4.20215 11.8623 1.00293 7.99316 1.00293C4.13086 1.00293 0.938477 4.20215 0.938477 8.06445C0.938477 11.9336 4.1377 15.126 8 15.126ZM8 13.7383C4.85547 13.7383 2.33301 11.209 2.33301 8.06445C2.33301 4.91992 4.84863 2.39746 7.99316 2.39746C11.1377 2.39746 13.6738 4.91992 13.6738 8.06445C13.6738 11.209 11.1445 13.7383 8 13.7383ZM7.62402 10.6348C7.79492 10.915 8.20508 10.9287 8.37598 10.6348L10.666 6.73145C10.8574 6.41016 10.7002 6.04102 10.3652 6.04102H5.62793C5.29297 6.04102 5.14941 6.43066 5.32031 6.73145L7.62402 10.6348Z"></path></svg></span>자료형</th><th><span class="icon property-icon"><svg aria-hidden="true" role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesText"><path d="M1.56738 3.25879H14.4258C14.7676 3.25879 15.0479 2.97852 15.0479 2.63672C15.0479 2.29492 14.7744 2.02148 14.4258 2.02148H1.56738C1.21875 2.02148 0.952148 2.29492 0.952148 2.63672C0.952148 2.97852 1.22559 3.25879 1.56738 3.25879ZM1.56738 6.84082H14.4258C14.7676 6.84082 15.0479 6.56055 15.0479 6.21875C15.0479 5.87695 14.7744 5.60352 14.4258 5.60352H1.56738C1.21875 5.60352 0.952148 5.87695 0.952148 6.21875C0.952148 6.56055 1.22559 6.84082 1.56738 6.84082ZM1.56738 10.4229H14.4258C14.7676 10.4229 15.0479 10.1426 15.0479 9.80078C15.0479 9.45898 14.7744 9.18555 14.4258 9.18555H1.56738C1.21875 9.18555 0.952148 9.45898 0.952148 9.80078C0.952148 10.1426 1.22559 10.4229 1.56738 10.4229ZM1.56738 14.0049H8.75879C9.10059 14.0049 9.38086 13.7246 9.38086 13.3828C9.38086 13.041 9.10742 12.7676 8.75879 12.7676H1.56738C1.21875 12.7676 0.952148 13.041 0.952148 13.3828C0.952148 13.7246 1.22559 14.0049 1.56738 14.0049Z"></path></svg></span>설명</th></tr></thead><tbody><tr id="b253647d-23b2-4f73-a561-d5da6fd07a15"><td class="cell-title"><a href="https://www.notion.so/id-b253647d23b24f73a561d5da6fd07a15?pvs=21">id</a></td><td class="cell-WlOw"><span class="selected-value select-value-color-blue">int</span></td><td class="cell-tzaS">항목 ID</td></tr><tr id="f47184a6-177f-471a-b38e-0f757e62b28a"><td class="cell-title"><a href="https://www.notion.so/chrID-f47184a6177f471ab38e0f757e62b28a?pvs=21">chrID</a></td><td class="cell-WlOw"><span class="selected-value select-value-color-blue">int</span></td><td class="cell-tzaS">할당될 캐릭터 ID<br/>참조 → 테이블: CharacterInfo - 컬럼: id<br/></td></tr><tr id="ea103870-0e10-453e-a99b-ce4270e9861d"><td class="cell-title"><a href="https://www.notion.so/level-ea1038700e10453ea99bce4270e9861d?pvs=21">level</a></td><td class="cell-WlOw"><span class="selected-value select-value-color-blue">int</span></td><td class="cell-tzaS">캐릭터 레벨</td></tr><tr id="3f68edce-c6c4-4cce-9285-8249c4a8a709"><td class="cell-title"><a href="https://www.notion.so/expAmount-3f68edcec6c44cce92858249c4a8a709?pvs=21">expAmount</a></td><td class="cell-WlOw"><span class="selected-value select-value-color-blue">int</span></td><td class="cell-tzaS">경험치 필요량</td></tr><tr id="631a023e-57da-4c2f-a325-9c09b6ae43f3"><td class="cell-title"><a href="https://www.notion.so/chrDMG-631a023e57da4c2fa3259c09b6ae43f3?pvs=21">chrDMG</a></td><td class="cell-WlOw"><span class="selected-value select-value-color-blue">int</span></td><td class="cell-tzaS">기본 공격력</td></tr><tr id="8416527a-826a-4542-96a6-b62817cccd69"><td class="cell-title"><a href="https://www.notion.so/chrHP-8416527a826a454296a6b62817cccd69?pvs=21">chrHP</a></td><td class="cell-WlOw"><span class="selected-value select-value-color-blue">int</span></td><td class="cell-tzaS">기본 체력</td></tr><tr id="2848e11e-0f36-41fd-8639-54570b4130bf"><td class="cell-title"><a href="https://www.notion.so/chrDT-2848e11e0f3641fd863954570b4130bf?pvs=21">chrDT</a></td><td class="cell-WlOw"><span class="selected-value select-value-color-blue">int</span></td><td class="cell-tzaS">데미지 감쇄값 (수치만큼 차감)</td></tr><tr id="dfdc8ec0-5206-470f-8975-dac0b627e16d"><td class="cell-title"><a href="https://www.notion.so/chrDR-dfdc8ec05206470f8975dac0b627e16d?pvs=21">chrDR</a></td><td class="cell-WlOw"><span class="selected-value select-value-color-blue">int</span></td><td class="cell-tzaS">방어력 (비율로 차감)</td></tr><tr id="2e7933c1-e927-47a4-adf5-47878fcba1ee"><td class="cell-title"><a href="https://www.notion.so/chrCritProb-2e7933c1e92747a4adf547878fcba1ee?pvs=21">chrCritProb</a></td><td class="cell-WlOw"><span class="selected-value select-value-color-pink">float</span></td><td class="cell-tzaS">기본 크리티컬 확률</td></tr><tr id="564c3a54-cbf6-4ed4-84b8-b99a56d39d90"><td class="cell-title"><a href="https://www.notion.so/chrCritDmg-564c3a54cbf64ed484b8b99a56d39d90?pvs=21">chrCritDmg</a></td><td class="cell-WlOw"><span class="selected-value select-value-color-pink">float</span></td><td class="cell-tzaS">기본 크리티컬 배율</td></tr></tbody></table><br/><br/></div><p id="8ff5e08f-ce24-4b08-996c-de61b344eee9" class="">
+</p><h2 id="7ca5a2e3-1e06-4d7b-a23d-9c3ebf245036" class="">1-2. 고유 캐릭터</h2><ul id="9c7a0016-1a08-4dc0-a55f-e93f0f00e28a" class="bulleted-list"><li style="list-style-type:disc">현재 기준 고유 캐릭터: 3종<ol type="1" id="0c1d3c83-18a3-4e61-8611-6c754844158a" class="numbered-list" start="1"><li>에이르</li></ol><ol type="1" id="85feac00-a247-4de2-af6f-cd84074081e3" class="numbered-list" start="2"><li>지크</li></ol><ol type="1" id="6d36415d-57c3-4b2e-bb7a-9b272ed2ba81" class="numbered-list" start="3"><li>다인</li></ol></li></ul><ul id="d15590a1-9aeb-4457-90bb-ddafc9f01975" class="bulleted-list"><li style="list-style-type:disc">각 캐릭터의 스탯은 <code>CharacterInfo</code>에서 ID를 참조하여 <code>CharacterLevelingTable</code> 에 정의한다.</li></ul><hr id="aeaca390-9dcb-427c-bed1-d55b27bc5ca4"/><h1 id="537c2c54-f55b-4034-9551-342e3d51d864" class="">2. 캐릭터 메인 UI</h1><figure id="23d767de-35fa-4789-9603-d23a2705b80f" class="image"><a href="Untitled.png"><img style="width:707.9791870117188px" src="Untitled.png"/></a></figure><ul id="14bb615e-0bc4-4561-8f0d-cb6701b5fd1d" class="bulleted-list"><li style="list-style-type:disc">UI 플로우차트</li></ul><ul id="72f5c6d8-3c9d-4c77-9ac0-ba22a8d46ef6" class="bulleted-list"><li style="list-style-type:disc">캐릭터 관련 UI는 캐릭터 페이지에 배치된다.<p id="11712f8f-47f5-46e8-bd1e-fd39e6924ac9" class="">※ 레이아웃이나 위치는 참고를 위한 예시입니다.</p></li></ul><ul id="5bd2e249-6df2-4f55-8f8f-61f35257fe4b" class="bulleted-list"><li style="list-style-type:disc">탭 바에서 캐릭터 메뉴 진입 시 출력되는 최초 화면</li></ul><figure id="78abf12b-84dd-477b-a044-e90d2accfa1a" class="image"><a href="Untitled%201.png"><img style="width:509px" src="Untitled%201.png"/></a></figure><h2 id="51638484-3aac-4fab-8ed8-d6e228f6c95d" class="">2-1. 캐릭터 장비</h2><p id="997958eb-b6d1-468b-9be7-5d5675fc3da0" class="">
+</p><figure id="a4590443-5740-4358-bb66-ec37b589bb5e" class="image"><a href="Untitled%202.png"><img style="width:708px" src="Untitled%202.png"/></a></figure><div id="fb3e2057-3bd6-4c5b-8683-6441b5147441" class="column-list"><div id="70130d23-3279-4c87-a029-028da88732d4" style="width:50%" class="column"><figure id="3b61b051-99a8-4565-affd-b1ef79e5269d" class="image"><a href="Untitled%203.png"><img style="width:384px" src="Untitled%203.png"/></a></figure><p id="6b34fac1-edca-4632-a822-162967717ada" class="">
+</p></div><div id="5f884446-ecaf-4e3b-9147-7add5f9e810d" style="width:50%" class="column"><figure id="ce4e8086-a9c6-4155-b518-a821716858a1" class="image"><a href="Untitled%204.png"><img style="width:330.9895935058594px" src="Untitled%204.png"/></a><figcaption>레퍼런스 이미지 (가디언 테일즈)</figcaption></figure><p id="455b3757-e830-4887-b720-aae691b12110" class="">
+</p></div></div><ul id="1cfdf8a7-e41f-4fb2-ae99-98af6db24967" class="bulleted-list"><li style="list-style-type:disc">각 아이콘은 현재 장착된 아이템의 아이콘 출력<p id="fcd187a7-2f16-45e1-988b-dbb0eed673e0" class="">※ 장착된 아이템이 없을 시 빈 슬롯 아이콘 출력</p></li></ul><ul id="9608875f-0ea2-472c-98c2-0ee65c5ba3f7" class="block-color-red_background bulleted-list"><li style="list-style-type:disc">1.5.0 에서 유물 개발 X</li></ul><p id="5aae8c66-04e9-4513-8937-acb1dc65d502" class="">
+</p><hr id="4b83b73f-d4b0-4daf-af39-92fe4ef53a72"/><p id="7c1719c4-4072-44b6-b1f6-8158f83f42da" class=""> </p><h3 id="b2782278-2a71-47a2-83ec-087e713df9f8" class="">2-1-1. <strong>아이템 장착 팝업</strong></h3><figure id="e37e8429-62d4-4f67-b612-cf5bdb4d17ee" class="image"><a href="Untitled%205.png"><img style="width:708px" src="Untitled%205.png"/></a></figure><figure id="1db9a889-618e-4475-ad12-3c6adb5ed2f2" class="image"><a href="Untitled%206.png"><img style="width:707.9896240234375px" src="Untitled%206.png"/></a></figure><ul id="cca9cf86-92d2-4564-83ab-551876577aaf" class="bulleted-list"><li style="list-style-type:disc">장비 슬롯을 선택 시 팝업이 출력</li></ul><ul id="e6bc733e-7291-4462-9c7c-32e11041c612" class="bulleted-list"><li style="list-style-type:disc">닫기 버튼 = 팝업 닫음<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="1188ca8c-6d23-42d6-8534-00cd09af574d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>무기 슬롯 선택</strong><br/>- 정보창 = 선택한 무기 정보 출력<br/>- 리스트 = 무기 리스트 출력<br/></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b44adfaf-840b-4adc-abd6-b70292225d3c"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>유물 슬롯 선택</strong><br/>- 정보창 = 선택한 유물 정보 출력<br/>- 리스트 = 선택한 슬롯 타입의 유물 리스트 출력<br/></div></figure><p id="54ce5d1d-77d0-4667-aaa8-be1a81692ec0" class="">
+</p><hr id="823c4e4d-79c9-47cc-856b-20cea31a545e"/><p id="4ec5c09a-42b3-453d-ae1d-0eeef6eb113a" class=""> </p><h3 id="095f9303-786e-4515-bc27-55ef866487ef" class="">A. 장비 정보</h3><figure id="a982ed41-dea8-4cca-b400-75cce5f431d3" class="image"><a href="Untitled%207.png"><img style="width:680px" src="Untitled%207.png"/></a></figure><figure id="0e6c517d-67bd-426d-bb1e-70f336527904" class="image"><a href="Untitled%208.png"><img style="width:485px" src="Untitled%208.png"/></a></figure><ul id="df8ab276-d4d5-4198-925e-72b9b399f039" class="bulleted-list"><li style="list-style-type:circle">선택한 슬롯의 아이템 종류에 따라 상단 정보화면의 출력 내용과 형태 달라짐.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9e230e67-4384-4560-958f-ab0c19ec5143"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">정보 출력 기본값 = 장착 중인 장비의 정보 출력<br/><br/>1. 무기 슬롯 선택<br/>- 정보창 = 장착 중인 무기 정보창 출력<br/><br/>2. 유물 슬롯 선택<br/>- 정보창 = 유물 정보창 출력<br/><br/><br/><mark class="highlight-red">※ 예외. 빈 슬롯일 경우 = 아래 이미지 참고</mark></div></figure><figure id="303646f4-8493-4ac1-a5ee-5fa78178855b" class="image"><a href="Untitled%209.png"><img style="width:192px" src="Untitled%209.png"/></a><figcaption>장착된 장비가 없을 경우</figcaption></figure><figure id="40451da8-9785-4e11-9da7-840982232679" class="image"><a href="Untitled%2010.png"><img style="width:336px" src="Untitled%2010.png"/></a><figcaption>&lt;레퍼런스 = 가디언 테일즈&gt; 장비 미장착 상태 </figcaption></figure><h3 id="31a63fdc-6605-41d2-a980-d7d625c487d1" class="">A-1. 무기 정보 창</h3><figure id="c882df0c-3701-4e1a-be8a-429d675c28f7" class="image"><a href="Untitled%2011.png"><img style="width:679.9896240234375px" src="Untitled%2011.png"/></a></figure><ol type="1" id="cfb05a20-cb79-4bcc-84c0-e4b3f84f964c" class="numbered-list" start="1"><li>등급 = <code>#무기테이블</code> → <code>$grade</code> 참조</li></ol><ol type="1" id="0f4e7362-e6a6-484c-b363-d3250b2aa736" class="numbered-list" start="2"><li>무기 이름 = <code>#무기테이블</code>→ <code>$name</code> </li></ol><ol type="1" id="bd247a78-b793-4f59-aecd-081a5c7c4d0e" class="numbered-list" start="3"><li>아이콘 경로 =<code>#무기테이블</code>→  <code>$iconPath</code> </li></ol><ol type="1" id="19cc320d-2b02-47f6-af30-2238184009ea" class="numbered-list" start="4"><li>착용 제한<ul id="610d69fa-7b7e-493c-9479-68d1ca215c51" class="bulleted-list"><li style="list-style-type:disc">[캐릭터 이름] 전용 의 형태로 출력</li></ul><ul id="5915a947-7199-4ba0-988d-a1e77a3eaa50" class="bulleted-list"><li style="list-style-type:disc"><code>#무기테이블</code>→ <code>$weaponType</code> → <code>#CharacterInfo</code>  →<code>$chrName</code> </li></ul></li></ol><ol type="1" id="4200a8a5-3f03-4170-a6f5-9b234190baf0" class="numbered-list" start="5"><li>설명 및 플레버 텍스트 = <code>#무기테이블</code>→ <code>$desc</code></li></ol><ol type="1" id="5360481d-81b7-4146-af81-358a53225e01" class="numbered-list" start="6"><li>레벨 = 현재 레벨 출력 (maxLevel은 따로 출력하지 않음)</li></ol><ol type="1" id="49088bf9-778a-41fc-ac02-05011b95b8c5" class="numbered-list" start="7"><li><strong>기본 스탯</strong><ul id="efe87030-571f-4459-8819-3c82729d8f3a" class="bulleted-list"><li style="list-style-type:disc">스탯 명칭 = 공격력</li></ul><ul id="5867599a-9ae3-44dc-9438-cb272325a7bc" class="bulleted-list"><li style="list-style-type:disc">스탯 값 = <code>#무기테이블</code>→ <code>$baseAtk</code> + (<code>#무기테이블</code>→ <code>$increaseAtk</code> x 무기 레벨) <ul id="06eaf531-6ab4-409c-80b8-50396c1b1f60" class="bulleted-list"><li style="list-style-type:circle">스탯 값 출력 시, 3 자리수 단위로 콤마<br/>e.g. 65,535<br/></li></ul></li></ul><p id="ac6e5307-0c59-473e-bf9a-3709cfca2bd8" class=""><strong>서브 스탯</strong></p><ul id="5a8851d8-bcc2-48aa-8151-02ce2cdd53a2" class="bulleted-list"><li style="list-style-type:disc">스탯 명칭 = <code>#무기테이블</code>→ <code>$subStat</code> </li></ul><ul id="cf98ee93-ff6e-45c1-81bd-24285fa15635" class="bulleted-list"><li style="list-style-type:disc">스탯 값 = <code>#무기테이블</code>→ <code>$subStatValue</code> </li></ul></li></ol><ol type="1" id="6fb46a58-03d3-4c74-be5d-3ec0afd52ada" class="numbered-list" start="8"><li>아이템 잠금 버튼<ul id="f49b5652-5a02-4193-a461-ededdafabaaf" class="bulleted-list"><li style="list-style-type:disc">※ 잠금 상태일 경우 잠긴 자물쇠 출력</li></ul><ul id="0dc6cc53-bef5-47b3-a75b-c90a8afdaa36" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.notion.so/UI-538f3e8646034a63a368e1fe33a26340?pvs=21">잠금 버튼 관련 기획</a></li></ul><ul id="bd651480-895d-4b92-b7b4-9e12252daec4" class="bulleted-list"><li style="list-style-type:disc">잠금 여부 = <code>#유저 DB</code>에서 호출</li></ul></li></ol><ol type="1" id="be95e9a9-babb-4e12-98e3-fa41f07607d8" class="numbered-list" start="9"><li>액션 아이콘 =  <br/><br/><code>#무기테이블</code>→<code>$baseAction</code> ,<code>$skill1Action</code>, <code>$skill2Action</code>, <code>$passiveAction</code>  <br/>→ <br/><code>#actionGroup</code>→<code>$skillIconPath</code> <ul id="fdd74b2e-cde8-477b-a86b-b4bfce868000" class="bulleted-list"><li style="list-style-type:disc">아이콘 터치 시 터치된 동안 액션 관련 설명 출력</li></ul><ul id="c4362837-91e3-44a7-8f06-82e0a630cb5e" class="bulleted-list"><li style="list-style-type:disc">설명 = <code>#무기테이블</code>→<code>$baseAction</code> ,<code>$skill1Action</code>, <code>$skill2Action</code>, <code>$passiveAction</code> <br/> →  <br/><code>#actionGroup</code>  →<code>$skillName</code>,<code>$skillDesc</code> </li></ul><figure id="e448d65f-6414-4a74-8938-fed802d4ec43" class="image"><a href="Untitled%2012.png"><img style="width:651.9791870117188px" src="Untitled%2012.png"/></a></figure></li></ol><ol type="1" id="12cd98cb-9b3b-4ceb-ab62-49ca4da88d79" class="numbered-list" start="10"><li>룬 슬롯 <figure id="57b90d8c-2d99-4602-ad21-d60eb9ed89b5" class="image"><a href="Untitled%2013.png"><img style="width:652px" src="Untitled%2013.png"/></a></figure><ul id="b40436c2-f05b-4c85-9605-c83c908a4a70" class="bulleted-list"><li style="list-style-type:disc">선택 시 = 변경 내역 저장 후 → 룬 교체 씬 이동 ( <a href="https://www.notion.so/5c741d1802054d828a059c66c16d09f2?pvs=21">스킬 및 룬 태그 시스템 참고</a>)</li></ul><ul id="49bdcd64-f096-45a8-835a-cc33680c3754" class="bulleted-list"><li style="list-style-type:disc">기존 씬에서 완전 전환됨</li></ul></li></ol><ol type="1" id="d18adc22-7b14-4c63-b3f1-e2ce2987dcb4" class="numbered-list" start="11"><li>장비 버튼<figure id="0e1d422c-d26e-4f18-83dd-5e32f5a3e1d2" class="image"><a href="Untitled%2014.png"><img style="width:237px" src="Untitled%2014.png"/></a></figure><ul id="53d115b2-2e34-4327-80a9-c2d6b1a1b59f" class="bulleted-list"><li style="list-style-type:disc">현재 캐릭터에 미장착된 아이템 = 장착 출력</li></ul><ul id="6107b149-e864-41a8-8211-88028c61375c" class="bulleted-list"><li style="list-style-type:disc">현재 캐릭터에 장착된 아이템 = 해제 출력(무기는 해제 불가)</li></ul></li></ol><p id="eda6231c-dcb6-416d-aa9d-dfd83515a58a" class="">
+</p><h3 id="5f64179b-5298-4add-bb54-bd384659a054" class="">B. 리스트</h3><figure id="6d06b47e-f847-4e29-910c-d54f7861ee88" class="image"><a href="Untitled%2015.png"><img style="width:680px" src="Untitled%2015.png"/></a></figure><figure id="fc73df44-1b12-4904-8226-a108e5918004" class="image"><a href="Untitled%2016.png"><img style="width:333px" src="Untitled%2016.png"/></a></figure><p id="90634610-f31b-4f26-8cb2-9f4411a5e04b" class="">
+</p><ol type="1" id="c7f98974-1e42-4459-a6f3-fdd0d634330a" class="numbered-list" start="1"><li>하단 리스트는 <span style="border-bottom:0.05em solid"><strong>선택한 슬롯</strong></span>에 따라 필터링되어 그리드 리스트에 버튼으로 출력<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="14873c2c-1ab1-47d6-a7ba-c45c9437a30d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">필터링 조건 : <br/>1. 무기 = 현 캐릭터 전용무기 &amp;&amp; 보유 중<br/><br/>e.g.) 선택한 슬롯 타입 = 지크 무기 → 플레이어가 보유한 지크 무기 리스트 출력<br/></div></figure><ul id="af958b98-e8c1-45ed-a23a-a9fe1159964c" class="bulleted-list"><li style="list-style-type:disc">스크롤 방향 = 세로</li></ul><ul id="949d3b56-6751-4fbd-bcdc-fe7e70a3e098" class="bulleted-list"><li style="list-style-type:disc">출력 내용 = 플레이어 보유중인 아이템 ⇒ 필터링 → 필터링 결과</li></ul><p id="26131c67-1688-4461-948f-62a8d5406d8d" class=""><strong>장비 항목</strong></p><figure id="e4595054-4898-4a66-a794-30af73b2f004" class="image"><a href="Untitled%2017.png"><img style="width:300px" src="Untitled%2017.png"/></a></figure><ul id="5594e118-a2ec-4475-9a3c-0748409991c9" class="bulleted-list"><li style="list-style-type:disc">장비 항목별 기본 요소는 다음과 같다.</li></ul><ol type="1" id="e2ab3421-bc1a-40eb-974a-232e9bee0607" class="numbered-list" start="1"><li>등급 = <code>#무기테이블</code> → <code>$grade</code> 참조</li></ol><ol type="1" id="e8aecc36-a20e-42ba-b11e-71702194615a" class="numbered-list" start="2"><li>아이콘  =<code>#무기테이블</code>→  <code>$iconPath</code>  </li></ol><ol type="1" id="978ac571-0213-4948-b677-b4e8d6689ad4" class="numbered-list" start="3"><li>레벨 = 현재 레벨 출력 </li></ol><ol type="1" id="3242958d-e131-4a67-b15c-7e7f91a0ca6d" class="numbered-list" start="4"><li>무기 명 = <code>#무기테이블</code>→ <code>$name</code> </li></ol><ul id="09d7aeb4-cba3-4b33-9587-764899e53b97" class="bulleted-list"><li style="list-style-type:disc">장착 중 = 장비 항목 전체에 딤드 처리와 함께 장착 중 표시</li></ul><ul id="4660a478-4a0a-464c-98ec-778d5627d20c" class="bulleted-list"><li style="list-style-type:disc">잠금 상태 = 좌측 하단에 자물쇠 표시<br/>※ 잠금 상태 X = 자물쇠 표시 X<br/></li></ul><ul id="48104ef3-85f7-4730-ae40-a744c929b6c2" class="bulleted-list"><li style="list-style-type:disc">아이템 선택 시 해당 아이템 정보가 상단에 표시된다.</li></ul></li></ol><p id="2fbe0532-19a6-4f76-8e2b-e2299a8fd2d7" class="">2. 정렬<div class="indented"><ul id="eeee0920-ece4-4a33-b24b-9486e56665d8" class="bulleted-list"><li style="list-style-type:disc">정렬 상태에 따라 1번 리스트 정렬</li></ul><ul id="41826e19-1fc5-45e0-aa72-91cd502b8729" class="bulleted-list"><li style="list-style-type:disc">우선 적용 : 첫번째 아이콘 = 현재 장착중인 유물 (다른 캐릭터가 장착한 경우 포함)</li></ul><ul id="2f0a5c2d-ae85-4a9e-873f-65bdadc0d866" class="bulleted-list"><li style="list-style-type:disc">정렬 버튼엔 현재 정렬 상태가 출력</li></ul><ul id="f5257327-0590-4e1d-8640-85e502e0f700" class="bulleted-list"><li style="list-style-type:disc">우측 화살표 = 오름차순 내림차순 스위치 (기본값 오름차순)</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a359241a-bd4c-4dc0-8bb5-236f345f0dd3"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">정렬 종류 (우측으로 갈수록 후순위)<br/>1. 등급순 → 레벨순 → 이름순<br/>2. 레벨순 → 등급순 → 이름순<br/>3. 이름순 → 등급순 → 레벨순<br/><br/><span style="border-bottom:0.05em solid"><strong>4. ID순 정렬 고려<br/>5. 획득 순 정렬 고려<br/></strong></span></div></figure><p id="de56a554-1598-4a4c-9641-01743aa36e5e" class="">
+</p></div></p></li></ul><hr id="eea47976-8e59-4a01-a1e4-895b0fd4d5af"/><h2 id="62007af2-895d-4978-a454-6d498b1ee7a3" class="">2-2. 캐릭터 정보</h2><figure id="5721a7cd-1b26-42a3-9165-8552b0aa6c42" class="image"><a href="Untitled%2018.png"><img style="width:356px" src="Untitled%2018.png"/></a></figure><figure id="b6e19440-61a3-445c-8403-b8072f998282" class="image"><a href="Untitled%2019.png"><img style="width:315px" src="Untitled%2019.png"/></a></figure><p id="7d6ca1d3-a919-4dd6-bccc-a6c2806987b8" class="">
+</p><p id="f3b6897d-d345-41eb-b24e-7c204515c7e7" class="">
+</p><p id="c7b77748-275f-49ea-a0a9-db8ca6b7dfb8" class=""><strong>A. 캐릭터 일러스트</strong><div class="indented"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f4679d09-b4b1-49d0-9d8a-600424ddb1f5"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">캐릭터 일러스트  = <code>CharacterInfo</code> 테이블의 <code>illustPath</code> 를 호출</div></figure><p id="757419cf-1804-4aef-aadf-11035d4870ac" class="">
+</p></div></p><p id="f0385def-8634-4ecc-9f54-9f78a157ec06" class=""><strong>B-2. 캐릭터 명</strong><div class="indented"><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="19b363eb-dcf4-4f6f-8876-76928c025663"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">캐릭터 명 =장착된 캐릭터 ID로 <code>CharacterInfo</code> 테이블 참조하여 <code>chrName</code> 호출</div></figure><p id="449a729c-f0b0-4c7f-b943-88a37bcd1661" class="">
+</p></div></p><figure id="279e0049-da31-4166-bbd8-6519c84dc4e1" class="image"><a href="Untitled%2020.png"><img style="width:707.9896240234375px" src="Untitled%2020.png"/></a></figure><ul id="9ad175ed-6700-41f7-a2ef-264abcf07fc0" class="bulleted-list"><li style="list-style-type:disc">선택 캐릭터가 인게임에 적용될 스탯을 표시한다.<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3aa94a31-db59-4697-8833-0da2e43625d2"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">e.g) 공격력 표시값 = 캐릭터공격력 + 무기 공격력 + 추가 공격력 + ...</div></figure></li></ul><ul id="45c6f7d1-8b2c-4b02-ad35-30306b1c320c" class="bulleted-list"><li style="list-style-type:disc">스탯 정보 창은  캐릭터의 모든 정보 표시 가능<ul id="0d444730-22ca-42a6-a4b8-3f09c0aee057" class="bulleted-list"><li style="list-style-type:circle">축소와 확장으로 정보량 제한</li></ul><ul id="3498916d-8b0a-42b0-8c53-4d61fb3ffa04" class="bulleted-list"><li style="list-style-type:circle">기본 값 = 축소 상태</li></ul><ul id="bf5a53c5-6ab6-4528-b915-570fa2d73e5d" class="bulleted-list"><li style="list-style-type:circle">축소 상태일 때 한정된 정보 출력</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="63fe72f1-2319-4e3b-95ac-585ee895c861"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>축소 시 출력 정보<br/><br/></strong>1. 공격력<br/>2. 체력<br/>3. 적용된 세트<br/><br/><del>4. 세트 별 유물 착용 개수</del></div></figure><ul id="66462105-af9e-4b72-b497-f004eb170185" class="bulleted-list"><li style="list-style-type:circle">확장 상태일 때 모든 정보 출력</li></ul><ul id="8cd60e1f-8dab-44bd-ab22-ac951809c40f" class="bulleted-list"><li style="list-style-type:circle">확장 상태일 때 스크롤 가능</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="965ac960-8f50-4100-bd95-2d8844bc6d9d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>확장 시 출력 정보<br/><br/></strong>1. 공격력<br/>2. 체력<br/>3. 방어력<br/>4. 데미지 감소<br/>5. 치명타 확률<br/>6. 치명타 배율<br/>7. 이동속도<br/><br/><del>8. 적용된 세트<br/>9. 세트 효과 <br/></del></div></figure><p id="11a21f41-6f12-4ad2-9bba-956da802f672" class="">
+</p></li></ul><ol type="1" id="7092e369-41d4-4273-9eed-7e2d1fc6a8b7" class="numbered-list" start="1"><li><strong>스탯</strong><p id="97f5b370-889d-4109-8dd7-fda535c80ef0" class="">※ 아래 링크의 공식 사용하여 인 게임 최종 스텟을 출력</p><figure id="0e7c331f-4a19-49fe-a786-941919cc7258" class="block-color-teal link-to-page"><a href="https://www.notion.so/0e7c331f4a1949fea786941919cc7258?pvs=21"><span class="icon">📝</span>수치 적용 공식</a></figure><ol type="1" id="668d625a-afea-402e-aa6d-8f84e63ca2cd" class="numbered-list" start="1"><li>공격력 </li></ol><ol type="1" id="d352d765-ac17-48f8-9042-073d65e0319a" class="numbered-list" start="2"><li>체력</li></ol><ol type="1" id="253e4675-6d39-45e9-89e1-0c7c43a31e3c" class="numbered-list" start="3"><li>데미지 감소 </li></ol><ol type="1" id="ecb869f2-28d8-4b0e-a352-94efcd56522d" class="numbered-list" start="4"><li>방어력</li></ol><ol type="1" id="e1835d14-fa93-4fcf-8be1-5489384223a8" class="numbered-list" start="5"><li>치명타 확률 =  기본 치명타 확률 + 추가 치명타 확률 </li></ol><ol type="1" id="3dd3e715-1d75-427c-9895-49f9cd40a542" class="numbered-list" start="6"><li>치명타 배율</li></ol><ol type="1" id="fb57b75c-ffc1-4bd3-8a97-4c81d5ca30ad" class="numbered-list" start="7"><li>이동 속도 = <code>#CharacterInfo</code> → <code>$baseSpeed</code></li></ol><p id="d2d118e7-c89c-49b9-8c3d-8481439b857c" class="">
+</p></li></ol><hr id="78505184-ecf3-496a-bb8e-fe81c499fc44"/><h2 id="ce1debf6-448c-45d6-974f-21e2d78258c3" class="">2-3. 캐릭터 리스트</h2><figure id="b0b525cf-8527-4667-ad9f-4f58d4748c80" class="image"><a href="Untitled%2021.png"><img style="width:356px" src="Untitled%2021.png"/></a></figure><figure id="01d7712d-0216-4488-bc71-942e612b0cef" class="image"><a href="Untitled%2022.png"><img style="width:651px" src="Untitled%2022.png"/></a></figure><ul id="a68d7bdf-1b8a-4333-9dae-2a014057a8d6" class="bulleted-list"><li style="list-style-type:disc">리스트에 출력된 캐릭터가 2줄 이상 일 때 세로 스크롤된다.</li></ul><ul id="9d496bab-18b5-44f3-ade7-48933bbe9126" class="bulleted-list"><li style="list-style-type:disc">정렬 기준은 아래와 같다.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0a7e26cf-f39a-4e1e-837b-ebca4f68e2f3"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">정렬 종류 (오름차순)<br/>1. 보유 → 등급 → 레벨 → 이름<br/></div></figure><ul id="2b15c6f2-0efd-4f5c-989e-d1cb01aeaf7e" class="bulleted-list"><li style="list-style-type:disc">캐릭터 항목 선택 시 해당 캐릭터로 즉시 변경된다.<p id="c172c35a-49c5-42d7-aa2e-9300638cdf71" class="">※ 미보유 캐릭터는 동작 안함</p><p id="04e5a7ad-5044-4ddf-94dd-ab691e363cfc" class="">
+</p></li></ul><ul id="b2c0734d-20d0-4932-83fb-861432799342" class="bulleted-list"><li style="list-style-type:disc">각 캐릭터 항목에 정보 표시<figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="dfab6692-6bd7-4a74-a30f-908ef55a9541"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">1. 캐릭터 일러스트 = <code>#CharacterInfo</code> → <code>$iconPath</code><br/><br/>2. 해당 캐릭터 레벨 = 유저 정보에서 참조<br/><br/>3. 무기 아이콘 = 유저 정보 → 해당 캐릭터 정보 → <br/><code>#무기테이블</code> → <code>$name</code><br/><br/>4. 미보유 캐릭터 = 일러스트 흑백 처리<br/>⇒ 미보유 캐릭터는 2, 3 번 항목을 출력 안함<br/><br/>5. 사용 중인 캐릭터 = 사용 중 표시 오버레이<br/></div></figure><p id="6fc0eca7-1dab-4297-bf4c-5f5628f70ecf" class="">
+</p></li></ul><p id="4334d064-ff3c-4da1-b9e3-c3a55d33f1b8" class="">
+</p><hr id="52077836-1756-479b-a040-a1e2562a4b04"/></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

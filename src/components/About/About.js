@@ -1,15 +1,15 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Particle from "../Particle";
-import Github from "./Github";
+// import Github from "./Github";
 import Techstack from "./Techstack";
 import Toolstack from "./Toolstack";
 import AboutCard from "./AboutCard";
-import laptopImg from "../../Assets/Aboutme.png";
+import laptopImg from "../../Assets/Aboutme.svg";
 
 function About() {
   return (
-    <section className="page-section">
+    <section className="page-section" style={{ overflow: "auto"}}>
       <Container fluid className="about-section" style={{ background: 'transparent' }}>
         <Particle />
         <Container>

@@ -36,12 +36,14 @@ style.innerHTML = `
     min-height: calc(100vh - 70px); /* 헤더와 푸터 높이를 고려한 값 */
     display: flex;
     flex-direction: column;
+    overflow: auto; /* 스크롤 허용 */
   }
 
   section.page-section {
     flex: 1;
     width: 100%;
     background: transparent !important;
+    overflow: visible; /* 콘텐츠가 넘칠 경우 표시 */
   }
 `;
 document.head.appendChild(style);
@@ -60,7 +62,7 @@ function App() {
   return (
     <Router>
       <Preloader load={load} />
-      <div className="App d-flex flex-column min-vh-100" id={load ? "no-scroll" : "scroll"}>
+      <div className="App d-flex flex-column min-vh-100" id={load ? "no-scroll" : "scroll"} style={{ overflow: "auto" }}>
         <Navbar />
         <ScrollToTop />
         <div className="flex-grow-1 content-wrapper">

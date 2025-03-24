@@ -1,0 +1,7 @@
+﻿항목,자료형,설명,데이터 공개 여부
+id,int,항목 ID,미출력
+chrName,string,"캐릭터 이름, StringTable의 Key 참조",출력
+chrPath,string,캐릭터 메쉬의 Path,미출력
+iconPath,string,캐릭터 아이콘 Path,
+illustPath,string,캐릭터 일러스트의 Path,
+baseSpeed,int,기본 이동 속도,출력

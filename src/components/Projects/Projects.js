@@ -2,94 +2,68 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import ProjectCard from "./ProjectCards";
 import Particle from "../Particle";
-import chatify from "../../Assets/Projects/chatify.png";
-import emotion from "../../Assets/Projects/emotion.png";
-import codeEditor from "../../Assets/Projects/codeEditor.png";
-import suicide from "../../Assets/Projects/suicide.png";
-import leaf from "../../Assets/Projects/leaf.png";
-import blog from "../../Assets/Projects/blog.png";
+import Lunia from "../../Assets/Projects/Lunia.jpg";
+import Tao from "../../Assets/Projects/tao.jpg";
+import Kinggod from "../../Assets/Projects/kinggod.jpg";
+import zh from "../../Assets/Projects/zh.webp";
+import excel2yaml from "../../Assets/Projects/excel2yaml.gif";
 
 function Projects() {
   return (
-    <section className="page-section">
-      <Container fluid className="project-section" style={{ background: 'transparent' }}>
+    <section className="page-section" style={{ overflow: "auto"}}>
+      <Container fluid className="project-section" style={{ background: "transparent" }}>
         <Particle />
         <Container>
           <h1 className="project-heading">
-            최근 <strong className="skyblue">작업물</strong>
+            지금까지 <strong className="skyblue">참여한 프로젝트</strong>
           </h1>
-          <p style={{ color: "white" }}>
-            최근에 작업한 몇 가지 프로젝트입니다.
-          </p>
+          <p style={{ color: "white" }}>개발하였던 프로젝트 중 공개 가능한 프로젝트입니다.</p>
           <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
             <Col md={4} className="project-card">
               <ProjectCard
-                imgPath={chatify}
-                title="Slack 문자열 챗봇"
-                description="
-                자체적으로 개발한 슬랙 봇으로, 매일 자동 스케줄 실행에 따라 각 그룹에 멘션합니다.
-                주요 기능으론 웹훅과 슬랙API를 사용하여 구현했고, 팀 내 일정을 전달하고 문화를 만들기 위한 도구입니다.
-                기여도: 100%"
-                ghLink="https://github.com/gomeng-dev/Jeong"
+                imgPath={Tao}
+                title="도를 아십니까"
+                description="처음 출시한 모바일 게임으로 개인 사업 진행 당시 기획 전반부터, 퍼블리셔를 통한 출시까지 진행했습니다."
+                ytLink="https://youtu.be/4vBG_nYWjV4"
               />
             </Col>
 
             <Col md={4} className="project-card">
               <ProjectCard
-                imgPath={leaf}
-                title="유니티 게임"
-                description="안드로이드 앱으로 개발한 턴제 RPG 게임입니다.
-                주요 기능으론 캐릭터 조작, 전투 시스템, 레벨 진행 및 획득 시스템 등이 있습니다.
-                개인 취미로 진행한 프로젝트로, 모든 캐릭터와 전투 시스템을 설계했습니다.
-                기여도: 100%"
-                ghLink="https://github.com/gomeng-dev/Unity"
+                imgPath={Lunia}
+                title="루니아 원정대"
+                description={"Allm 재직 당시 개발하였던 모바일 게임으로, 개발 초기부터 참여했습니다.\n기반 시스템 기획 전반과 출시까지 참여했습니다."}
+                ytLink="https://github.com/gomeng-dev/Jeong"
+                appLink="https://play.google.com/store/apps/details?id=kr.co.allm.luniadr"
               />
             </Col>
 
             <Col md={4} className="project-card">
               <ProjectCard
-                imgPath={emotion}
-                title="HanEuAll"
-                description="출장 예약, 차량 예약, 부재 현황 등을 웹(반응형)으로 구현했습니다.
-                주요 기능으론 각종 예약 시스템, 휴가 신청 기능, 메일 알림, 승인 기능이 있습니다.
-                프론트 페이지를 개발하고, 기획 단계부터 참여했습니다.
-                기여도: 30%"
-                ghLink="https://github.com/gomeng-dev/HanEuAll"
+                imgPath={Kinggod}
+                title="킹갓캐슬"
+                description={"모바일 오토배틀러 게임으로, 출시 2년차에 합류하여 시스템 기획을 진행하였습니다. 전반적인 UI UX 전반을 개편하였으며, 추가 성장요소 하우징시스템, 신규 게임모드를 진행하였습니다."}
+                ytLink="https://www.youtube.com/watch?v=NU4V70gOcDc"
+                appLink="https://play.google.com/store/apps/details?id=com.awesomepiece.castle&hl=ko"
               />
             </Col>
 
             <Col md={4} className="project-card">
               <ProjectCard
-                imgPath={suicide}
-                title="Game Designer"
-                description="로봇 게임 기획 및 개발에 참여했습니다.
-                주요 기능으론 최대 4인 플레이 가능하며, 로봇 조작 및 전투, 맵 상호작용 등이 있습니다.
-                시스템 기획, 리소스 제작, 레벨 디자인등을 담당했습니다.
-                기여도: 40%"
-                ghLink="https://github.com/gomeng-dev/GameDesigner"
+                imgPath={zh}
+                title="좀비 고등학교"
+                description="모바일 액션게임으로 한 세대를 풍미한 게임입니다. 출시 11년차에 합류하여 이벤트 모드 레벨 디자인, 보스전 설계, 업무 프로세스 개선 등을 진행 중에 있습니다."
+                ytLink="https://www.youtube.com/watch?v=UuJoHFlFUNY&t=18s"
+                appLink="https://play.google.com/store/apps/details?id=net.kernys.aooni&hl=ko"
               />
             </Col>
 
             <Col md={4} className="project-card">
               <ProjectCard
-                imgPath={codeEditor}
+                imgPath={excel2yaml}
                 title="Excel Add-in"
-                description="자체 개발한 엑셀 Add-in으로 업무 자동화를 위해 개발되었습니다.
-                주요 기능으론 데이터 변환, 행 열 계산, 보고서 자동 생성이 있습니다.
-                VBA 및 Macro 개발 업무 자동화로 40% 시간 절약, 데이터 오류 감소 효과가 있었습니다.
-                기여도: 100%"
-                ghLink="https://github.com/gomeng-dev/ExcelAddin"
-              />
-            </Col>
-
-            <Col md={4} className="project-card">
-              <ProjectCard
-                imgPath={blog}
-                title="AI Study App"
-                description="AI 기반 공부 앱으로 프로토타입 단계입니다.
-                주요 기능으론 AI 퀴즈 생성, 오답 추적, 개인 학습 진도, 예상 시험 범위 제공이 있습니다.
-                기여도: 0% (프로토타입)"
-                ghLink="https://github.com/gomeng-dev/AiStudy"
+                description={"자체 개발한 엑셀 Add-in으로 업무 자동화를 위해 개발되었습니다. 기능으론 테이블 YAML 변환 기능, YAML 병합 기능 등이 있으며. Row 데이터를 수정하는 방식에서 벗어나 업무 효율 40% 가량 상승, 데이터 오류 감소 효과가 있었습니다."}
+                ghLink="https://github.com/gomeng-dev/Excel2Yaml"
               />
             </Col>
           </Row>

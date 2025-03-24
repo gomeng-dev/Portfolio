@@ -57,11 +57,15 @@ body, html {
   height: 100%;
   width: 100%;
   overflow-x: hidden;
+  overflow-y: auto; /* 세로 스크롤 허용 */
 }
 
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 16px !important;
+  line-height: 1.7 !important;
+  letter-spacing: 0.01em !important;
 }
 
 .blue, .skyblue {
@@ -103,24 +107,25 @@ button:focus {
 /* --------- */
 
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 10px !important;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #1e293b;
+  background: rgba(30, 41, 59, 0.7) !important;
+  border-radius: 10px !important;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgba(79, 163, 247, 0.8);
-  border-radius: 12px;
+  background: rgba(79, 163, 247, 0.9) !important;
+  border-radius: 10px !important;
+  border: 2px solid rgba(30, 41, 59, 0.7) !important;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(25, 118, 211, 0.9);
-  border-radius: 12px;
+  background: rgba(44, 133, 227, 1) !important;
 }
 
 /* --------- */
@@ -135,9 +140,13 @@ button:focus {
 
 .navbar {
   position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000 !important;
   transition: all 0.3s ease-out 0s !important;
   padding: 0.3rem 2rem !important;
-  font-size: 1.2rem !important;
+  font-size: 1.3rem !important;
 }
 
 .navbar-toggler {
@@ -193,7 +202,7 @@ button:focus {
 
 @media (max-width: 767px) {
   .navbar {
-    padding: 1rem 2rem !important;
+    padding: 0.5rem 1.5rem !important;
     font-size: 1.4rem !important;
     background-color: #181a27 !important;
   }
@@ -290,11 +299,11 @@ button:focus {
 }
 #tsparticles {
   position: fixed !important;
-  background-repeat: no-repeat !important;
-  background-size: cover !important;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  z-index: 0 !important;
+  z-index: 0;
 }
 
 .home-header {
@@ -506,11 +515,10 @@ button:focus {
 /* --------- */
 /* Projects */
 /* --------- */
-.project-section {
+.project-section, .about-section, .home-section, .resume-section, .career-section {
+  padding-top: 100px !important;
+  margin-top: 80px !important;
   position: relative !important;
-  padding-top: 150px !important;
-  padding-bottom: 30px !important;
-  background-image: var(--section-background-color) !important;
 }
 
 .project-card {
@@ -832,39 +840,35 @@ button:focus {
 
 /* 추가 - 컨텐츠 영역 전체에 배경 적용 */
 .content-wrapper {
-  min-height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(./Assets/home-bg.jpg) !important;
+  background-position: center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+  min-height: calc(100vh - 70px);
   display: flex;
   flex-direction: column;
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(./Assets/home-bg.jpg);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  overflow-y: auto !important; /* 세로 스크롤 강제 허용 */
+  position: relative;
+  z-index: 1;
 }
 
 .page-section {
   flex: 1;
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  background: transparent !important;
+  overflow: visible !important; /* 오버플로우 내용 표시 */
+  min-height: 100%;
+  position: relative;
 }
 
-.project-section, .about-section, .home-section, .resume-section {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding-top: 70px;
-  padding-bottom: 30px;
-  margin: 0;
+.project-section, .about-section, .home-section, .resume-section, .career-section {
+  padding-top: 100px !important;
+  padding-bottom: 50px !important;
 }
 
-#tsparticles {
-  position: fixed !important;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
+#scroll {
+  overflow: auto !important;
 }
 
 .react-pdf__Document {
@@ -888,105 +892,747 @@ button:focus {
   margin-top: 20px;
 }
 
-/* 경력 페이지 스타일 */
+/* 경력 페이지 개선된 스타일 */
+.text-left {
+  text-align: left !important;
+}
+
 .career-section {
   position: relative !important;
-  padding-top: 150px !important;
-  padding-bottom: 30px !important;
+  padding-top: 180px !important;
+  padding-bottom: 50px !important;
   background: transparent !important;
   color: white !important;
 }
 
-.career-timeline {
-  padding-top: 30px;
+.career-card {
+  background: rgba(0, 0, 0, 0.3) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  animation: fadeIn 0.5s ease-in-out !important;
 }
 
-.career-item {
-  position: relative;
-  padding: 25px;
-  margin-bottom: 40px;
-  border-left: 3px solid #4fa3f7;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 5px;
+.career-card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5) !important;
 }
 
-.career-item h3 {
-  font-size: 1.6rem;
+.career-header {
+  background: rgba(0, 0, 0, 0.4) !important;
+  border-bottom: 2px solid rgba(79, 163, 247, 0.5) !important;
+  padding: 20px 25px !important;
+}
+
+.company-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.position-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: white;
-  margin-bottom: 15px;
+  flex-wrap: wrap;
+  margin-top: 5px;
 }
 
-.career-item h4 {
-  font-size: 1.2rem;
-  color: #4fa3f7;
-  margin-bottom: 15px;
+.career-card h3 {
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  color: white !important;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9) !important;
+}
+
+.career-card h4 {
+  font-size: 1.1rem !important;
+  color: #4fa3f7 !important;
+  margin-right: 15px;
 }
 
 .period {
-  font-size: 1rem;
-  color: #bbbbbb;
+  font-size: 0.9rem !important;
+  color: #bbbbbb !important;
+  display: flex;
+  align-items: center;
+}
+
+.responsibilities-title {
+  font-size: 1.2rem !important;
+  color: #e6e6e6 !important;
+  margin-bottom: 15px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding-bottom: 8px !important;
 }
 
 .career-description {
-  list-style-type: none;
-  padding-left: 10px;
-  margin-top: 20px;
+  list-style-type: none !important;
+  padding-left: 5px !important;
+  margin-bottom: 0 !important;
 }
 
 .career-description li {
-  position: relative;
-  padding-left: 20px;
-  margin-bottom: 10px;
+  position: relative !important;
+  padding-left: 20px !important;
+  margin-bottom: 10px !important;
+  font-size: 1rem !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7) !important;
+  line-height: 1.8 !important;
 }
 
 .career-description li:before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  color: #4fa3f7;
+  content: "•" !important;
+  position: absolute !important;
+  left: 0 !important;
+  color: #4fa3f7 !important;
 }
 
 .career-projects {
-  margin-top: 20px;
-  padding: 15px;
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
+  margin-top: 25px !important;
 }
 
-.project-item {
-  margin-top: 15px;
-  padding-bottom: 15px;
-  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+.project-card {
+  background: rgba(0, 0, 0, 0.2) !important;
+  border: none !important;
+  border-radius: 5px !important;
+  margin-bottom: 15px !important;
 }
 
-.project-item:last-child {
-  border-bottom: none;
+.project-header {
+  background: rgba(0, 0, 0, 0.3) !important;
+  padding: 12px 20px !important;
+  border-bottom: 1px solid rgba(79, 163, 247, 0.3) !important;
 }
 
-.project-item h6 {
-  font-size: 1.05rem;
-  color: white;
-  margin-bottom: 5px;
+.project-detail {
+  list-style-type: none !important;
+  padding-left: 5px !important;
+  margin-bottom: 0 !important;
 }
 
-.project-item p {
-  font-size: 0.9rem;
-  color: #bbbbbb;
+.project-detail li {
+  position: relative !important;
+  padding-left: 20px !important;
+  margin-bottom: 8px !important;
+  font-size: 0.95rem !important;
+  color: #e0e0e0 !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7) !important;
+  line-height: 1.8 !important;
+}
+
+.project-detail li:before {
+  content: "•" !important;
+  position: absolute !important;
+  left: 0 !important;
+  color: #4fa3f7 !important;
+}
+
+.highlight-text {
+  color: #ffc107 !important;
+  font-weight: bold !important;
+  margin: 10px 0 !important;
+  font-size: 1.25rem !important;
+  padding: 5px 10px !important;
+  background-color: rgba(255, 193, 7, 0.2) !important;
+  border-radius: 5px !important;
+  display: inline-block !important;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8) !important;
+}
+
+.info-card {
+  background: rgba(0, 0, 0, 0.3) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  height: 100% !important;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  animation: fadeIn 0.5s ease-in-out !important;
+}
+
+.info-card:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+.info-card .card-header {
+  background: rgba(0, 0, 0, 0.4) !important;
+  border-bottom: 2px solid rgba(79, 163, 247, 0.5) !important;
+  padding: 15px 20px !important;
+}
+
+.education-item {
+  margin-top: 10px !important;
+}
+
+.education-item h5 {
+  font-size: 1.1rem !important;
+  color: white !important;
+  margin-bottom: 8px !important;
+}
+
+.skills-list {
+  list-style-type: none !important;
+  padding-left: 5px !important;
+  margin-top: 10px !important;
+  margin-bottom: 0 !important;
+}
+
+.skills-list li {
+  position: relative !important;
+  padding-left: 20px !important;
+  margin-bottom: 10px !important;
+  color: #e0e0e0 !important;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7) !important;
+  line-height: 1.8 !important;
+}
+
+.skills-list li:before {
+  content: "•" !important;
+  position: absolute !important;
+  left: 0 !important;
+  color: #4fa3f7 !important;
 }
 
 @media (max-width: 767px) {
-  .career-item h3 {
-    font-size: 1.4rem;
+  .career-card h3 {
+    font-size: 1.5rem !important;
+  }
+  
+  .position-info {
     flex-direction: column;
     align-items: flex-start;
   }
   
-  .period {
-    margin-top: 5px;
-    font-size: 0.9rem;
+  .career-card h4 {
+    margin-bottom: 8px !important;
   }
+  
+  .career-card, .info-card, .project-card {
+    margin-left: -5px !important;
+    margin-right: -5px !important;
+    width: calc(100% + 10px) !important;
+  }
+  
+  .card-body {
+    padding: 15px !important;
+  }
+  
+  .career-header {
+    padding: 15px 20px !important;
+  }
+  
+  .btn-sm {
+    padding: 0.4rem 0.8rem !important;
+    font-size: 0.9rem !important;
+  }
+}
+
+/* 글로벌 스크롤 스타일 */
+html, body, #root, .App {
+  overflow-y: auto !important;
+  min-height: 100% !important;
+}
+
+/* 파티클 스타일 조정 */
+#tsparticles canvas {
+  position: fixed !important;
+  z-index: 0 !important;
+}
+
+/* 실제 콘텐츠의 z-index 조정 */
+.container, .container-fluid {
+  position: relative;
+  z-index: 1;
+}
+
+/* 네비게이션바 z-index 조정 */
+.navbar {
+  z-index: 100 !important;
+}
+
+/* 스크롤 영역 명시적 설정 */
+.App, .content-wrapper, .page-section, .project-section, .about-section, .home-section, .resume-section, .career-section {
+  overflow-y: auto !important;
+}
+
+/* 전반적인 가독성 개선 */
+.content-wrapper {
+  background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(./Assets/home-bg.jpg) !important;
+  background-position: center !important;
+  background-size: cover !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+}
+
+body {
+  font-family: 'LINE Seed KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-size: 16px !important;
+  line-height: 1.7 !important;
+  letter-spacing: 0.01em !important;
+}
+
+/* 더 선명한 텍스트를 위한 설정 */
+h1, h2, h3, h4, h5, h6, p, li, a, button {
+  font-weight: 500 !important;
+}
+
+/* 컨테이너 여백 증가 */
+.container {
+  max-width: 1200px !important;
+  padding: 0 25px !important;
+}
+
+/* 애니메이션 효과 추가 */
+.career-card, .info-card, .project-card {
+  animation: fadeIn 0.5s ease-in-out !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 반응형 디자인 최적화 */
+@media (max-width: 991px) {
+  .container {
+    max-width: 100% !important;
+    padding: 0 20px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    font-size: 15px !important;
+  }
+
+  .career-card h3 {
+    font-size: 1.5rem !important;
+  }
+
+  .career-card h4 {
+    font-size: 1.2rem !important;
+    margin-bottom: 8px !important;
+  }
+
+  .responsibilities-title,
+  .project-card h6 {
+    font-size: 1.2rem !important;
+  }
+
+  .career-description li, 
+  .project-detail li {
+    font-size: 1.05rem !important;
+    line-height: 1.6 !important;
+  }
+
+  .project-card .card-body {
+    padding: 15px !important;
+  }
+
+  .career-section {
+    padding-top: 150px !important;
+  }
+}
+
+/* 스크롤바 스타일 개선 */
+::-webkit-scrollbar {
+  width: 10px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(30, 41, 59, 0.7) !important;
+  border-radius: 10px !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(79, 163, 247, 0.9) !important;
+  border-radius: 10px !important;
+  border: 2px solid rgba(30, 41, 59, 0.7) !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(44, 133, 227, 1) !important;
+}
+
+/* 노션 스타일 CSS */
+.notion-style {
+  font-family: 'LINE Seed KR', sans-serif !important;
+  color: white !important;
+  line-height: 1.8 !important;
+}
+
+.notion-container {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 30px !important;
+}
+
+.notion-heading {
+  font-size: 3rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 1.5rem !important;
+  text-align: left !important;
+}
+
+.notion-text {
+  font-size: 1.4rem !important;
+  line-height: 1.8 !important;
+  margin-bottom: 2rem !important;
+  text-align: left !important;
+}
+
+.notion-entry {
+  margin-bottom: 5rem !important;
+  padding-bottom: 3rem !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.notion-entry:last-child {
+  border-bottom: none !important;
+}
+
+.notion-entry-header {
+  margin-bottom: 2.5rem !important;
+}
+
+.notion-entry-title {
+  display: flex !important;
+  align-items: center !important;
+  margin-bottom: 1rem !important;
+}
+
+.notion-entry-title h2 {
+  font-size: 2.2rem !important;
+  font-weight: 700 !important;
+  color: white !important;
+  margin: 0 !important;
+  margin-right: 1.5rem !important;
+}
+
+.notion-role {
+  font-size: 1.6rem !important;
+  color: #4fa3f7 !important;
+  font-weight: 600 !important;
+}
+
+.notion-period {
+  display: flex !important;
+  align-items: center !important;
+  font-size: 1.2rem !important;
+  color: #bbbbbb !important;
+  margin-left: auto !important;
+}
+
+.notion-subtitle {
+  font-size: 1.6rem !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding-bottom: 0.8rem !important;
+  margin-bottom: 1.5rem !important;
+  font-weight: 600 !important;
+  text-align: left !important;
+}
+
+.notion-list {
+  list-style-type: none !important;
+  padding-left: 0 !important;
+  margin-bottom: 2rem !important;
+}
+
+.notion-list li {
+  position: relative !important;
+  padding-left: 1.5rem !important;
+  margin-bottom: 1rem !important;
+  font-size: 1.3rem !important;
+  line-height: 1.8 !important;
+  text-align: left !important;
+}
+
+.notion-list li:before {
+  content: "•" !important;
+  position: absolute !important;
+  left: 0 !important;
+  color: #4fa3f7 !important;
+  font-size: 1.5rem !important;
+}
+
+.notion-projects {
+  margin-top: 3rem !important;
+}
+
+.notion-project {
+  margin-bottom: 2.5rem !important;
+  background: rgba(0, 0, 0, 0.2) !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  transition: transform 0.3s ease !important;
+}
+
+.notion-project:hover {
+  transform: translateY(-5px) !important;
+}
+
+.notion-project-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  background: rgba(0, 0, 0, 0.3) !important;
+  padding: 1.2rem 1.5rem !important;
+  border-bottom: 1px solid rgba(79, 163, 247, 0.2) !important;
+}
+
+.notion-project-title {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.notion-project-title h5 {
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  margin: 0 !important;
+  color: white !important;
+}
+
+.notion-button {
+  font-size: 1.1rem !important;
+  padding: 0.7rem 1.2rem !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.notion-button[variant="success"] {
+  background-color: #689f38 !important;
+  border-color: #689f38 !important;
+}
+
+.notion-button[variant="danger"] {
+  background-color: #d32f2f !important;
+  border-color: #d32f2f !important;
+}
+
+.notion-button:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+.notion-highlight {
+  display: inline-block !important;
+  background-color: rgba(255, 193, 7, 0.2) !important;
+  color: #ffc107 !important;
+  font-size: 1.4rem !important;
+  font-weight: 600 !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 6px !important;
+  margin: 0.5rem 0 !important;
+}
+
+.notion-info-section {
+  margin-bottom: 3rem !important;
+}
+
+.notion-info-item {
+  margin-bottom: 1.5rem !important;
+}
+
+.notion-info-item h4 {
+  font-size: 1.4rem !important;
+  color: white !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.notion-footer {
+  margin-top: 5rem !important;
+  padding-top: 3rem !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+  .notion-heading {
+    font-size: 2.2rem !important;
+  }
+  
+  .notion-text {
+    font-size: 1.2rem !important;
+  }
+  
+  .notion-entry-title h2 {
+    font-size: 1.8rem !important;
+  }
+  
+  .notion-role {
+    font-size: 1.3rem !important;
+  }
+  
+  .notion-period {
+    font-size: 1rem !important;
+    margin-left: 0 !important;
+    margin-top: 0.5rem !important;
+  }
+  
+  .notion-entry-title {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  
+  .notion-subtitle {
+    font-size: 1.4rem !important;
+  }
+  
+  .notion-list li {
+    font-size: 1.2rem !important;
+  }
+  
+  .notion-project-title h5 {
+    font-size: 1.3rem !important;
+  }
+  
+  .notion-button {
+    font-size: 1rem !important;
+    padding: 0.5rem 1rem !important;
+  }
+  
+  .notion-project-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  
+  .notion-button {
+    margin-top: 0.8rem !important;
+    margin-left: 0 !important;
+  }
+}
+
+/* 네비게이션 바와 콘텐츠가 겹치지 않도록 모바일에서도 충분한 패딩 제공 */
+@media (max-width: 768px) {
+  .career-section {
+    padding-top: 150px !important;
+  }
+  
+  .notion-heading {
+    padding-top: 30px !important;
+  }
+}
+
+/* 모바일 환경에서 섹션 패딩 조정 */
+@media (max-width: 768px) {
+  .project-section, .about-section, .home-section, .resume-section, .career-section {
+    padding-top: 150px !important;
+    padding-bottom: 40px !important;
+  }
+}
+
+/* 네비게이션 바와 컨텐츠 사이 공간 확보를 위한 스타일 추가 */
+.navbar {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000 !important;
+}
+
+.project-section, .about-section, .home-section, .resume-section, .career-section {
+  padding-top: 100px !important;
+  margin-top: 80px !important;
+  position: relative !important;
+}
+
+/* 네비게이션 메뉴 아래 공백 강제 지정 */
+.page-top-padding {
+  padding-top: 100px !important;
+  min-height: 100px !important;
+  display: block;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .page-top-padding {
+    padding-top: 80px !important;
+  }
+}
+
+/* 텍스트 색상 및 가독성 개선 */
+.notion-list li,
+.notion-project-title h5,
+.notion-entry-title h2,
+.notion-role,
+.notion-subtitle,
+.notion-period,
+.notion-info-item h4,
+.project-heading {
+  color: white !important;
+  text-shadow: none !important;
+}
+
+.notion-list li:before,
+.notion-project-title svg,
+.notion-entry-title svg,
+.skyblue {
+  color: #4fa3f7 !important;
+  text-shadow: 0 0 10px rgba(79, 163, 247, 0.3) !important;
+}
+
+/* 텍스트 크기 및 굵기 증가 */
+.notion-list li {
+  font-size: 1.4rem !important;
+  font-weight: 400 !important;
+  line-height: 1.9 !important;
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+.notion-entry-title h2 {
+  font-size: 2.4rem !important;
+  font-weight: 700 !important;
+}
+
+.notion-role {
+  font-size: 1.7rem !important;
+  font-weight: 600 !important;
+  color: #65b5ff !important;
+}
+
+/* 아이콘 크기 및 색상 강화 */
+.notion-entry-title svg,
+.notion-project-title svg {
+  font-size: 2rem !important;
+  color: #65b5ff !important;
+}
+
+/* 배경 투명도 조정 */
+.notion-project {
+  background: rgba(0, 0, 0, 0.25) !important;
+}
+
+.notion-project-header {
+  background: rgba(20, 20, 35, 0.5) !important;
+}
+
+/* 버튼 스타일 강화 */
+.notion-button {
+  font-size: 1.2rem !important;
+  font-weight: 600 !important;
+  padding: 0.8rem 1.5rem !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+.notion-button[variant="success"] {
+  background-color: #7cb342 !important;
+  border-color: #7cb342 !important;
+}
+
+.notion-button[variant="danger"] {
+  background-color: #e53935 !important;
+  border-color: #e53935 !important;
+}
+
+/* 하이라이트 텍스트 강화 */
+.notion-highlight {
+  color: #ffca28 !important;
+  font-size: 1.5rem !important;
+  background-color: rgba(255, 202, 40, 0.15) !important;
+  text-shadow: none !important;
 }
 

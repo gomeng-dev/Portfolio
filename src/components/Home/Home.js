@@ -7,7 +7,7 @@ import Type from "./Type";
 
 function Home() {
   return (
-    <section className="page-section">
+    <section className="page-section" style={{ overflow: "auto"}}>
       <Container fluid className="home-section" id="home" style={{position: 'relative', zIndex: 1}}>
         <Particle style={{zIndex: 0}} />
         <Container className="home-content" style={{position: 'relative', zIndex: 2}}>

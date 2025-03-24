@@ -1,0 +1,688 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>뽑기 시스템</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-default_background {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: undefined; }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-transparentGray { background-color: undefined; }
+.select-value-color-translucentGray { background-color: undefined; }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f7b327e0-6208-428a-a873-e58108279b7f" class="page sans"><header><h1 class="page-title">뽑기 시스템</h1><p class="page-description"></p></header><div class="page-body"><h3 id="0279d2cb-3b5e-45b3-a860-7c78c937e7e2" class="">관련 문서</h3><p id="17354ef5-befc-46b5-9703-0daf13005f04" class=""><a href="https://www.notion.so/a909a33bfbf14a28b3caad10ae7109e7?pvs=21">뽑기 데이터 구조</a> </p><p id="27513e78-bfe7-4f02-ab52-924203676b34" class=""><a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">뽑기 UI</a> </p><h1 id="a0cdc698-1a0d-4403-a75b-7dc593a10cc8" class="">개요</h1><ol type="1" id="0bb766f9-70e0-4f46-a2c0-5a3076c4dc95" class="numbered-list" start="1"><li><a href="https://www.notion.so/89fbbf50fe7d497fba3b886816048424?pvs=21">재화</a><ol type="a" id="9442aae6-a308-419a-a940-6e68a06e7255" class="numbered-list" start="1"><li>현금성 재화 = 보석<ul id="080d4863-6d1b-477d-bc74-91d9311dbdc8" class="bulleted-list"><li style="list-style-type:disc">획득처 = 현금 결제</li></ul><ul id="94b6dd31-5fb2-4352-9bc7-ac9dee4cc11f" class="bulleted-list"><li style="list-style-type:disc">사용처<ul id="d563d492-b65b-4442-9515-33dd78c3d7a9" class="bulleted-list"><li style="list-style-type:circle">유료 상품 구매</li></ul><ul id="a38f5e7a-ecbb-4a19-badd-b9020ab5ce39" class="bulleted-list"><li style="list-style-type:circle">길드 코인 전환</li></ul></li></ul></li></ol><ol type="a" id="c5c778af-15d7-4e65-b710-4d831f900b6f" class="numbered-list" start="2"><li>인게임 재화 = 길드 코인<p id="302ff34e-14d7-4bf6-8915-77bfc68ed30e" class=""><span style="border-bottom:0.05em solid"><strong>※ 1.12.0 버전 스팩에서 제외 됨</strong></span></p><ul id="af74b3e0-816e-46e2-a6f7-4001ba868586" class="bulleted-list"><li style="list-style-type:disc">획득처 = 인게임, 퀘스트 보상, 이벤트, 보석 1:1 교환</li></ul><ul id="d943be73-9528-409f-9270-db15764aa0f2" class="bulleted-list"><li style="list-style-type:disc">사용처<ul id="8bc63c14-9b1e-467e-b4b5-bad04c2e4565" class="bulleted-list"><li style="list-style-type:circle">뽑기권 구매</li></ul><ul id="19273e75-5daf-4074-8c33-d5d330eccb64" class="bulleted-list"><li style="list-style-type:circle">상점 고가치 아이템 구매</li></ul></li></ul></li></ol></li></ol><ol type="1" id="3ac90472-99c4-47f5-8c82-a6a79ff50a2f" class="numbered-list" start="2"><li><strong><a href="https://www.notion.so/89fbbf50fe7d497fba3b886816048424?pvs=21">뽑기</a></strong><ul id="d574fe31-1274-4775-9eba-45cbfa8a128d" class="bulleted-list"><li style="list-style-type:disc">뽑기 자원 = 신규 타입 자원<ul id="01507085-4fd8-46f0-a580-ed27e3703439" class="bulleted-list"><li style="list-style-type:circle">상시 뽑기권</li></ul><ul id="7056e893-227d-4d1e-aaf3-ac279fe1f816" class="bulleted-list"><li style="list-style-type:circle">한정 뽑기권</li></ul></li></ul><ul id="188dec0f-aa6f-4331-912f-9fdf59aa8356" class="bulleted-list"><li style="list-style-type:disc">지급 아이템 종류<ul id="a289689f-a88f-4f6e-84c1-f7435c195631" class="bulleted-list"><li style="list-style-type:circle">캐릭터 완제</li></ul><ul id="2c1699fb-5c2e-4485-8d8f-3bef40d8a4dc" class="bulleted-list"><li style="list-style-type:circle">캐릭터 영혼석</li></ul><ul id="11ab8290-9f63-488a-aceb-c4f5eda232db" class="bulleted-list"><li style="list-style-type:circle">무기</li></ul></li></ul><ul id="b156c07f-3bce-45de-a0af-5a9ef673944e" class="bulleted-list"><li style="list-style-type:disc">뽑기 상품</li></ul><ol type="1" id="0f8f5e88-27d6-4af7-bccc-244ef54d4137" class="numbered-list" start="1"><li>e.g) <a href="https://www.notion.so/89fbbf50fe7d497fba3b886816048424?pvs=21">상시 뽑기</a></li></ol><ol type="1" id="59bf5247-41da-400c-9f07-e9d6612810ea" class="numbered-list" start="2"><li>e.g) <a href="https://www.notion.so/89fbbf50fe7d497fba3b886816048424?pvs=21">다인 한정 뽑기</a></li></ol></li></ol><ol type="1" id="eb7fa88e-2561-421f-8b5c-7b2f062bef1d" class="numbered-list" start="3"><li><strong><a href="https://www.notion.so/89fbbf50fe7d497fba3b886816048424?pvs=21">마일리지 시스템</a></strong></li></ol><ol type="1" id="5f996730-d3d5-4235-8b8c-847468eaa609" class="numbered-list" start="4"><li>천장<ul id="2ab53831-2da9-403c-a41c-7b7e68ac77c9" class="bulleted-list"><li style="list-style-type:disc">천장 한도 = 천장 아이템 지급에 필요한 뽑기 횟수</li></ul><ul id="52e7bea5-835d-4b85-a53c-16cf3591b553" class="bulleted-list"><li style="list-style-type:disc">천장 아이템 = 천장 한도 도달 시 지급하는 아이템</li></ul></li></ol><p id="5a1997a2-ee62-4f9b-af79-43c23b2effd9" class="">
+</p><h1 id="5072d75c-9dc2-4ef4-a9b4-12b0dcf8d2fe" class="">1. 재화</h1><ul id="d1976721-b59b-423e-8185-8db59bb60ec0" class="bulleted-list"><li style="list-style-type:disc">현금성 재화와 인게임 재화에 대한 내용<h2 id="daab2634-e738-434e-a85a-6c30076bf835" class="">1). 보석 ( 현금성 재화 )</h2><ul id="e82ae108-88bc-4124-af89-206e84b5e026" class="bulleted-list"><li style="list-style-type:circle">오로지 결제로만 획득 가능한 재화, 현금성 상품 구매 및 코인으로 교환 시 사용 됨</li></ul><ol type="1" id="b9ee284e-b9fb-4074-9505-3be7e5adf177" class="numbered-list" start="1"><li>획득처 = Only <span style="border-bottom:0.05em solid"><strong>현금 결제</strong></span></li></ol><ol type="1" id="67ddeeb6-9a81-488e-b1d4-98673caac95d" class="numbered-list" start="2"><li>사용처<ol type="a" id="30999241-9d6b-4c23-9d92-86c17d93f4a6" class="numbered-list" start="1"><li>유료 상품 구매</li></ol><ol type="a" id="ed89611a-564a-4bdc-8b02-e648702069df" class="numbered-list" start="2"><li>길드 코인 교환</li></ol></li></ol><h2 id="20b54840-e5c1-4f1b-94b8-bf54e65bdaf0" class="block-color-red_background">2). 길드 코인 ( 인게임 재화 )</h2><p id="6f36b0d8-8728-4814-988b-a81dbc437822" class="block-color-red_background"><span style="border-bottom:0.05em solid"><strong>※ 1.12.0 버전 스팩에서 제외 됨</strong></span></p><ul id="b33848a0-4b4c-4be8-a1a7-e6e3ed9ce178" class="bulleted-list"><li style="list-style-type:circle">고가치 아이템, 재화, 뽑기권 구매 시 사용</li></ul><ol type="1" id="edce3e85-929f-40dc-b3f6-f085aa1b9436" class="numbered-list" start="1"><li>획득처<ol type="a" id="aeebabac-52a0-4c29-b901-4fb3b6dff341" class="numbered-list" start="1"><li>보석 교환 : 1대1 비율<ul id="9a668034-13d3-45a2-8ce2-898b206055a8" class="bulleted-list"><li style="list-style-type:disc">(1)상점 페이지, (2)상단바에서 교환 가능<p id="864757b1-b042-4096-9ef1-79ae677e06d9" class="">※ 상세 UI <a href="https://www.notion.so/UI-9b873e721663403582d9a4d7bfde4ad0?pvs=21">뽑기 UI</a> 참조</p></li></ul><figure id="e4bc69cb-c2b8-45d3-a01d-43a45afa1adf" class="image"><a href="Untitled.png"><img style="width:672px" src="Untitled.png"/></a></figure></li></ol><ol type="a" id="5af96dc6-a01b-421e-94ec-0636d4d59710" class="numbered-list" start="2"><li>퀘스트 보상</li></ol><ol type="a" id="98ff762c-39a9-48aa-9a29-c861b4f2c327" class="numbered-list" start="3"><li>클리어 보상</li></ol><ol type="a" id="387fd6d6-146c-4bd5-b0ec-0bff171c674e" class="numbered-list" start="4"><li>도전과제</li></ol><ol type="a" id="7641be0f-7f53-4055-888c-c7448182ae13" class="numbered-list" start="5"><li>이벤트 지급</li></ol></li></ol><ol type="1" id="b85d9adb-57bc-4bf5-b3c5-6fa32fdaab7c" class="numbered-list" start="2"><li>사용처<ol type="a" id="33a87abb-eadb-4756-b49c-9908e83f124e" class="numbered-list" start="1"><li>뽑기권 구매</li></ol><ol type="a" id="85805968-b052-466e-a636-32babb8b4d92" class="numbered-list" start="2"><li>상점 고가치 아이템 구매 ( e.g : 스태미너, 골드, etc...)</li></ol></li></ol></li></ul><h1 id="160559f6-ed1d-43e1-95d0-29df5c9f88a1" class="">2. 뽑기</h1><ul id="4e96efe9-c3e9-40c4-8084-0f37aef3378a" class="bulleted-list"><li style="list-style-type:disc">전용 자원을 소모하여 랜덤 풀에서 랜덤한 캐릭터, 캐릭터 영혼석, 무기를 획득하는 시스템</li></ul><ul id="f3177e10-1517-47d4-8dd4-2599c0a4c178" class="bulleted-list"><li style="list-style-type:disc">교환비 = 뽑기 1회 : 랜덤 아이템 1개</li></ul><ul id="9da3e7bb-8b89-4d53-9f76-db390cc0943f" class="bulleted-list"><li style="list-style-type:disc">뽑기는 뽑기권을 소모하여 할 수 있다.<p id="42409395-3400-46db-b7e0-9f35ef501ec0" class="">※ 뽑기 종류에 따라 지정된 뽑기권 요구.</p></li></ul><ol type="1" id="1db2e00f-0935-4cc7-9fc2-fbb909da8d5d" class="numbered-list" start="1"><li><strong>뽑기 자원</strong><div><ul id="cee4120b-9d0a-4ee1-8f20-83ac409bdf94" class="bulleted-list"><li style="list-style-type:disc"><code>MaterialInfo</code> 에 신규 타입 추가 = Ticket</li></ul><ul id="32d19f8a-2b53-481c-a5d3-3740f5d6af81" class="bulleted-list"><li style="list-style-type:disc">보유한 뽑기 자원은 타입 별 인벤토리 자원 목록에서 출력</li></ul></div><ul id="ba8855b6-73ed-4431-94b3-7fb6246b4284" class="bulleted-list"><li style="list-style-type:disc">획득처<ol type="1" id="61a03a91-74a4-45a9-b368-b1815681bbac" class="numbered-list" start="1"><li>상점<ul id="e75c803d-8882-4276-bd99-589b2a371d80" class="bulleted-list"><li style="list-style-type:disc">뽑기 자원 가격 정보 = <a href="https://www.notion.so/a909a33bfbf14a28b3caad10ae7109e7?pvs=21"><code>ProductInfo</code></a>에 항목 추가</li></ul></li></ol><ol type="1" id="854b4dd8-612b-4adb-9083-a0e0f50e0ded" class="numbered-list" start="2"><li>퀘스트 보상</li></ol><ol type="1" id="c80a46c8-5246-47a0-8715-5e9408d54312" class="numbered-list" start="3"><li>접속 보상</li></ol></li></ul><ul id="1ed67553-5335-4e7d-91c0-a3c902865187" class="bulleted-list"><li style="list-style-type:disc">종류<ul id="b11a1787-507f-4ecb-8ab9-0bf6051c9163" class="bulleted-list"><li style="list-style-type:circle">각 뽑기가 요구하는 자원 정보는 <a href="https://www.notion.so/a909a33bfbf14a28b3caad10ae7109e7?pvs=21"><code>ProductInfo</code></a><a href="https://www.notion.so/a909a33bfbf14a28b3caad10ae7109e7?pvs=21"> 테이블</a>에 입력</li></ul><ol type="1" id="4b7942e0-581e-4248-92ab-c773481dc4d8" class="numbered-list" start="1"><li>상시 뽑기권</li></ol><ol type="1" id="3b1186bb-cf9e-4719-bde9-7aeca8490d9f" class="numbered-list" start="2"><li>한정 뽑기권</li></ol></li></ul></li></ol><ol type="1" id="49112ed0-ab2f-430f-b44e-19340a3fefef" class="numbered-list" start="2"><li><strong>지급 아이템 종류</strong><ul id="3e2231ae-b3ca-4abe-817a-4170ed35d046" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.notion.so/a909a33bfbf14a28b3caad10ae7109e7?pvs=21"><code>#RandomSetInfo</code></a> 테이블에서 뽑기에서 제공할 아이템 입력</li></ul><ol type="1" id="1d87b742-2577-4da3-8b50-72e9cb8f7805" class="numbered-list" start="1"><li>캐릭터 완제<ul id="07f3fa11-aadc-47d1-87c5-70521b4109ff" class="bulleted-list"><li style="list-style-type:disc">완제 캐릭터를 보유중일 경우 해당 캐릭터의 <mark class="highlight-red">영혼석 n개</mark>와 <a href="https://www.notion.so/89fbbf50fe7d497fba3b886816048424?pvs=21">마일리지</a>로 대체지급된다.<ul id="0ae2229b-e51b-4c47-bf4d-ed64bb5ce05c" class="bulleted-list"><li style="list-style-type:circle">지급할 영혼석 n 개 = <code>CharacterRankUpInfo</code> → <code><mark class="highlight-blue">Rank</mark></code> ==0 일 때 <code><mark class="highlight-blue">SoulCount</mark></code> 값</li></ul><ul id="c121f042-1b90-49a3-a5e5-25bee325b41d" class="bulleted-list"><li style="list-style-type:circle">지급할 영혼석 Id = <code>CharacterInfo</code> → <mark class="highlight-blue"><code>CharacterSoulId</code></mark>  참조</li></ul><p id="8f4a7f49-7602-4513-afbc-0b2349a578bb" class="">※ 캐릭터 영혼석 최대 보유량을 초과하여 획득 불가</p></li></ul><ul id="c1ee5495-4e07-4bc7-8fc0-714376603382" class="bulleted-list"><li style="list-style-type:disc">등급 2종 :  <mark class="highlight-purple">서사</mark>, <mark class="highlight-orange">전설</mark></li></ul></li></ol><ol type="1" id="5bcdf46a-96af-48e1-8b0e-070f6c32c533" class="numbered-list" start="2"><li>캐릭터 영혼석<ul id="8273db10-896a-4de4-abeb-686996c56471" class="bulleted-list"><li style="list-style-type:disc">등급 2종 :  <mark class="highlight-purple">서사</mark>, <mark class="highlight-orange">전설</mark></li></ul></li></ol><ol type="1" id="86d871c6-9d06-4a1a-a052-3bcf8d03d294" class="numbered-list" start="3"><li>무기<ul id="eb939208-66de-433c-9994-173a04194416" class="bulleted-list"><li style="list-style-type:disc">등급 3종 : <mark class="highlight-blue">고급</mark>, <mark class="highlight-purple">서사</mark>, <mark class="highlight-orange">전설</mark></li></ul></li></ol><p id="ebf3f64c-43bf-461f-95b1-b8b4c7713455" class="">※ 각 항목 별 보유량 초과 시 하단 <a href="https://www.notion.so/89fbbf50fe7d497fba3b886816048424?pvs=21">마일리지</a> 참고</p></li></ol><ol type="1" id="94b4d1e5-cf40-464e-b8d8-8f27eba008ca" class="numbered-list" start="3"><li><strong>천장</strong><ul id="49c9bd2f-50ae-4f51-a108-f94c6629978a" class="bulleted-list"><li style="list-style-type:disc"><a href="https://www.notion.so/f7b327e06208428aa873e58108279b7f?pvs=21">하단 참조</a></li></ul></li></ol><ol type="1" id="0349df58-59b1-441c-bd03-ce83f62a776b" class="numbered-list" start="4"><li><strong>뽑기 상품</strong><ul id="e9a3c0a6-e1ee-4ab1-9f58-509d3da51166" class="bulleted-list"><li style="list-style-type:disc">뽑기 상품 정보는 <a href="https://www.notion.so/a909a33bfbf14a28b3caad10ae7109e7?pvs=21"><code>ProductInfo</code></a> 에 입력</li></ul><ul id="2a0e8578-65a6-40f9-ae2a-902eb51fc92f" class="bulleted-list"><li style="list-style-type:disc">뽑기 종류 추가 가능</li></ul><ol type="1" id="3bb6af6a-0394-4aa8-a8fe-07881db9bec9" class="numbered-list" start="1"><li>상시 뽑기 = 항시 열려있는 뽑기</li></ol><ol type="1" id="8ae39b5c-b966-4df0-8af9-4a58a3807655" class="numbered-list" start="2"><li>한정 뽑기 = 픽업 이벤트 기간동안 활성화되며, 한정 상품을 얻을 수 있는 뽑기<ul id="a45fc1a9-aba3-49bd-863d-7d5d0470dcc2" class="bulleted-list"><li style="list-style-type:disc">뽑기 활성화 기간 정보 = <code>ProductInfo</code> → <mark class="highlight-blue"><code>Duration{}</code></mark><mark class="highlight-blue"> </mark></li></ul></li></ol></li></ol><h2 id="ce8af6e0-096e-4c0b-bc53-9c5a7899dc28" class="">2-1). 예시 - 상시 뽑기</h2><figure id="9f00fb57-b134-4e2f-a691-2c9fcf685557" class="image"><a href="Untitled%201.png"><img style="width:528px" src="Untitled%201.png"/></a><figcaption>원신의 상시 기원(뽑기)</figcaption></figure><ul id="3f795858-9fe7-4713-93d2-682a78f14662" class="bulleted-list"><li style="list-style-type:disc">영구성 뽑기</li></ul><ul id="866e8bcd-e5c6-4e4e-88a9-f74d4d77da43" class="bulleted-list"><li style="list-style-type:disc">풀이 대체로 고정적인 뽑기</li></ul><ol type="1" id="b8e0da5b-7264-4be6-9591-f9082ac83796" class="numbered-list" start="1"><li><strong>상시 뽑기 정보</strong><figure id="657dee83-fa61-44a5-90e9-0a50b0825ff0" class="image"><a href="Untitled%202.png"><img style="width:590px" src="Untitled%202.png"/></a><figcaption>상시 뽑기 요약 정보</figcaption></figure><figure id="a16ff7bc-6676-46c1-9974-1c9f420364cb" class="image"><a href="Untitled%203.png"><img style="width:864px" src="Untitled%203.png"/></a><figcaption><code>RandomItemSetInfo</code> : 상시 뽑기 아이템 목록</figcaption></figure><figure id="0c6e1876-a054-452d-8925-25bcd3516258" class="image"><a href="Untitled%204.png"><img style="width:2083.27099609375px" src="Untitled%204.png"/></a><figcaption><code>GachaRewardInfo</code> : 상시 뽑기 아이템 천장 정보, 뽑기 풀</figcaption></figure><figure id="e449149a-9342-48c7-b81c-c1432146c5c5" class="image"><a href="Untitled%205.png"><img style="width:2083.23974609375px" src="Untitled%205.png"/></a><figcaption><code>Info</code> : 상시 뽑기 상품 정보</figcaption></figure><div><h3 id="22dd1836-f1f8-4f3e-be1d-67f4a1008264" class="">캐릭터 일반소환 정책</h3><ul id="3fce1115-925a-4554-8aaa-abc6afe7ad2b" class="bulleted-list"><li style="list-style-type:disc"><strong>기본 정책</strong><ol type="1" id="b0903f7f-bf95-4084-a5fa-981db39f05aa" class="numbered-list" start="1"><li>상시 뽑기 풀은 추가, 확장 가능</li></ol><ol type="1" id="3474aa6e-f81a-4eb4-adca-c96e3c41e099" class="numbered-list" start="2"><li>상시 뽑기 풀에는 픽업 아이템이 없음</li></ol><ol type="1" id="371c2398-9ccd-4c12-a20a-0b59ddebc763" class="numbered-list" start="3"><li>상시 뽑기 풀에서는 한정 아이템이 절대 포함되지 않음</li></ol></li></ul><ul id="7d474dc9-2dda-4c5f-b010-09dce6cdb3fe" class="bulleted-list"><li style="list-style-type:disc"><strong>일반소환 등급별 확률 정책</strong><ol type="1" id="bbe5766a-0bef-43f3-8da3-803f00b9cd20" class="numbered-list" start="1"><li>전설 확률 : 1.5%</li></ol><ol type="1" id="a736b50f-569f-4450-965e-c89c62bd4f25" class="numbered-list" start="2"><li>에픽 확률 : 19%(표기는 18.97%)</li></ol><ol type="1" id="5e5fa19d-7b1d-4271-ae5d-154cc6a7e371" class="numbered-list" start="3"><li>레어 확률 : 79.5%(표기는 79.38%)</li></ol></li></ul><ul id="3029d7cf-3160-4b0d-b063-48f0f7ab5c45" class="bulleted-list"><li style="list-style-type:disc"><strong>일반소환 정책</strong><p id="501358b1-8525-4d5b-b58c-51dd598e68c0" class="">아래 확률을 해당 세부 카테고리 소속 대상이 동일하게 나눠가짐</p><ol type="1" id="59b1dccf-5432-4c31-bf87-f5703203b173" class="numbered-list" start="1"><li>일반 전설 캐릭터 : 0.32%</li></ol><ol type="1" id="31295968-7bba-44d4-8a49-6676f3ef112a" class="numbered-list" start="2"><li>일반 전설 캐릭터 영혼석 : 0.88%</li></ol><ol type="1" id="2d2a80c2-6561-401b-8cc8-c53fc05d3b51" class="numbered-list" start="3"><li>전설 무기 : 0.32%</li></ol><ol type="1" id="95e3d0bb-fd5a-4e07-9bc8-ba37a8de95a1" class="numbered-list" start="4"><li>일반 에픽 캐릭터 : 2.55%</li></ol><ol type="1" id="c53e0e39-cd57-49c5-97fe-4b4bf34f22fe" class="numbered-list" start="5"><li>일반 에픽 캐릭터 영혼석 : 13.95%</li></ol><ol type="1" id="40cef63b-698e-417e-8ad6-077f6a304e4a" class="numbered-list" start="6"><li>에픽 무기 : 2.52%</li></ol><ol type="1" id="e8df0b39-8929-4cce-a23a-588660ff63c5" class="numbered-list" start="7"><li>일반 무기 : 79.38%</li></ol></li></ul></div></li></ol><p id="275dab7f-9e54-452b-afb7-adf682f7aa36" class="">
+</p><ol type="1" id="5b0536f3-809c-4542-9908-faf7a40cc44c" class="numbered-list" start="1"><li><strong>상시 뽑기 천장</strong><ul id="5ec4197b-15ec-44c3-a2ef-774c00570dd1" class="bulleted-list"><li style="list-style-type:disc">149회 까지 <mark class="highlight-orange"><strong>전설급</strong></mark> <span style="border-bottom:0.05em solid"><strong>캐릭터 완제, 무기</strong></span> 가 나오지 않을 경우 150번째 뽑기에서는 <mark class="highlight-orange"><strong>전설급</strong></mark> <strong>캐릭터 완제</strong> 혹은 <strong>무기</strong>가 나온다.<ol type="1" id="9a273c02-f605-424f-97d2-1272cb3ac645" class="numbered-list" start="1"><li>150번째 뽑기에서 캐릭터 완제와 무기가 나올 확률은 각 각 50%, 50% 이다.</li></ol></li></ul><ul id="b6497ce9-882b-46bc-a466-8fbd2f4abc7b" class="bulleted-list"><li style="list-style-type:disc">상시 뽑기 풀이 확장되어도 뽑기 횟수는 유지된다.</li></ul></li></ol><ol type="1" id="e2cb01f8-da77-4dcc-adfc-24a86239d02c" class="numbered-list" start="3"><li><strong>상시 뽑기 자원</strong><ul id="59b20de6-0161-4da4-8836-9463d81b67fa" class="bulleted-list"><li style="list-style-type:disc">상시 뽑기권 1개를 자원으로 사용한다.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="996e14d8-800c-49d1-afcb-bbe0a721388a"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>상시 뽑기권</strong><ul id="72f18311-d6f4-4488-8b5c-32b374947539" class="bulleted-list"><li style="list-style-type:disc">획득처<ol type="1" id="83f325e3-abfc-49fa-bcb5-183f53d624c7" class="numbered-list" start="1"><li>코인으로 상점 구매</li></ol><ol type="1" id="906104ab-8bb1-4521-938d-93b40161c6e1" class="numbered-list" start="2"><li>이벤트 보상</li></ol><ol type="1" id="28f5c659-700c-4e77-b134-808c8c29ad0e" class="numbered-list" start="3"><li>퀘스트 보상</li></ol><ol type="1" id="eef9d7ee-23c7-48ec-9b69-bd62b610a5db" class="numbered-list" start="4"><li>마일리지 샵 구매</li></ol></li></ul><ul id="3f46b7ce-baa3-43b4-aa38-6d1a5660728d" class="bulleted-list"><li style="list-style-type:disc">사용처 = 상시 뽑기</li></ul></div></figure></li></ol><h2 id="716d9a9a-0ede-4c94-92aa-df26fc6e54b9" class="">2-2). 예시 - 다인 한정 뽑기</h2><figure id="35a1dd95-5dc5-4be7-8572-cf8776b49d9b" class="image"><a href="Untitled%206.png"><img style="width:480px" src="Untitled%206.png"/></a><figcaption>레퍼런스 : 원신의 한정 캐릭터 이벤트 기원(뽑기)</figcaption></figure><ul id="f9fdc70a-5bd9-4a93-9016-a1311e5a21d0" class="bulleted-list"><li style="list-style-type:disc">일정 기간동안 한정 아이템을 획득 할 수 있는 이벤트 뽑기</li></ul><ul id="64f2e2f1-b48b-489c-b1cb-97b0631fd3f3" class="bulleted-list"><li style="list-style-type:disc">오픈 기간 = 한정 뽑기 이벤트 기간 (약 2주 단위, 변경 가능성 있음)<p id="11b592bb-83be-46dc-ad50-9e198dc498be" class="">※ 이벤트 기간은 연,월,일,시,분,초  단위로 상세하게 설정할 수 있다.</p></li></ul><ul id="c663d6e5-eec0-4154-af63-6c877c64cc52" class="bulleted-list"><li style="list-style-type:disc">뽑기 아이템 풀은 <span style="border-bottom:0.05em solid"><strong>매 한정 이벤트마다 변경</strong></span> 됨</li></ul><ul id="f6eb8561-4326-4704-b1ef-cdb52f074433" class="block-color-red bulleted-list"><li style="list-style-type:disc"><span style="border-bottom:0.05em solid"><strong>한정 뽑기는 동시에 여러개가 열릴 수 있다.</strong></span></li></ul><ol type="1" id="9091a041-e39e-4328-8aa8-f466a653684e" class="numbered-list" start="1"><li><strong>다인 한정 뽑기 정보</strong><figure id="9a814a0c-7fb0-4dba-bb78-cb90ec806a30" class="image"><a href="Untitled%207.png"><img style="width:590px" src="Untitled%207.png"/></a><figcaption>다인 한정 뽑기 요약 정보</figcaption></figure><figure id="38e5a612-6386-4987-b110-042e05317ad0" class="image"><a href="Untitled%208.png"><img style="width:816px" src="Untitled%208.png"/></a><figcaption><code>RandomItemSetInfo</code> : 다인 한정 뽑기 아이템 목록</figcaption></figure><figure id="4cb15f0f-3007-4166-971b-55cfbbe7e80d" class="image"><a href="Untitled%209.png"><img style="width:2083.27099609375px" src="Untitled%209.png"/></a><figcaption><code>GachaRewardInfo</code> : 다인 한정 뽑기 아이템 천장 정보, 뽑기 풀</figcaption></figure><figure id="21e765ee-7ffd-4a2f-8826-60d5ab57cd09" class="image"><a href="Untitled%2010.png"><img style="width:2083.28125px" src="Untitled%2010.png"/></a><figcaption><code>GachaInfo</code> : 다인 한정 뽑기 상품 정보</figcaption></figure><div><h3 id="ef29acfc-5883-45fc-83dc-bc7c8e099b39" class="">캐릭터 픽업 소환 정책</h3><ul id="af9c020e-b6ec-46ea-9838-bbff5b602dd3" class="bulleted-list"><li style="list-style-type:disc"><strong>픽업 소환 기본 정책</strong><ul id="cdfea60e-4d1b-4ef7-aa57-f09dddfb6a95" class="bulleted-list"><li style="list-style-type:circle">픽업 소환은 특정 기간 동안만 진행</li></ul><ul id="5556b0a7-c32a-4ff6-9cc2-6ed15e342fb4" class="bulleted-list"><li style="list-style-type:circle">픽업 소환 풀에서는 특정 대상이 확률업되어 제공</li></ul><ul id="fd705e07-5b8d-4c99-a636-cec789582f22" class="bulleted-list"><li style="list-style-type:circle">픽업 아이템은 복수 지정 가능<ul id="086913db-5d3b-404f-8158-f07a910312fa" class="bulleted-list"><li style="list-style-type:square">e.g) 다인 캐릭터 완제, 다인 캐릭터 조각</li></ul></li></ul><ul id="fac9503f-6b0d-4785-ac60-fe8938b58942" class="bulleted-list"><li style="list-style-type:circle">픽업 소환은 <span style="border-bottom:0.05em solid">동시에 여러개가 열릴 수 있다</span>.</li></ul></li></ul><ul id="f32ca6aa-fe65-4687-ba5f-fc6ec02b29d6" class="bulleted-list"><li style="list-style-type:disc"><strong>픽업 소환 운영 정책</strong><ul id="8f2b6aa9-13d3-4103-9010-34b526117373" class="bulleted-list"><li style="list-style-type:circle">전설 캐릭터 1종 메인 픽업 확률업 </li></ul><ul id="7bf0404d-6ae0-4213-a98a-803e145557c7" class="bulleted-list"><li style="list-style-type:circle">에픽 캐릭터 3종 서브 픽업 확률업</li></ul><ul id="ecffd53c-2632-446c-ba7a-f7e9562310e8" class="bulleted-list"><li style="list-style-type:circle">그 외 일반 뽑기와 동일하게 상시 캐릭터, 상시 무기 포함</li></ul></li></ul><ul id="5af2a699-d7ca-4834-ac96-210bae985539" class="bulleted-list"><li style="list-style-type:disc"><strong>픽업소환 등급별 확률 정책(일반소환과 동일)</strong><ol type="1" id="0821e2c7-ed09-42cc-b9ab-7bf98b3c6fc8" class="numbered-list" start="1"><li>전설 확률 : 1.5%</li></ol><ol type="1" id="ecafa174-e440-4025-9c3a-ac75abb72858" class="numbered-list" start="2"><li>에픽 확률 : 19%(표기는 18.97%)</li></ol><ol type="1" id="57e5d530-f67e-46d0-9f62-e19d1722511b" class="numbered-list" start="3"><li>레어 확률 : 79.5%(표기는 79.38%)</li></ol></li></ul><ul id="e7c6dd01-8c08-4aad-99e0-7e52619b1ec8" class="bulleted-list"><li style="list-style-type:disc"><strong>픽업소환 대상별 세부확률 정책</strong><p id="29147de6-cb58-4404-afe6-4cf9f00ce722" class="">아래 확률을 해당 세부 카테고리 소속 대상이 동일하게 나눠가짐</p><ol type="1" id="96805d91-b374-4711-bcb8-8dc76d45e6ea" class="numbered-list" start="1"><li>픽업 레전더리 캐릭터 : 0.15% </li></ol><ol type="1" id="db6bc7c0-7a64-4ddd-b242-704b19d783be" class="numbered-list" start="2"><li>일반 레전더리 캐릭터 : 0.16%</li></ol><ol type="1" id="d6bf7129-a281-4ed0-90fd-7d3b8877bc3a" class="numbered-list" start="3"><li>픽업 레전더리 캐릭터 영혼석 : 0.54%</li></ol><ol type="1" id="ca5a725a-8ea6-4d84-9b4a-632260b2ebcc" class="numbered-list" start="4"><li>일반 레전더리 캐릭터 영혼석 : 0.36%</li></ol><ol type="1" id="0f689829-bb31-443a-90d2-11a4f55a6651" class="numbered-list" start="5"><li>레전더리 무기 : 0.32%</li></ol><ol type="1" id="82185222-7095-469f-a390-f01170d9ffb7" class="numbered-list" start="6"><li>픽업 에픽 캐릭터 : 0.15% </li></ol><ol type="1" id="1926f7ad-1b6e-4194-b0b2-49ea68676abe" class="numbered-list" start="7"><li>일반 에픽 캐릭터 : 0.96%</li></ol><ol type="1" id="63b5a528-c60b-4a31-8064-68336d1d05dc" class="numbered-list" start="8"><li>픽업 에픽 캐릭터 영혼석  : 8.4% </li></ol><ol type="1" id="3c9bb60d-a309-4469-8f75-fc85f2d4786b" class="numbered-list" start="9"><li>일반 에픽 캐릭터 영혼석 : 5.64%</li></ol><ol type="1" id="66c39930-021b-452d-82c4-7ec0fa6a83bc" class="numbered-list" start="10"><li>에픽 무기 : 2.52%</li></ol><ol type="1" id="08c97a78-e247-4ba0-9e58-84980e5ae043" class="numbered-list" start="11"><li>레어 무기 : 79.38%</li></ol><figure id="7db6c21e-f365-40f4-acca-ea351b42abe4" class="image"><a href="220124_%25EC%2586%258C%25ED%2599%2598%25EC%25A0%2595%25EC%25B1%2585.png"><img style="width:235px" src="220124_%25EC%2586%258C%25ED%2599%2598%25EC%25A0%2595%25EC%25B1%2585.png"/></a></figure></li></ul><p id="7f6978fe-77ea-4529-ab2b-19b93d7c0fbb" class="">
+</p><ul id="93daddbf-0020-4f4d-ae07-e4e349c1b021" class="bulleted-list"><li style="list-style-type:disc"><strong>신규 캐릭터 출시 정책</strong><ul id="4fc12ff4-7703-4c7a-9357-310c889f9961" class="bulleted-list"><li style="list-style-type:circle">신규 캐릭터는 출시 시 무조건 픽업 소환 진행</li></ul><ul id="ec3fb463-1189-4c9d-9d0b-79523aed81f2" class="bulleted-list"><li style="list-style-type:circle">이후 픽업이 끝나면 일반 소환에 포함</li></ul><ul id="8bd0147b-55a1-438a-a792-7d63077bd985" class="bulleted-list"><li style="list-style-type:circle">픽업 뽑기는 항상 전설 캐릭터 1종이 메인 타겟이 되도록 유도</li></ul></li></ul></div></li></ol><ol type="1" id="076f05d7-2503-4962-9888-26248e7d96c2" class="numbered-list" start="2"><li><strong>한정 뽑기 천장</strong><ul id="7a40db9f-32ed-47b0-8525-cf99746fc73a" class="block-color-yellow_background bulleted-list"><li style="list-style-type:disc">천장 횟수는 &quot;한정 뽑기&quot; 라는 뽑기 종류 안에서 공유된다.</li></ul><ul id="b6367bcf-ee81-4d27-9af6-5b6940cd3445" class="bulleted-list"><li style="list-style-type:disc">천장 아이템 == 픽업 한정 아이템 ( 캐릭터 완제 or 무기 )</li></ul><ul id="399b6fec-95a4-44a2-96dd-5c9b4427d8f8" class="bulleted-list"><li style="list-style-type:disc">149회 까지 <mark class="highlight-red"><span style="border-bottom:0.05em solid"><strong>픽업 한정 아이템</strong></span></mark>이 나오지 않을 경우 150번째 뽑기에서는 <mark class="highlight-red"><span style="border-bottom:0.05em solid"><strong>픽업 한정 아이템</strong></span></mark>이 나온다.</li></ul><ul id="1ee239d6-46b8-4de8-9726-fe38f8b9185e" class="bulleted-list"><li style="list-style-type:disc">단 150번째 뽑기 도달 전 <mark class="highlight-red"><span style="border-bottom:0.05em solid"><strong>픽업 한정 아이템</strong></span></mark>이 나올 경우 천장 카운트는 초기화된다.<p id="5c07a58b-9462-4dc1-aa41-0ef10d2b6f71" class="">※ 복수의 한정 뽑기가 있을 경우 어느 한정뽑기에서 픽업을 뽑아도 카운트는 초기화</p></li></ul><ul id="226904f9-37a2-41ee-85b2-6a5e33d393b2" class="bulleted-list"><li style="list-style-type:disc">픽업 이벤트가 종료되어도 한정 뽑기에서 뽑은 횟수는 계정에 저장된다.<ul id="66626cb1-fc89-45bf-8295-edb75a7169f8" class="bulleted-list"><li style="list-style-type:circle">다음 한정 뽑기가 열릴 때 저장된 뽑기 횟수를 불러온다.</li></ul></li></ul></li></ol><ol type="1" id="d83c496a-75de-4feb-ad91-31f633816f65" class="numbered-list" start="3"><li><strong>한정 뽑기 자원</strong><ul id="29980c64-e334-4585-9e63-31b5bc8a710d" class="bulleted-list"><li style="list-style-type:disc">한정 뽑기권 1개를 자원으로 사용한다.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a4682578-842f-4174-b8d5-dd36dddc5efb"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>한정 뽑기권</strong><ul id="c787d1ba-d0e0-4077-a505-3352f53af2ed" class="bulleted-list"><li style="list-style-type:disc">획득처<ol type="1" id="d3f7e049-d7cc-4505-9986-51d24e80d06e" class="numbered-list" start="1"><li>코인으로 상점 구매 → <code>ProductInfo</code> 참조</li></ol><ol type="1" id="1b84819c-1bbf-4bdd-aba2-830b82b4f9a1" class="numbered-list" start="2"><li>마일리지 샵 구매</li></ol></li></ul><ul id="7acd4b96-864c-4325-ae45-4a322a187d53" class="bulleted-list"><li style="list-style-type:disc">사용처 = 한정 뽑기</li></ul></div></figure></li></ol><h1 id="b9ed3745-aee1-49cc-af22-e59c2968c79a" class="block-color-red_background">3. 마일리지</h1><p id="15a29616-a176-490b-9324-f3d9777a85eb" class=""><span style="border-bottom:0.05em solid"><strong>※ 1.12.0 버전 스팩에서 제외 됨</strong></span></p><ul id="807983c0-0914-4ebb-81f0-3090b99387a9" class="bulleted-list"><li style="list-style-type:disc">마일리지는 마일리지 상점에서 사용 가능한 재화이다.<ul id="c0fb0eba-e9c8-4067-ac1b-77becfa02a46" class="bulleted-list"><li style="list-style-type:circle">골드, 보석과 같은 NonItemType</li></ul></li></ul><ul id="8767ae8c-c8ae-45e9-8e1a-151d3243310f" class="toggle"><li><details open=""><summary><mark class="highlight-gray"><strong>v1.12.0</strong></mark></summary><ul id="942190a6-eb08-4ff0-9b15-f2c10544c63c" class="bulleted-list"><li style="list-style-type:disc">뽑기로 획득한 아이템이 보유량을 초과하게 될 경우 마일리지로 전환하여 지급.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="7f10bbff-7e0d-47fe-a1f4-24926c020010"><div style="font-size:1.5em"><span class="icon">‼️</span></div><div style="width:100%"><strong>전환 기준</strong><ul id="57d454f7-9c0c-4b0b-aa9d-04746d3ed9d0" class="bulleted-list"><li style="list-style-type:disc">캐릭터 <ol type="1" id="96852734-93ff-4b6e-8b8f-b838a0ce17bb" class="numbered-list" start="1"><li>캐릭터 완제를 중복 획득할 경우</li></ol><ol type="1" id="15e16853-8a13-4c4e-8f16-732818aaf6b6" class="numbered-list" start="2"><li>(캐릭터에 사용된 영혼석 + 보유한 영혼석) = 풀 승급에 필요한 영혼석 개수 일 경우<figure id="962e19ee-e5d2-4088-8131-6defdbd392a3" class="image"><a href="Untitled%2011.png"><img style="width:280px" src="Untitled%2011.png"/></a></figure></li></ol></li></ul><ul id="df54115b-78e1-46af-912c-a28d1e35ae0f" class="bulleted-list"><li style="list-style-type:disc">무기 = 무기 획득 시 마다 지급</li></ul><ul id="3748ffbd-f2b0-410a-ae6c-f20c6c149cbd" class="bulleted-list"><li style="list-style-type:disc">영혼석 = 총 영혼석 한도 초과 시</li></ul></div></figure><figure id="a0448cbc-0337-4981-9e44-a86405921ec7" class="image"><a href="Untitled%2012.png"><img style="width:320px" src="Untitled%2012.png"/></a><figcaption>MileageInfo 추가</figcaption></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f029cfcb-3924-4124-b5aa-e86bcbc8d601"><div style="font-size:1.5em"><span class="icon">‼️</span></div><div style="width:100%"><strong>마일리지 전환량</strong><p id="eaac8d59-1253-46b0-96e2-67fef6da1158" class="">각 마일리지 전환량은 <code>MileageInfo</code> 에 기록한다.</p><ul id="dd459c16-f245-4931-9d3b-cfddba237ed6" class="bulleted-list"><li style="list-style-type:disc">마일리지 포인트<ul id="2ac6c517-9066-4db1-9779-5a9b72d4c4f3" class="bulleted-list"><li style="list-style-type:circle">획득처<ul id="e52add0e-e06e-4190-ba50-e0a95754b84a" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-orange">전설</mark> [무기,  중복 완제 캐릭터 ] : 100개 획득 </li></ul><ul id="0ed960a6-910b-4799-b86d-9f6a5f019316" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-orange">전설 </mark>중복 완제 캐릭터, 영혼석 (총 영혼석 440개 초과) : 영혼석 개당 5개 획득 <p id="700a3616-e548-4c4a-b760-c2a82ea24e8e" class="">e.g) (중복 캐릭터 획득 마일리지 100개) + ( 영혼석 전환 마일리지 100개 )  = 200개</p></li></ul><ul id="48b8ae57-df5f-478d-b6af-fa1ffe1ee3d9" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-purple">에픽</mark> [무기, 중복 완제 캐릭터 ] : 20개 획득</li></ul><ul id="d2527520-3a7e-4164-9c05-9ce5da834182" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-purple">에픽</mark> 중복 완제 캐릭터, 영혼석 (총 영혼석 440개 초과) : 영혼석 개당 1개 획득<p id="8fade9f7-2857-47d2-bb20-779eb800f864" class="">e.g) (중복 캐릭터 획득 마일리지 20개) + ( 영혼석 전환 마일리지 20개 )  = 40개</p></li></ul><ul id="ea380a77-6bf8-4fac-a51f-9e206859064a" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-blue">고급 </mark>[무기] : 5개 획득</li></ul></li></ul></li></ul></div></figure><ul id="9ef7f3ac-338c-44e5-8729-b35c87978d3c" class="bulleted-list"><li style="list-style-type:disc">마일리지로 교환 가능한 상품은 추가 예정</li></ul></details></li></ul><ul id="a3d325cc-2311-44eb-b449-2a0f4c1a7744" class="bulleted-list"><li style="list-style-type:disc"><strong>마일리지 지급 방식</strong> — 소환 결과물의 (1) Type별, (2) Rarity별<ol type="1" id="8deef531-9459-4c45-b337-c65646772ea1" class="numbered-list" start="1"><li>무기 획득 시<br/><br/><code>ItemType = Weapon</code><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="246ae359-60b1-47d6-a9ab-7d0e0de1da99"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">별도 조건 없이 마일리지 지급<br/>(지급 수량은 무기의 <br/><code>Rarity</code>에 따른다.)</div></figure></li></ol><ol type="1" id="1858da62-17e4-4000-954e-529f3b88d0db" class="numbered-list" start="2"><li>캐릭터 획득 시<br/><br/><code>ItemType = Character</code><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6f33207d-2f7d-4972-8db0-dd7f8959b99c"><div style="font-size:1.5em"><span class="icon">⛔</span></div><div style="width:100%">미보유 캐릭터인 경우, 마일리지 지급 없음</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="0aa2a798-8dad-4b86-84eb-0ab2e431c866"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">1️⃣ 보유 중인 캐릭터일 경우, 마일리지 지급<br/>    (지급 수량은 캐릭터의 <br/><code>Rarity</code>에 따른다.)<br/><br/>2️⃣ 중복 캐릭터는 영혼석으로 전환되며, <br/><a href="https://www.notion.so/f7b327e06208428aa873e58108279b7f?pvs=21">[3. 캐릭터 영혼석 획득 시]</a> 규칙을 따른다.<br/>    (해당 영혼석이 마일리지로 전환될 경우, 항목 내에서 합산하여 표시한다.)<br/></div></figure></li></ol><ol type="1" id="4348e1f3-e6a1-429d-a760-f1b21e9b04e9" class="numbered-list" start="3"><li>캐릭터 영혼석 획득 시<br/><br/><code>ItemType = CharacterSoul</code><ul id="c25b1473-115d-4de5-83b4-e83af0dcde8d" class="bulleted-list"><li style="list-style-type:disc">영혼석 최대치 = 최대 승급까지 필요한 수량 = (1) 보유량 + (2) 누적 소모량<br/>이후 초과분은 마일리지로 전환한다.<br/></li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="c5b4a357-5631-4acc-bb82-98b7dc84912d"><div style="font-size:1.5em"><span class="icon">⛔</span></div><div style="width:100%">(<code>보유량</code> + <code>누적 소모량</code>) + <code>획득량</code> ≤ <strong><mark class="highlight-blue_background"><code>영혼석 최대치</code></mark></strong><mark class="highlight-blue_background"><code><br/><br/></code></mark>마일리지 지급 없음</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b5674477-ac67-44c7-ab70-e18674687f9e"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong><mark class="highlight-blue_background">(</mark></strong><strong><mark class="highlight-blue_background"><code>보유량</code></mark></strong><strong><mark class="highlight-blue_background"> + </mark></strong><strong><mark class="highlight-blue_background"><code>누적 소모량</code></mark></strong><strong><mark class="highlight-blue_background">) + </mark></strong><strong><mark class="highlight-blue_background"><code>획득량</code></mark></strong> &gt; <code>영혼석 최대치</code><br/><br/>영혼석 최대치를 초과한만큼 마일리지 지급<br/><br/>지급 수량은 캐릭터 영혼석의 <br/><code>Rarity</code>와 초과한만큼의 <code>Count</code>에 따른다.<br/>= <br/><code>.Rarity * .Count</code></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="37813547-86c6-48ed-9b09-f1677a5ea99d"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">이미 영혼석 최대치를 만족했을 경우, 마일리지 지급<br/><br/>1️⃣ 획득량 모두 초과분으로 처리<br/><br/>2️⃣ 지급 수량은 영혼석의 <br/><code>Rarity</code>와 <code>Count</code>에 따른다.<br/>      = <br/><code>.Rarity * .Count</code></div></figure></li></ol></li></ul><h1 id="73215f8e-e1a4-49b5-8ab8-154c297f7afe" class="">4. 천장 시스템</h1><ul id="bb5191ce-43bc-4a1d-8816-dbd07c48055c" class="bulleted-list"><li style="list-style-type:disc">천장 시스템은 유저가 뽑기 진행 시 조건에 따라 일정 등급 이상의 아이템 획득을 보장하여주는 시스템이다.</li></ul><ol type="1" id="8ada1fa7-83bf-4121-9339-9db59dfe57f5" class="numbered-list" start="1"><li>서사급 확정 시스템= 각 뽑기 별 <span style="border-bottom:0.05em solid"><strong>누적 10회 뽑기</strong></span>  안에 최소 <span style="border-bottom:0.05em solid"><strong>1개의 서사급 이상 아이템</strong></span>을 보장<ul id="759fb319-4268-4c87-87fa-45c8dd8ccf37" class="bulleted-list"><li style="list-style-type:disc">최소한의 획득 아이템 등급 보장으로 10연속 저급 아이템만 획득하는 사태 방지</li></ul></li></ol><ol type="1" id="1426f2ad-a6c5-495e-be07-012ea65bf043" class="numbered-list" start="2"><li>확률 변동 시스템 = <span style="border-bottom:0.05em solid"><strong>천장 아이템을 획득하지 못한 상태</strong></span>로 일정 횟수 이상 뽑기 진행 시 <span style="border-bottom:0.05em solid"><strong>천장 아이템 확률이 상승</strong></span>하는 시스템. <ul id="c1acec94-4cf8-435c-b544-e4bf63553874" class="bulleted-list"><li style="list-style-type:disc">유저가 천장을 치기 전에 획득하도록 유도하여 보다 긍정적인 경험 부여</li></ul></li></ol><ol type="1" id="64c3c04b-4f50-4382-9fee-0a9932ea5f07" class="numbered-list" start="3"><li>확정 천장 시스템 = 뽑기 횟수(=천장 카운트) ≥ 천장 한도 만족 시 <span style="border-bottom:0.05em solid"><strong>천장 아이템의 획득</strong></span>을 보장</li></ol><h2 id="1084ce10-b666-46ab-967e-60a98249ca8d" class="">4-1.  서사급 확정 시스템</h2><ul id="d2dec9e1-3cee-4497-91fb-93bd51f68bd2" class="bulleted-list"><li style="list-style-type:disc">뽑기 횟수 9회 안에 <strong><mark class="highlight-pink">서사</mark></strong> 등급 이상 아이템이 나오지 않을 경우 10번쨰 뽑기는 무조건 <strong><mark class="highlight-pink">서사</mark></strong><mark class="highlight-pink"> </mark>이상 아이템이 나온다.<ul id="79438e85-6d76-4065-b03f-ff621be97812" class="bulleted-list"><li style="list-style-type:circle"><strong><mark class="highlight-blue">고급</mark></strong> 아이템 확률 총합은 <strong><mark class="highlight-pink">서사</mark></strong> 아이템 뽑기 확률에 비율이 유지되어 분배된다.<figure id="c102770f-fc36-47d1-976d-018c7c788334" class="image"><a href="Untitled%2013.png"><img style="width:2055.229248046875px" src="Untitled%2013.png"/></a><figcaption>10번째 뽑기 확률 변화 예시</figcaption></figure><p id="3f16563b-660c-4ace-9cdf-caed1b8c5096" class="">※ 단 전설 이상 아이템 뽑기 확률은 기존과 동일하다.</p><p id="170a17af-5362-4aa0-b959-c6befe1690a4" class="">※ 9번 뽑기 안에 서사 등급 이상 아이템이 나올 경우 서사급 확정 카운트를 초기화한다.</p><p id="d18c88d1-e29e-457f-94bb-158c33d43113" class="">※ 서사급 확정 시스템의 뽑기 횟수는 각 뽑기 별로 계산된다. </p></li></ul></li></ul><h2 id="919d61b1-c4a4-4783-b320-4b9b2afe4266" class="">4-2. 확률 변동 시스템</h2><ol type="1" id="0e72f8ee-32fc-43ab-8cc6-4b8d68043c5e" class="numbered-list" start="1"><li><mark class="highlight-pink">확률 변동 회차</mark> : 뽑기 횟수 ≥ <mark class="highlight-pink">확률 변동 회차</mark>일 경우 천장 아이템 획득 확률이 상승<p id="c14ee644-4997-403d-9ce8-dfd720f0615c" class="">※ <mark class="highlight-pink">확률 변동 회차</mark> 값은 천장 횟수가 같은 뽑기들은 전부 동일하다.</p></li></ol><ol type="1" id="6be2b96a-7214-420e-bd3e-eee0538c74d0" class="numbered-list" start="2"><li>확률 변동 대상 = <mark class="highlight-blue"><code>PityItem$[]</code></mark></li></ol><ol type="1" id="c38db148-5b4f-4321-8fd6-44073fd4259d" class="numbered-list" start="3"><li><mark class="highlight-teal">변환 확률</mark> = 확률이 변동될 대상의 변경될 확률 값<ul id="d725ef11-5558-4620-8e5b-c6d64627f7ec" class="bulleted-list"><li style="list-style-type:disc">각 가챠 개별로 변환 확률 설정<p id="dc102be1-f152-404b-8849-1a013a9d00e7" class="">※ 정책적으로 같은 타입의 뽑기 끼리는 데이터 통일</p></li></ul></li></ol><ol type="1" id="014617c7-2eca-4324-a896-1cc5d2f85684" class="numbered-list" start="4"><li>발동 효과 : <ul id="3edfab9a-5ab6-46a0-9351-0b871f9af0ab" class="bulleted-list"><li style="list-style-type:disc">확률 변동 회차 도달 시 다음 뽑기의 천장 아이템 출현 확률 대폭 증가<figure id="87648216-af4d-44e3-8d55-1ed14ce6e58f" class="image"><a href="Untitled%2014.png"><img style="width:2055.30224609375px" src="Untitled%2014.png"/></a></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a339cc58-fcf8-4cbe-a95d-5d88a745c1b0"><div style="font-size:1.5em"><span class="icon">‼️</span></div><div style="width:100%">확률 변동 회차 == <mark class="highlight-pink"><strong>125</strong></mark>회<p id="e96cdc2d-9c1b-45e3-9e78-4279121bc193" class="">천장 한도 == <mark class="highlight-blue"><strong>150</strong></mark>회</p><p id="1219c0dc-888d-406c-8e70-13a3a79d084c" class="">천장 아이템 출현 확률<div class="indented"><p id="07074843-bf5e-4fe5-8756-6b572eae7503" class="">기존 확률 = <mark class="highlight-orange">0.5</mark>%</p><p id="577c679c-38f1-48fd-bf0f-3d27ee6a4d36" class="">변동 확률 = <strong><mark class="highlight-teal">30</mark></strong>%</p></div></p><p id="d83c065f-c532-4999-9b1c-abdcc2e27f10" class="">e.g) 124회 까지 천장 아이템이 나오지 않았을 경우<div class="indented"><ul id="592d4cd2-844c-49a8-86d1-80360807faad" class="bulleted-list"><li style="list-style-type:disc">1회~124회 뽑기 천장 아이템 확률 <mark class="highlight-orange">0.5</mark>%</li></ul><ul id="d0db0062-c42b-4741-ad98-8c0b17f47c35" class="bulleted-list"><li style="list-style-type:disc"><strong><mark class="highlight-pink">125</mark></strong>회~<strong><mark class="highlight-pink">149</mark></strong>회 뽑기에서 천장 아이템 확률 <strong><mark class="highlight-teal">30</mark></strong>%<ul id="7482e683-f28f-47ec-8de1-7ae62c5a1ecb" class="bulleted-list"><li style="list-style-type:circle">약 129회차 에서 <span style="border-bottom:0.05em solid"><strong>대부분의 유저</strong></span>가 천장 아이템 획득<p id="a7fb7037-6925-4c6e-8d86-c5489164ce92" class="">※ 천장 아이템이 복수일 경우 <mark class="highlight-teal">변동 확률</mark> / 2 </p></li></ul></li></ul><ul id="2a5102f3-0eb0-4c2d-9e6f-8009969128cc" class="bulleted-list"><li style="list-style-type:disc"><strong><mark class="highlight-pink">150</mark></strong>회 뽑기에서 천장 한도 도달, 천장 아이템 확률 <mark class="highlight-red">100</mark>%</li></ul></div></p></div></figure><ul id="74335475-a20f-46b0-9bd2-7c57ab6031b9" class="bulleted-list"><li style="list-style-type:circle">전제) 전설 다인 완제 출현 확률 0.5% → 30%<figure id="e7354b32-7641-473b-bc2a-117c0377ac6e" class="image"><a href="Untitled%2015.png"><img style="width:2027.2396240234375px" src="Untitled%2015.png"/></a></figure><p id="4c07cc21-15e6-4a54-bd5b-d9f7dfdf0b74" class="">※ 확률 증가 시 기존 확률 비율에 따라 다른 아이템 확률 감소</p></li></ul><p id="16aedeca-da71-49f0-a7f8-52f006a52d42" class="">
+</p></li></ul></li></ol><h2 id="929cbf5e-77a5-42d7-a9ea-0bfd3d47d289" class="">4-3. 확정 천<strong>장 시스템</strong></h2><ul id="f7c6909a-aad8-4e58-8a98-532cbf3a5dee" class="bulleted-list"><li style="list-style-type:disc">구간 내 천장 아이템 획득을 보장하여주는 시스템</li></ul><ul id="b52e7371-8cc2-432a-ba6f-1a62b3d57cca" class="bulleted-list"><li style="list-style-type:disc">뽑기 횟수 ≥ 천장 한도일 경우 천장 아이템을 획득 할 수 있도록 해주는 시스템</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="e8e9155f-130c-459e-8c48-a31e911fdcc6"><div style="font-size:1.5em"><span class="icon">‼️</span></div><div style="width:100%">전제 조건) <strong>천장 한도</strong> == 150회 &amp;&amp; <strong>천장 아이템</strong> == <mark class="highlight-orange">전설급</mark> <span style="border-bottom:0.05em solid">캐릭터 완제, 무기</span><p id="617f4178-5c49-4a30-b67a-b972b15cf970" class=""><strong>Case 1 :</strong> 149번째 까지 <mark class="highlight-orange">전설급</mark> <span style="border-bottom:0.05em solid">캐릭터 완제, 무기</span> 가 나오지 않을 경우<div class="indented"><figure id="2cf8cfa4-58c3-4449-920b-c07e32b499ed" class="image"><a href="Untitled%2016.png"><img style="width:324px" src="Untitled%2016.png"/></a></figure><ul id="030f7502-d15a-4d37-8e9f-52ceccbf3d18" class="bulleted-list"><li style="list-style-type:disc">150번째 뽑기에서는 <mark class="highlight-orange">전설급</mark> 캐릭터 완제 혹은 무기가 나온다.</li></ul></div></p><p id="d69f1d85-84a5-4a8b-ad43-c48db4011799" class="">Case 2 : 50번째 뽑기에서 천장 아이템이 나왔을 경우<div class="indented"><figure id="8a2b9042-6b63-4244-a95c-47b599dd70ab" class="image"><a href="Untitled%2017.png"><img style="width:324px" src="Untitled%2017.png"/></a></figure><ul id="3a3f8a03-3358-48fd-860f-dd8f922503b0" class="bulleted-list"><li style="list-style-type:disc">천장 아이템 획득 시 천장 카운트 = 0</li></ul></div></p><p id="226d16f1-a243-411e-b123-0a36640ebae2" class="">Case 3 : 10연속 뽑기 중 3번째에 천장 아이템이 나왔을 경우<div class="indented"><figure id="fba7ac38-33e9-4403-8dea-0dd289542d63" class="image"><a href="Untitled%2018.png"><img style="width:324px" src="Untitled%2018.png"/></a></figure><ul id="c8a9a76d-6096-47a9-9d3e-6b5e958497d1" class="bulleted-list"><li style="list-style-type:disc">3번째 뽑기에서 천장 카운트 = 0으로 초기화</li></ul><ul id="7fc17743-4cd4-418a-b50c-cf3700ba956c" class="bulleted-list"><li style="list-style-type:disc">이후 남은 7번의 뽑기 횟수가 천장 카운트로 쌓인다.</li></ul></div></p><p id="0a05c0bb-5b09-42e3-be2b-19befaca6786" class="">Case 1+3 : 149번째 뽑기에서 10연차를 돌릴 경우<div class="indented"><figure id="43cb40a8-9402-4dc8-bd1d-d1cb39a60864" class="image"><a href="Untitled%2019.png"><img style="width:324px" src="Untitled%2019.png"/></a></figure><ul id="1b55ee56-f18d-4a18-bb9a-5883d572e7db" class="bulleted-list"><li style="list-style-type:disc">150번째 뽑기에서 <mark class="highlight-orange">전설급</mark> <span style="border-bottom:0.05em solid">캐릭터 완제, 무기</span> 출현</li></ul><ul id="70477396-8f3f-4833-aa90-0a8f974445f2" class="bulleted-list"><li style="list-style-type:disc">이후 뽑기 잉여 횟수분(8회) 만큼 천장 카운트 증가 </li></ul></div></p></div></figure><ol type="1" id="0f946688-84e8-486a-bc2c-8a9f38aaf305" class="numbered-list" start="1"><li>천장 한도 = <code>GachaRewardInfo</code> 의 <mark class="highlight-blue"><code>Id</code></mark> 참조 → <mark class="highlight-blue"><code>PityCounts</code></mark></li></ol><ol type="1" id="3bf3b5a8-05e4-4007-a149-ae886a82e590" class="numbered-list" start="2"><li>천장 아이템 = <code>GachaRewardInfo</code> 의 <mark class="highlight-blue"><code>Id</code></mark> 참조 → <mark class="highlight-blue"><code>PityItem</code></mark><ul id="42892d4a-8e7f-4efc-a41e-20408118fc55" class="bulleted-list"><li style="list-style-type:disc">한정 뽑기의 천장 아이템 == 한정 아이템 or 캐릭터</li></ul><ul id="96e501dc-1786-41d3-8e08-73fc339842d5" class="bulleted-list"><li style="list-style-type:disc">상시 뽑기의 천장 아이템 == 상시 뽑기 풀 → 전설급 무기 or 캐릭터</li></ul><div><ol type="1" id="30db420f-2717-4a03-9f49-780ccab405f4" class="numbered-list" start="1"><li>PityItem$[] = 천장 도달 시 제공할 아이템 Id 배열<ul id="6b830a90-fe78-4480-92e9-c9ed249dcaf3" class="bulleted-list"><li style="list-style-type:disc">해당 배열에서 지정된 확률에 따라 계산하여 <span style="border-bottom:0.05em solid"><strong>한가지 항목만 출력</strong></span>된다.</li></ul><ol type="1" id="446c34e2-244c-4d5f-98fc-689d4e15e0f7" class="numbered-list" start="1"><li>Id = 제공할 아이템의 <code>RandomRewardInfo</code> → <mark class="highlight-blue"><code>Id</code></mark> 입력</li></ol><ol type="1" id="aeaf9b47-51d1-4438-a976-d49cb656a991" class="numbered-list" start="2"><li>Probability = 해당 아이템 제공 확률</li></ol></li></ol></div></li></ol></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
