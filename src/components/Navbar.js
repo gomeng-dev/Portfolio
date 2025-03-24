@@ -39,7 +39,7 @@ function NavBar() {
       className={navColour ? "sticky" : "navbar"}
     >
       <Container>
-        <Navbar.Brand href="/" className="d-flex align-items-center" style={{ padding: "0 5px" }}>
+        <Navbar.Brand as={Link} to="/" className="d-flex align-items-center" style={{ padding: "0 5px" }}>
           <img 
             src={logo} 
             className="img-fluid logo" 
