@@ -21,7 +21,7 @@ function Home() {
               </h1>
 
               <h1 className="heading-name">
-                <strong className="main-name" style={{ fontWeight: 700 }}> 정영훈</strong>입니다
+                <strong className="main-name" style={{ fontWeight: 700 }}>시스템 기획자</strong> 정영훈 입니다.
               </h1>
 
               <div style={{ padding: 50, textAlign: "left" }}>

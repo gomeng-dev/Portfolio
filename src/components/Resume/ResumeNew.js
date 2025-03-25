@@ -85,7 +85,7 @@ function ResumeNew() {
                   key={`page_${index + 1}`}
                   pageNumber={index + 1}
                   scale={width > 786 ? 1.7 : 0.6}
-                  className="mb-5" // 페이지 간 여백 추가
+                  className="mb-0" // 페이지 간 여백 제거 (mb-5에서 mb-0으로 변경)
                 />
               )
             )}

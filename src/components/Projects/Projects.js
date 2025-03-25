@@ -19,34 +19,8 @@ function Projects() {
           </h1>
           <p style={{ color: "white" }}>개발하였던 프로젝트 중 공개 가능한 프로젝트입니다.</p>
           <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
-            <Col md={4} className="project-card">
-              <ProjectCard
-                imgPath={Tao}
-                title="도를 아십니까"
-                description="처음 출시한 모바일 게임으로 개인 사업 진행 당시 기획 전반부터, 퍼블리셔를 통한 출시까지 진행했습니다."
-                ytLink="https://youtu.be/4vBG_nYWjV4"
-              />
-            </Col>
 
-            <Col md={4} className="project-card">
-              <ProjectCard
-                imgPath={Lunia}
-                title="루니아 원정대"
-                description={"Allm 재직 당시 개발하였던 모바일 게임으로, 개발 초기부터 참여했습니다.\n기반 시스템 기획 전반과 출시까지 참여했습니다."}
-                ytLink="https://github.com/gomeng-dev/Jeong"
-                appLink="https://play.google.com/store/apps/details?id=kr.co.allm.luniadr"
-              />
-            </Col>
 
-            <Col md={4} className="project-card">
-              <ProjectCard
-                imgPath={Kinggod}
-                title="킹갓캐슬"
-                description={"모바일 오토배틀러 게임으로, 출시 2년차에 합류하여 시스템 기획을 진행하였습니다. 전반적인 UI UX 전반을 개편하였으며, 추가 성장요소 하우징시스템, 신규 게임모드를 진행하였습니다."}
-                ytLink="https://www.youtube.com/watch?v=NU4V70gOcDc"
-                appLink="https://play.google.com/store/apps/details?id=com.awesomepiece.castle&hl=ko"
-              />
-            </Col>
 
             <Col md={4} className="project-card">
               <ProjectCard
@@ -57,7 +31,7 @@ function Projects() {
                 appLink="https://play.google.com/store/apps/details?id=net.kernys.aooni&hl=ko"
               />
             </Col>
-
+            
             <Col md={4} className="project-card">
               <ProjectCard
                 imgPath={excel2yaml}
@@ -66,6 +40,33 @@ function Projects() {
                 ghLink="https://github.com/gomeng-dev/Excel2Yaml"
               />
             </Col>
+            <Col md={4} className="project-card">
+              <ProjectCard
+                imgPath={Kinggod}
+                title="킹갓캐슬"
+                description={"모바일 오토배틀러 게임으로, 출시 2년차에 합류하여 시스템 기획을 진행하였습니다. 전반적인 UI UX 전반을 개편하였으며, 추가 성장요소 하우징시스템, 신규 게임모드를 진행하였습니다."}
+                ytLink="https://www.youtube.com/watch?v=NU4V70gOcDc"
+                appLink="https://play.google.com/store/apps/details?id=com.awesomepiece.castle&hl=ko"
+              />
+            </Col>
+            <Col md={4} className="project-card">
+              <ProjectCard
+                imgPath={Lunia}
+                title="루니아 원정대"
+                description={"Allm 재직 당시 개발하였던 모바일 게임으로, 개발 초기부터 참여했습니다.\n기반 시스템 기획 전반과 출시까지 참여했습니다."}
+                ytLink="https://github.com/gomeng-dev/Jeong"
+                appLink="https://play.google.com/store/apps/details?id=kr.co.allm.luniadr"
+              />
+            </Col>
+            <Col md={4} className="project-card">
+              <ProjectCard
+                imgPath={Tao}
+                title="도를 아십니까"
+                description="처음 출시한 모바일 게임으로 개인 사업 진행 당시 기획 전반부터, 퍼블리셔를 통한 출시까지 진행했습니다."
+                ytLink="https://youtu.be/4vBG_nYWjV4"
+              />
+            </Col>
+
           </Row>
         </Container>
       </Container>

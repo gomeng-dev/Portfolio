@@ -37,7 +37,7 @@ function Footer() {
     <Container fluid className="footer mt-auto py-3">
       <Row>
         <Col md="4" className="footer-copywright">
-          <h3>Copyright © {year} Gomeng</h3>
+          <h3>Copyright © {year} Gomeng A.K.A 정영훈</h3>
         </Col>
         <Col md="4" className="footer-body">
           <ul className="footer-icons">
