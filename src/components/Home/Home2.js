@@ -12,7 +12,8 @@ function Home2() {
   return (
     <Container fluid className="home-about-section" id="about" style={{ 
       background: 'transparent',
-      paddingBottom: '30px' 
+      paddingBottom: '20px',
+      paddingTop: '0px' 
     }}>
       <Container>
         <Row>

@@ -169,11 +169,22 @@ function App() {
     <Router>
       <PortfolioContext.Provider value={{ showPortfolio, setShowPortfolio, portfolioParam }}>
         <Preloader load={load} />
-        <div className="App d-flex flex-column min-vh-100" id={load ? "no-scroll" : "scroll"} style={{ overflow: "auto" }}>
+        <div 
+          className="App d-flex flex-column min-vh-100" 
+          id={load ? "no-scroll" : "scroll"} 
+          style={{ 
+            position: "relative",
+            width: "100%",
+            height: "100%",
+            pointerEvents: "auto"
+          }}
+        >
           <Navbar />
           <ScrollToTop />
           <UrlParamManager />
-          <div className="flex-grow-1 content-wrapper">
+          <div 
+            className="flex-grow-1 content-wrapper"
+          >
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/project" element={<Projects />} />

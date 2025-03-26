@@ -65,6 +65,14 @@ function NavBar() {
       fixed="top"
       expand="md"
       className={navColour ? "sticky" : "navbar"}
+      style={{ 
+        backgroundColor: navColour 
+          ? "rgba(27, 26, 46, 0.85)" 
+          : "rgba(24, 26, 39, 0.8)", 
+        backdropFilter: "blur(15px)",
+        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.2)",
+        borderBottom: "1px solid rgba(79, 163, 247, 0.2)"
+      }}
     >
       <Container>
         <Navbar.Brand as={Link} to={getNavLink("/")} className="d-flex align-items-center" style={{ padding: "0 5px" }}>
@@ -74,7 +82,8 @@ function NavBar() {
             alt="Gomeng" 
             style={{
               display: "block",
-              objectPosition: "left center"
+              objectPosition: "left center",
+              height: "35px"
             }}
           />
         </Navbar.Brand>
@@ -83,6 +92,7 @@ function NavBar() {
           onClick={() => {
             updateExpanded(expand ? false : "expanded");
           }}
+          style={{ padding: "0.15rem 0.4rem" }}
         >
           <span></span>
           <span></span>

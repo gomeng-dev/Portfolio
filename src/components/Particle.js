@@ -36,8 +36,10 @@ function Particle({ style }) {
         interactivity: {
           events: {
             onclick: {
-              enable: true,
-              mode: "push",
+              enable: false,
+            },
+            onhover: {
+              enable: false,
             },
           },
           modes: {
@@ -48,7 +50,11 @@ function Particle({ style }) {
         },
         retina_detect: true,
       }}
-      style={{ ...style, zIndex: 0 }}
+      style={{ 
+        ...style, 
+        zIndex: 0,
+        pointerEvents: "none"
+      }}
     />
   );
 }
